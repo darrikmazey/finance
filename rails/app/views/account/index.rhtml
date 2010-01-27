@@ -1,0 +1,9 @@
+<div class="contentHeading"><div class="content"><%= link_to "accounts", { :controller => 'account' } %> :: <%= @account_type %></div></div>
+<div id="innerContent">
+	<div class="list item_list">
+		<% if @accounts.size > 0 -%>
+			<%= render :partial => 'account_item', :collection => @accounts %>
+		<% end -%>
+		<div class="clear"></div>
+	</div>
+</div>

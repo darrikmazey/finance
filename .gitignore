@@ -1,0 +1,4 @@
+rails/config/database.yml
+rails/log
+rails/tmp
+schema.rb

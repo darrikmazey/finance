@@ -1,0 +1,19 @@
+<div class="contentHeading"><div class="content">
+<%= link_to "accounts", { :controller => 'account', :action => 'index' } %> :: 
+<%= link_to @account.type.to_s.downcase, { :controller => 'account', :action => 'index', :account_type => @account.type.to_s.downcase } %> :: 
+<%= @account.name %></div></div>
+<div id="innerContent">
+	<div class="content_information">
+		<div class="label name">name</div>
+		<div class="field name"><%= @account.name %></div>
+		<div class="label type">type</div>
+		<div class="field type"><%= @account.type %></div>
+		<div class="label balance">balance</div>
+		<div class="field balance"><%= format_currency(@account.balance) %></div>
+		<div class="label balance-date">balance date</div>
+		<div class="field balance-date"><%= format_date(@account.balance_date) %></div>
+		<div class="label created-at">created at</div>
+		<div class="field created-at"><%= format_date(@account.created_at) %></div>
+	</div>
+	<p class='clear'></p>
+</div>

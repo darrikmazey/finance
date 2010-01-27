@@ -1,0 +1,49 @@
+
+/*
+ * generic list
+ */
+.list {
+	width: 100%;
+}
+
+.sublist {
+	width: 96%;
+	margin-left: 4%;
+}
+
+.sublist .item {
+	padding-left: 1%;
+	padding-top: 2px;
+}
+
+/*
+ * generic lists of items
+ */
+.item_list .item:hover {
+	background-color: #717171;
+}
+
+.item_list .top_level_project:hover {
+	background-color: #666666;
+}
+
+.item_list .header, .item_list .item {
+	width: 100%;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+.item_list .field {
+	float: left;
+	text-align: center;
+}
+
+.item_list .header .field {
+	font-weight: bold;
+}
+
+.item_list .header {
+	border-bottom: 1px solid;
+	margin-bottom: 5px;
+}
+

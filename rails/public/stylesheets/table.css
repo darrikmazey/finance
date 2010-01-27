@@ -1,0 +1,21 @@
+table {
+	width: 100%;
+}
+
+table th {
+	text-align: left;
+	border-bottom: 1px solid black;
+}
+
+table tr {
+	border: 1px solid		
+}
+
+table td {
+	padding: 3px;
+}
+
+th.amount,
+td.amount {
+	text-align: right;
+}

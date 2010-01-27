@@ -1,0 +1,34 @@
+<div class="contentHeading"><div class="content">
+<%= link_to "accounts", { :controller => 'account', :action => 'index' } %> :: 
+<%= link_to @account.type.to_s.downcase, { :controller => 'account', :action => 'index', :account_type => @account.type.to_s.downcase } %> :: 
+<%= link_to @account.name, { :controller => 'account', :action => 'view', :id => @account.id } %> :: edit</div></div>
+<div id="innerContent">
+	<div id="account_form" class="form">
+	<% form_for :account do |f| %>
+		<% if !@account.new_record? -%>
+			<%= f.hidden_field :id, :value => @account.id %>
+		<% end -%>
+		<fieldset> 
+			<div class="formLine">
+				<div class="formLabel">
+					<label for="name">name</label>
+				</div>
+				<div class="formInput">
+					<%= f.text_field :name, :class => "wide_input" %>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="formLine">
+				<div class="formLabel">
+					<label for="account_name">type</label>
+				</div>
+				<div class="formInput">
+					<%= f.select( "type", @types, :selected => @account.type.to_s ) %>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</fieldset>
+	<% end -%>
+	</div>
+	<p class='clear'></p>
+</div>

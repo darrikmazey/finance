@@ -1,0 +1,9 @@
+<tr>
+	<td class="actions"><%= link_to 'E', { :controller => 'entry', :action => 'edit', :id => entry_item.id } %> <%= link_to 'D', { :controller => 'entry', :action => 'delete', :id => entry_item.id } %></td>
+	<td class="date"><%= format_date(entry_item.date) %></td>
+	<td class="text"><%= entry_item.text %></td>
+	<td class="description"><%= entry_item.description %></td>
+	<td class="from_account"><%= entry_item.from_account_name %></td>
+	<td class="to_account"><%= entry_item.to_account_name %></td>
+	<td class="amount"><%= format_currency(entry_item.amount(@account_id)) %></td>
+</tr>
