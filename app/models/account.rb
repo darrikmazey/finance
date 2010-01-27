@@ -9,4 +9,16 @@ class Account < ActiveRecord::Base
 		end
 		return name
 	end
+
+	def balance
+		self.initial_balance
+	end
+
+	def positive?
+		self.balance >= 0
+	end
+
+	def negative?
+		!self.positive?
+	end
 end

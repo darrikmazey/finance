@@ -14,7 +14,24 @@ pre {
 
 a { color: #aaa; text-decoration: none; }
 a:visited { color: #aaa; }
-a:hover { color: #fff; background-color:#000; text-decoration: underline; }
+a:hover { color: #fff; text-decoration: underline; }
+
+.page_header .content {
+	font-size: 1.2em;
+	text-align: right;
+	padding: 5px;
+}
+
+.menu {
+	width: 100%;
+	margin-top: 5px;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+
+.menu .link {
+	display: inline-block;
+}
 
 .fieldWithErrors {
   padding: 2px;
@@ -52,3 +69,80 @@ a:hover { color: #fff; background-color:#000; text-decoration: underline; }
   list-style: square;
 }
 
+.list .heading {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.list .content {
+	border: 1px solid #ccc;
+}
+
+.list .header {
+	background-color: #444;
+	padding: 4px;
+	font-weight: bold;
+}
+
+.list .list_item {
+	padding-top: 4px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+	color: #bbb;
+}
+
+.list .list_item:hover {
+	color: #fff;
+}
+
+.list .field {
+	display: inline-block;
+	width: 10%;
+	text-align: center;
+}
+
+.list .field.first {
+	text-align: left;
+}
+
+.list_item.positive_account .field.balance {
+}
+
+.list_item.negative_account .field.balance {
+	background-color: #311;
+}
+
+.list_item .links {
+	display: none;
+	width: 20%;
+}
+
+.list_item:hover .links {
+	display: inline-block;
+}
+
+.list_item .links .link {
+	display: inline-block;
+	text-align: center;
+	width: 27%;
+}
+
+.list_item .link:hover a {
+	text-decoration: none;
+}
+
+.list.accounts .field.name,
+.list.accounts .field.description {
+	width: 15%;
+}
+
+.list.accounts .field.user,
+.list.accounts .field.description {
+	display: none;
+}
+
+.list.accounts .field.period {
+	width: 10%;
+}

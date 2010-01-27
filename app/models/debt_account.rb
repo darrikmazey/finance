@@ -1,0 +1,2 @@
+class DebtAccount < Account
+end
