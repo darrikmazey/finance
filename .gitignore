@@ -1,4 +1,3 @@
-rails/config/database.yml
-rails/log
-rails/tmp
+log
+tmp
 schema.rb

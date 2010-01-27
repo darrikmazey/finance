@@ -1,0 +1,38 @@
+<p>
+  <b>Name:</b>
+  <%=h @account.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @account.description %>
+</p>
+
+<p>
+  <b>Initial balance:</b>
+  <%=h @account.initial_balance %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @account.type %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @account.user %>
+</p>
+
+<p>
+  <b>Due date:</b>
+  <%=h @account.due_date %>
+</p>
+
+<p>
+  <b>Period:</b>
+  <%=h @account.period %>
+</p>
+
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>
