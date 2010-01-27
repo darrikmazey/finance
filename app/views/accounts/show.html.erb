@@ -10,22 +10,22 @@
 
 <p>
   <b>Initial balance:</b>
-  <%=h @account.initial_balance %>
+  <%=h number_to_currency(@account.initial_balance) %>
 </p>
 
 <p>
   <b>Type:</b>
-  <%=h @account.type %>
+  <%=h @account.type.to_s.titleize %>
 </p>
 
 <p>
   <b>User:</b>
-  <%=h @account.user %>
+  <%=h @account.user.username %>
 </p>
 
 <p>
   <b>Due date:</b>
-  <%=h @account.due_date %>
+  <%=h @account.due_date.short_date %>
 </p>
 
 <p>

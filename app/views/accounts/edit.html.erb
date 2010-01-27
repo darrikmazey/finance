@@ -1,4 +1,4 @@
-<h1>Editing account</h1>
+<h1>Editing <%= @account.type.to_s.titleize.downcase %></h1>
 
 <% form_for(@account) do |f| %>
   <%= f.error_messages %>
@@ -17,15 +17,15 @@
   </p>
   <p>
     <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= @account.type.to_s.titleize %>
   </p>
   <p>
     <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= @account.user.username %>
   </p>
   <p>
     <%= f.label :due_date %><br />
-    <%= f.datetime_select :due_date %>
+    <%= f.date_select :due_date %>
   </p>
   <p>
     <%= f.label :period %><br />

@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
 
+	#map.resources :billing_accounts, :controller => 'accounts'
   map.resources :accounts
 
   # The priority is based upon order of creation: first created -> highest priority.
