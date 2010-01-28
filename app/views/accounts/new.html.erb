@@ -11,6 +11,10 @@
     <%= f.label :description %><br />
     <%= f.text_field :description %>
   </p>
+	<p>
+		<%= f.label :account_number %><br />
+		<%= f.text_field :account_number %>
+	</p>
   <p>
     <%= f.label :initial_balance %><br />
     <%= f.text_field :initial_balance %>
@@ -19,6 +23,7 @@
     <%= f.label :type %><br />
     <%= f.collection_select :type, Account::AccountType.all, :class_name, :to_s %>
   </p>
+	<%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
     <%= f.label :due_date %><br />
     <%= f.date_select :due_date %>

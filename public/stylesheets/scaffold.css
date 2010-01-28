@@ -81,7 +81,8 @@ a:hover { color: #fff; text-decoration: underline; }
 	margin-top: 5px;
 }
 
-.list .content {
+.list .content
+{
 	border: 1px solid #ccc;
 }
 
@@ -151,3 +152,46 @@ a:hover { color: #fff; text-decoration: underline; }
 .list.accounts .field.period {
 	width: 10%;
 }
+
+.edit_item .heading,
+.item_data .heading {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.edit_item .content,
+.item_data .content {
+	border: 1px solid #ccc;
+	padding: 5px;
+}
+
+.edit_item .field_name,
+.item_data .field_name {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.edit_item .field .field_name,
+.item_data .field .field_name {
+	display: inline-block;
+	width: 12%;
+	text-align: right;
+	margin-right: 5px;
+	font-weight: bold;
+}
+
+.edit_item .field .field_value,
+.item_data .field .field_value {
+	display: inline-block;
+	width: 30%;
+	text-align: left;
+	color: #ccc;
+}
+
+.edit_item.bank_account .field.period,
+.edit_item.bank_account .field.due_date,
+.item_data.bank_account .field.period,
+.item_data.bank_account .field.due_date {
+	display: none;
+}
+

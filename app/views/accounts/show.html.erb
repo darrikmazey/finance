@@ -1,37 +1,47 @@
-<p>
-  <b>Name:</b>
-  <%=h @account.name %>
-</p>
+<div class="item_data account <%= @account.class.name.underscore %>">
+	<div class="heading"><%= @account.class.name.titleize %> : <%= @account.name %></div>
 
-<p>
-  <b>Description:</b>
-  <%=h @account.description %>
-</p>
+	<div class="content">
+		<div class="field name">
+			<div class="field_name">Name:</div>
+			<div class="field_value"><%=h @account.name %></div>
+		</div>
 
-<p>
-  <b>Initial balance:</b>
-  <%=h number_to_currency(@account.initial_balance) %>
-</p>
+		<div class="field description">
+			<div class="field_name">Description:</div>
+			<div class="field_value"><%=h @account.description %></div>
+		</div>
 
-<p>
-  <b>Type:</b>
-  <%=h @account.type.to_s.titleize %>
-</p>
+		<div class="field account_number">
+			<div class="field_name">Account number:</div>
+			<div class="field_value"><%=h @account.account_number %></div>
+		</div>
+		<div class="field initial_balance">
+			<div class="field_name">Initial balance:</div>
+			<div class="field_value"><%=h number_to_currency(@account.initial_balance) %></div>
+		</div>
 
-<p>
-  <b>User:</b>
-  <%=h @account.user.username %>
-</p>
+		<div class="field type">
+			<div class="field_name">Type:</div>
+			<div class="field_value"><%=h @account.type.to_s.titleize %></div>
+		</div>
 
-<p>
-  <b>Due date:</b>
-  <%=h @account.due_date.short_date %>
-</p>
+		<div class="field user">
+			<div class="field_name">User:</div>
+			<div class="field_value"><%=h @account.user.username %></div>
+		</div>
 
-<p>
-  <b>Period:</b>
-  <%=h @account.period %>
-</p>
+		<div class="field due_date">
+			<div class="field_name">Due date:</div>
+			<div class="field_value"><%=h @account.due_date.short_date %></div>
+		</div>
+
+		<div class="field period">
+			<div class="field_name">Period:</div>
+			<div class="field_value"><%=h @account.period %></div>
+		</div>
+	</div>
+</div>
 
 
 <%= link_to 'Edit', edit_account_path(@account) %> |

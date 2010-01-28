@@ -1,40 +1,48 @@
-<h1>Editing <%= @account.type.to_s.titleize.downcase %></h1>
+<div class="edit_item account <%= @account.class.name.underscore %>">
+	<div class="heading">Editing <%= @account.class.name.titleize.downcase %></div>
+	<div class="content">
 
-<% form_for(@account) do |f| %>
-  <%= f.error_messages %>
+		<% form_for(@account) do |f| %>
+			<%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </p>
-  <p>
-    <%= f.label :initial_balance %><br />
-    <%= f.text_field :initial_balance %>
-  </p>
-  <p>
-    <%= f.label :type %><br />
-    <%= @account.type.to_s.titleize %>
-  </p>
-  <p>
-    <%= f.label :user %><br />
-    <%= @account.user.username %>
-  </p>
-  <p>
-    <%= f.label :due_date %><br />
-    <%= f.date_select :due_date %>
-  </p>
-  <p>
-    <%= f.label :period %><br />
-    <%= f.text_field :period %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
-<% end %>
+			<div class="field name">
+				<div class="field_name"><%= f.label :name %></div>
+				<div class="field_value"><%= f.text_field :name %></div>
+			</div>
+			<div class="field description">
+				<div class="field_name"><%= f.label :description %></div>
+				<div class="field_value"><%= f.text_field :description %></div>
+			</div>
+			<div class="field account_number">
+				<div class="field_name"><%= f.label :account_number %></div>
+				<div class="field_value"><%= f.text_field :account_number %></div>
+			</div>
+			<div class="field initial_balance">
+				<div class="field_name"><%= f.label :initial_balance %></div>
+				<div class="field_value"><%= f.text_field :initial_balance %></div>
+			</div>
+			<div class="field type">
+				<div class="field_name"><%= f.label :type %></div>
+				<div class="field_value"><%= @account.type.to_s.titleize %></div>
+			</div>
+			<div class="field user">
+				<div class="field_name"><%= f.label :user %></div>
+				<div class="field_value"><%= @account.user.username %></div>
+			</div>
+			<div class="field due_date">
+				<div class="field_name"><%= f.label :due_date %></div>
+				<div class="field_value"><%= f.date_select :due_date %></div>
+			</div>
+			<div class="field period">
+				<div class="field_name"><%= f.label :period %></div>
+				<div class="field_value"><%= f.text_field :period %></div>
+			</div>
+			<p>
+				<%= f.submit 'Update' %>
+			</p>
+		<% end %>
+	</div>
+</div>
 
 <%= link_to 'Show', @account %> |
 <%= link_to 'Back', accounts_path %>

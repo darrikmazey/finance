@@ -2,7 +2,11 @@ class Account < ActiveRecord::Base
   belongs_to :user
 
 	PERIODS = { 1 => :yearly, 12 => :monthly }
-	TYPES = [ :billing_account, :debt_account ]
+	TYPES = [ :billing_account, :debt_account, :bank_account ]
+
+	def self.hidden_fields
+		[]
+	end
 
 	def self.model_name
 		name = 'account'
@@ -24,6 +28,47 @@ class Account < ActiveRecord::Base
 	def negative?
 		!self.positive?
 	end
+
+	def method_missing(id, *args)
+		id_str = id.to_s
+		if id_str =~ /is_(.*_account)\?/
+			account_type = $1
+			if account_type.to_sym == :abstract_account
+				if self.class.name.camelize == "Account"
+					return true
+				else
+					return false
+				end
+			elsif TYPES.include? account_type.to_sym
+				if account_type.camelize == self.class.name
+					return true
+				else
+					return false
+				end
+			else
+				super(id, *args)
+			end
+		end
+		super(id, *args)
+	end
+
+	def show_field?(field)
+		if self.class.hidden_fields.include? field
+			false
+		else
+			true
+		end
+	end
+
+	def protected_field(field, disp, alt = nil)
+		if self.show_field? field
+			disp
+		else
+			alt
+		end
+	end
+
+## supporting classes
 
 	class AccountType
 		
