@@ -1,2 +1,2 @@
-class BillingAccount < Account
+class BillingAccount < CreditAccount
 end

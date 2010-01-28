@@ -1,2 +1,2 @@
-class DebtAccount < Account
+class DebtAccount < CreditAccount
 end
