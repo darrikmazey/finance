@@ -1,0 +1,33 @@
+<p>
+  <b>Ref:</b>
+  <%=h @transaction.ref %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @transaction.description %>
+</p>
+
+<p>
+  <b>Credit amount:</b>
+  <%=h @transaction.credit_amount %>
+</p>
+
+<p>
+  <b>Debit amount:</b>
+  <%=h @transaction.debit_amount %>
+</p>
+
+<p>
+  <b>Trans date:</b>
+  <%=h @transaction.trans_date %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%=h @transaction.account %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

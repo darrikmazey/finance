@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   belongs_to :user
+	has_many :transactions
 
 	PERIODS = { 1 => :yearly, 2 => :semi_annually, 4 => :quarterly, 6 => :bi_monthly, 12 => :monthly, 24 => :semi_monthly, 26 => :bi_weekly, 52 => :weekly }
 	TYPES = [ :debit_account, :credit_account, :billing_account, :debt_account, :bank_account ]
@@ -76,7 +77,14 @@ class Account < ActiveRecord::Base
 	end
 
 	def balance
-		self.initial_balance
+		debits = DebitTransaction.sum(:debit_amount, :conditions => ['account_id = ?', self.id])
+		credits = CreditTransaction.sum(:credit_amount, :conditions => ['account_id = ?', self.id])
+		
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + credits - debits
+		end
 	end
 
 	def positive?
@@ -85,6 +93,19 @@ class Account < ActiveRecord::Base
 
 	def negative?
 		!self.positive?
+	end
+
+	def respond_to?(id, include_private = false)
+		id_str = id.to_s
+		if id_str =~ /is_(.*_account)\?/
+			account_type = $1
+			if account_type.to_sym == :abstract_account
+				return true
+			elsif TYPES.include? account_type.to_sym
+				return true
+			end
+		end
+		super(id, include_private)
 	end
 
 	def method_missing(id, *args)
