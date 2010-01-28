@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users
+  map.resources :users, :collection => { :login => [:get, :post], :logout => [:get] }, :has_many => [:accounts]
 
 	#map.resources :billing_accounts, :controller => 'accounts'
   map.resources :accounts

@@ -5,7 +5,7 @@
 	<div class="field type"><%=h account.type.to_s.titleize %></div>
 	<div class="field user"><%=h account.user.username %></div>
 	<div class="field due_date"><%=h account.due_date.short_date %></div>
-	<div class="field period"><%=h account.period %></div>
+	<div class="field period"><%=h Account::Period[account.period].name %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', account %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_account_path(account) %></div>

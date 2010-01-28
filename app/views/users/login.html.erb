@@ -1,0 +1,14 @@
+
+<% form_for :user, User.new do |f| -%>
+	<p>
+		<%= f.label :username %>
+		<%= f.text_field :username %>
+	</p>
+	<p>
+		<%= f.label :password %>
+		<%= f.password_field :password %>
+	</p>
+	<p>
+		<%= f.submit 'login' %>
+	</p>
+<% end -%>

@@ -17,19 +17,15 @@
   </p>
   <p>
     <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </p>
-  <p>
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
+    <%= f.collection_select :type, Account::AccountType.all, :class_name, :to_s %>
   </p>
   <p>
     <%= f.label :due_date %><br />
-    <%= f.datetime_select :due_date %>
+    <%= f.date_select :due_date %>
   </p>
   <p>
     <%= f.label :period %><br />
-    <%= f.text_field :period %>
+    <%= f.collection_select :period, Account::Period.all, :period, :name %>
   </p>
   <p>
     <%= f.submit 'Create' %>

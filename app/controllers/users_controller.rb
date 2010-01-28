@@ -1,4 +1,43 @@
 class UsersController < ApplicationController
+	
+	before_filter :require_user, :except => [ :login ]
+
+	# GET /users/login
+	def login
+		if request.get?
+			if @current_user
+				redirect_to user_url(@current_user)
+				return
+			end
+			@current_user = User.new
+			render :action => 'login', :layout => 'login'
+			return
+		end
+		if request.post?
+			@current_user = User.authenticate(params[:user][:username], params[:user][:password])
+			if @current_user.nil?
+				flash[:error] = 'invalid username or password'
+				render :action => 'login', :layout => 'login'
+				return
+			else
+				session[:user_id] = @current_user.id
+				flash[:notice] = "successfully logged in as user '#{@current_user.username}'"
+				if session[:after_login]
+					redirect_to session[:after_login]
+				else
+					redirect_to accounts_url
+				end
+			end
+		end
+	end
+
+	# GET /users/logout
+	def logout
+		reset_session
+		flash[:notice] = 'you have been logged out'
+		redirect_to login_users_url
+	end
+
   # GET /users
   # GET /users.xml
   def index

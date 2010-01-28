@@ -4,20 +4,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Accounts: <%= controller.action_name %></title>
+  <title><%= controller.controller_name %> : <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'scaffold' %>
 </head>
 <body>
 
 <p style="color: green"><%= flash[:notice] %></p>
 <p style="color: red"><%= flash[:error] %></p>
-<div class="debug">
-user_id = <%= params[:user_id] %> (<%= params[:user_id].class %>)<br />
-current_user = <%= @current_user.id %> (<%= @current_user.id.class %>)
-</div>
-
-<%= render :partial => 'shared/page_header' %>
-<%= render :partial => 'shared/menu' %>
 
 <%= yield %>
 

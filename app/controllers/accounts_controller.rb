@@ -1,8 +1,15 @@
 class AccountsController < ApplicationController
+	
+	before_filter :require_user
+
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
+		if @user
+			@accounts = @user.accounts
+		else
+			@accounts = Account.all
+		end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +32,7 @@ class AccountsController < ApplicationController
   # GET /accounts/new.xml
   def new
     @account = Account.new
+		@account.user = User.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +49,7 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
+		@account.type = params[:account][:type]
 
     respond_to do |format|
       if @account.save

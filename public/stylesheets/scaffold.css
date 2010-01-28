@@ -6,6 +6,11 @@ body, p, ol, ul, td {
   line-height: 20px;
 }
 
+.debug {
+	display: none;
+	color: #ccf;
+}
+
 pre {
   background-color: #eee;
   padding: 10px;
