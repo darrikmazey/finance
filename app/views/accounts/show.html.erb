@@ -32,6 +32,11 @@
 			<div class="field_value"><%=h @account.type.to_s.titleize %></div>
 		</div>
 
+		<div class="field amount">
+			<div class="field_name">Amount:</div>
+			<div class="field_value"><%=h number_to_currency(@account.amount) %></div>
+		</div>
+
 		<div class="field user">
 			<div class="field_name">User:</div>
 			<div class="field_value"><%=h @account.user.username %></div>

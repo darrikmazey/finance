@@ -23,6 +23,10 @@
     <%= f.label :type %><br />
     <%= f.collection_select :type, Account::AccountType.all, :class_name, :to_s %>
   </p>
+	<p>
+		<%= f.label :amount %><br />
+		<%= f.text_field :amount %>
+	</p>
 	<%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
     <%= f.label :due_date %><br />

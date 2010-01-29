@@ -25,6 +25,10 @@
 				<div class="field_name"><%= f.label :type %></div>
 				<div class="field_value"><%= @account.type.to_s.titleize %></div>
 			</div>
+			<div class="field amount">
+				<div class="field_name"><%= f.label :amount %></div>
+				<div class="field_value"><%= f.text_field :amount %></div>
+			</div>
 			<div class="field user">
 				<div class="field_name"><%= f.label :user %></div>
 				<div class="field_value"><%= @account.user.username %></div>
