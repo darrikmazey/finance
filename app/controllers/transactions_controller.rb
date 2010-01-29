@@ -32,17 +32,31 @@ class TransactionsController < ApplicationController
 
 		ttype = params[:type]
 		if @account
-			if (ttype == 'debit' and @account.is_debit_account?) or (ttype == 'credit' and @account.is_credit_account?)
-				@debit_accounts = Account.all_debit
-				@credit_accounts = Account.all_credit
+			if ttype == 'transfer'
+				if @account.is_debit_account?
+					@debit_accounts = Account.all_debit
+					@credit_accounts = Account.all_debit
+					@transaction.credit_account = @account
+					@transaction.description = 'transfer'
+				else
+					@debit_accounts = Account.all_credit
+					@credit_accounts = Account.all_credit
+					@transaction.debit_account = @account
+					@transaction.description = 'transfer'
+				end
 			else
-				@debit_accounts = Account.all_credit
-				@credit_accounts = Account.all_debit
-			end
-			if ttype == 'debit'
-				@transaction.debit_account = @account
-			else
-				@transaction.credit_account = @account
+				if (ttype == 'debit' and @account.is_debit_account?) or (ttype == 'credit' and @account.is_credit_account?)
+					@debit_accounts = Account.all_debit
+					@credit_accounts = Account.all_credit
+				else
+					@debit_accounts = Account.all_credit
+					@credit_accounts = Account.all_debit
+				end
+				if ttype == 'debit'
+					@transaction.debit_account = @account
+				else
+					@transaction.credit_account = @account
+				end
 			end
 		else
 			@debit_accounts = Account.all
