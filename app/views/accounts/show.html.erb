@@ -56,14 +56,19 @@
 </div>
 <% end -%>
 
+<div class="transaction_links links">
+	<div class="link plus">
 	<%=
 		link_to_if @account.is_credit_account?, '+', new_account_transaction_url(@account, { :type => 'credit' }) do
 			link_to '+', new_account_transaction_url(@account, { :type => 'debit' })
 		end
 	%>
+	</div>
+	<div class="link minus">
 	<%=
 		link_to_if @account.is_credit_account?, '-', new_account_transaction_url(@account, { :type => 'debit' }) do
 			link_to '-', new_account_transaction_url(@account, { :type => 'credit' })
 		end
 	%>
-
+	</div>
+</div>

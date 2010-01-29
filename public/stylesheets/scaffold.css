@@ -150,6 +150,11 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-decoration: none;
 }
 
+.transaction_links .link {
+	display: inline-block;
+	font-size: 1.4em;
+}
+
 .list.accounts .field.name,
 .list.accounts .field.description {
 	width: 15%;
