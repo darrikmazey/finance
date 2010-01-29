@@ -1,5 +1,5 @@
 <div class="list_item account <%= account.type.to_s.underscore%> <%= account.flags %>">
-	<div class="field first name"><%=h account.name %></div>
+	<div class="field first name"><%= link_to account.name, account %></div>
 	<div class="field description"><%=h account.description %></div>
 	<div class="field balance"><%=h number_to_currency(account.balance) %></div>
 	<div class="field type"><%=h account.type.to_s.titleize %></div>
@@ -9,8 +9,6 @@
 	<div class="field due_date"><%=h account.protected_field(:due_date, account.next_due_date.short_date) %></div>
 	<div class="field period"><%=h account.protected_field(:period, Account::Period[account.period].name) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', account %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_account_path(account) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></div>
 	</div>
 </div>

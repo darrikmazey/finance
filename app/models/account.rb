@@ -59,6 +59,26 @@ class Account < ActiveRecord::Base
 		self.net_annual / 12
 	end
 
+	def self.credit_balance
+		sum = 0
+		Account.all_credit.each do |c|
+			sum += c.balance
+		end
+		sum
+	end
+
+	def self.debit_balance
+		sum = 0
+		Account.all_debit.each do |c|
+			sum += c.balance
+		end
+		sum
+	end
+
+	def self.net_balance
+		self.debit_balance - self.credit_balance
+	end
+
 	def net_annual
 		self.amount * self.period
 	end

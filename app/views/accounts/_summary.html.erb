@@ -9,6 +9,39 @@
 	<div class="field period">&nbsp;</div>
 </div>
 
+<div class="list_item summary current_debit">
+	<div class="field first name">Current debit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance"><%= number_to_currency(Account.debit_balance) %></div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount">&nbsp;</div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary current_credit">
+	<div class="field first name">Current credit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance"><%= number_to_currency(Account.credit_balance) %></div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount">&nbsp;</div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary current_net">
+	<div class="field first name">Current net</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance"><%= number_to_currency(Account.net_balance) %></div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount">&nbsp;</div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
 <div class="list_item summary monthly_debit">
 	<div class="field first name">Monthly debit</div>
 	<div class="field description">&nbsp;</div>
