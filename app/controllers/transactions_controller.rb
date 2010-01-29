@@ -1,4 +1,7 @@
 class TransactionsController < ApplicationController
+
+	before_filter :require_user
+
   # GET /transactions
   # GET /transactions.xml
   def index
