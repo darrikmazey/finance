@@ -7,7 +7,7 @@ body, p, ol, ul, td {
 }
 
 .debug {
-	/*display: none;*/
+	display: none;
 	color: #ccf;
 }
 
