@@ -236,12 +236,14 @@ a:hover { color: #fff; text-decoration: underline; }
 	color: #ccc;
 }
 
+/*
 .edit_item.bank_account .field.period,
 .edit_item.bank_account .field.due_date,
 .item_data.bank_account .field.period,
 .item_data.bank_account .field.due_date {
 	display: none;
 }
+*/
 
 .debit_transaction .field.amount {
 	background-color: #131;
