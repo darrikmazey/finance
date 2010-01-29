@@ -7,7 +7,7 @@ body, p, ol, ul, td {
 }
 
 .debug {
-	display: none;
+	/*display: none;*/
 	color: #ccf;
 }
 
@@ -72,6 +72,10 @@ a:hover { color: #fff; text-decoration: underline; }
 #errorExplanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+.list {
+	margin-top: 15px;
 }
 
 .list .heading {
@@ -160,6 +164,18 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 10%;
 }
 
+.list.transactions .field.ref {
+	width: 5%;
+}
+
+.list.transactions .field.description {
+	width: 15%;
+}
+
+.list.transactions .field.account {
+	width: 15%;
+}
+
 .edit_item .heading,
 .item_data .heading {
 	font-size: 1.2em;
@@ -202,10 +218,10 @@ a:hover { color: #fff; text-decoration: underline; }
 	display: none;
 }
 
-.debit_transaction {
+.debit_transaction .field.amount {
 	background-color: #131;
 }
 
-.credit_transaction {
+.credit_transaction .field.amount {
 	background-color: #311;
 }

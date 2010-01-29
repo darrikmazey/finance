@@ -1,2 +1,0 @@
-class WithdrawalTransaction < CreditTransaction
-end

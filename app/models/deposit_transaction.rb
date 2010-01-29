@@ -1,2 +1,0 @@
-class DepositTransaction < DebitTransaction
-end

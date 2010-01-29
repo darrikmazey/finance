@@ -2,7 +2,11 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.xml
   def index
-    @transactions = Transaction.all
+		if @account.nil?
+			@transactions = Transaction.find :all, :order => ['trans_date desc, id desc']
+		else
+			@transactions = @account.transactions.find :all, :order => ['trans_date desc, id desc']
+		end
 
     respond_to do |format|
       format.html # index.html.erb

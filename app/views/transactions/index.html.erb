@@ -1,29 +1,12 @@
-<h1>Listing transactions</h1>
+<div class="list transactions">
+	<div class="heading">Listing transactions</div>
+	<div class="content">
 
-<table>
-  <tr>
-    <th>Date</th>
-    <th>Ref</th>
-    <th>Description</th>
-		<th>Type</th>
-    <th>Amount</th>
-    <th>Account</th>
-  </tr>
+		<%= render :partial => 'list_header' %>
+		<%= render :partial => 'transaction', :collection => @transactions %>
 
-<% @transactions.each do |transaction| %>
-  <tr class="<%= transaction.flags %>">
-    <td><%=h transaction.trans_date.short_date %></td>
-    <td><%=h transaction.ref %></td>
-    <td><%=h transaction.description %></td>
-		<td><%=h transaction.transaction_type %></td>
-    <td><%=h transaction.amount %></td>
-    <td><%=h transaction.account.name %></td>
-    <td><%= link_to 'Show', transaction %></td>
-    <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-    <td><%= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+	</div>
+</div>
 
 <br />
 

@@ -43,6 +43,27 @@
 	</div>
 </div>
 
-
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>
+
+<% if @account.recent_transactions.size > 0 -%>
+<div class="list transactions">
+	<div class="heading">transactions</div>
+	<div class="content">
+		<%= render :partial => 'transactions/list_header' %>
+		<%= render :partial => 'transactions/transaction', :collection => @account.recent_transactions %>
+	</div>
+</div>
+<% end -%>
+
+	<%=
+		link_to_if @account.is_credit_account?, '+', new_account_transaction_url(@account, { :type => 'credit' }) do
+			link_to '+', new_account_transaction_url(@account, { :type => 'debit' })
+		end
+	%>
+	<%=
+		link_to_if @account.is_credit_account?, '-', new_account_transaction_url(@account, { :type => 'debit' }) do
+			link_to '-', new_account_transaction_url(@account, { :type => 'credit' })
+		end
+	%>
+

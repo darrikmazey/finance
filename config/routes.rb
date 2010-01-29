@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => { :login => [:get, :post], :logout => [:get] }, :has_many => [:accounts]
 
 	#map.resources :billing_accounts, :controller => 'accounts'
-  map.resources :accounts
+  map.resources :accounts, :has_many => :transactions
 
   # The priority is based upon order of creation: first created -> highest priority.
 

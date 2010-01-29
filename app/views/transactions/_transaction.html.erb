@@ -1,0 +1,13 @@
+<div class="list_item transaction <%= transaction.flags %>">
+	<div class="field first trans_date"><%=h transaction.trans_date.short_date %></div>
+	<div class="field ref"><%=h transaction.ref %></div>
+	<div class="field description"><%=h transaction.description %></div>
+	<div class="field type"><%=h transaction.transaction_type %></div>
+	<div class="field amount"><%=h number_to_currency(transaction.amount) %></div>
+	<div class="field account"><%= link_to transaction.account.name, account_url(transaction.account) %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', transaction %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_transaction_path(transaction) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', transaction, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>
