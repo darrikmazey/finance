@@ -210,6 +210,10 @@ a:hover { color: #fff; text-decoration: underline; }
 	display: none;
 }
 
+.list.accounts .field.type {
+	width: 5%;
+}
+
 .list.accounts .field.period {
 	width: 10%;
 }

@@ -1,0 +1,2 @@
+class BudgetAccount < CreditAccount
+end

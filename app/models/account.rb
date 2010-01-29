@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
 	has_many :debits, :class_name => 'Transaction', :foreign_key => 'debit_account_id'
 
 	PERIODS = { 1 => :yearly, 2 => :semi_annually, 4 => :quarterly, 6 => :bi_monthly, 12 => :monthly, 24 => :semi_monthly, 26 => :bi_weekly, 52 => :weekly }
-	TYPES = [ :debit_account, :credit_account, :billing_account, :debt_account, :bank_account ]
+	TYPES = [ :debit_account, :credit_account, :billing_account, :debt_account, :bank_account, :budget_account ]
 
 	def self.hidden_fields
 		[]
