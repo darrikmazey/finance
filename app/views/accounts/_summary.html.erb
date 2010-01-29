@@ -1,0 +1,76 @@
+<div class="header">
+	<div class="field first name">&nbsp;</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">Balance</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount">Amount</div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary monthly_debit">
+	<div class="field first name">Monthly debit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_monthly_debit) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary monthly_credit">
+	<div class="field first name">Montly credit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_monthly_credit) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary net_monthly">
+	<div class="field first name">Net monthly</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_monthly) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary annual_debit">
+	<div class="field first name">Annual debit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_annual_debit) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary annual_credit">
+	<div class="field first name">Annual credit</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_annual_credit) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>
+
+<div class="list_item summary net_annual">
+	<div class="field first name">Net annual</div>
+	<div class="field description">&nbsp;</div>
+	<div class="field balance">&nbsp;</div>
+	<div class="field type">&nbsp;</div>
+	<div class="field amount"><%= number_to_currency(Account.net_annual) %></div>
+	<div class="field user">&nbsp;</div>
+	<div class="field due_date">&nbsp;</div>
+	<div class="field period">&nbsp;</div>
+</div>

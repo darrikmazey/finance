@@ -27,6 +27,46 @@ class Account < ActiveRecord::Base
 		Account.all.select { |a| a.is_debit_account? }
 	end
 
+	def self.net_annual_debit
+		debit = 0
+		Account.all_debit.each do |d|
+			debit += d.net_annual
+		end
+		debit
+	end
+
+	def self.net_monthly_debit
+		self.net_annual_debit / 12
+	end
+
+	def self.net_annual_credit
+		credit = 0
+		Account.all_credit.each do |d|
+			credit += d.net_annual
+		end
+		credit
+	end
+
+	def self.net_monthly_credit
+		self.net_annual_credit / 12
+	end
+
+	def self.net_annual
+		self.net_annual_debit - self.net_annual_credit
+	end
+
+	def self.net_monthly
+		self.net_annual / 12
+	end
+
+	def net_annual
+		self.amount * self.period
+	end
+
+	def net_monthly
+		self.net_annual / 12
+	end
+
 	def flags
 		f = ''
 
@@ -40,6 +80,12 @@ class Account < ActiveRecord::Base
 			f += 'overdue_account '
 		else
 			f += 'current_account '
+		end
+
+		if self.is_credit_account?
+			f += 'credit_account '
+		else
+			f += 'debit_account '
 		end
 
 		f
