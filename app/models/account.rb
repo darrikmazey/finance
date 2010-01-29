@@ -19,6 +19,14 @@ class Account < ActiveRecord::Base
 		return name
 	end
 
+	def self.all_credit
+		Account.all.select { |a| a.is_credit_account? }
+	end
+
+	def self.all_debit
+		Account.all.select { |a| a.is_debit_account? }
+	end
+
 	def flags
 		f = ''
 

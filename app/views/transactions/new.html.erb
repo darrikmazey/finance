@@ -3,6 +3,11 @@
 <% form_for(@transaction) do |f| %>
   <%= f.error_messages %>
 
+	<%= hidden_field :account, :id %>
+  <p>
+    <%= f.label :trans_date %><br />
+    <%= f.datetime_select :trans_date %>
+  </p>
   <p>
     <%= f.label :ref %><br />
     <%= f.text_field :ref %>
@@ -12,24 +17,20 @@
     <%= f.text_field :description %>
   </p>
   <p>
-    <%= f.label :credit_amount %><br />
-    <%= f.text_field :credit_amount %>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
   </p>
   <p>
-    <%= f.label :debit_amount %><br />
-    <%= f.text_field :debit_amount %>
+    <%= f.label :credit_account %><br />
+    <%= f.collection_select :credit_account_id, @credit_accounts, :id, :name, :include_blank => :true %>
   </p>
   <p>
-    <%= f.label :trans_date %><br />
-    <%= f.datetime_select :trans_date %>
-  </p>
-  <p>
-    <%= f.label :account %><br />
-    <%= f.text_field :account %>
+    <%= f.label :debit_account %><br />
+    <%= f.collection_select :debit_account_id, @debit_accounts, :id, :name, :include_blank => :true %>
   </p>
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', transactions_path %>
+<%= link_to 'Back', account_url(@account) %>

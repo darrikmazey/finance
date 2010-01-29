@@ -30,6 +30,25 @@ class TransactionsController < ApplicationController
   def new
     @transaction = Transaction.new
 
+		ttype = params[:type]
+		if @account
+			if (ttype == 'debit' and @account.is_debit_account?) or (ttype == 'credit' and @account.is_credit_account?)
+				@debit_accounts = Account.all_debit
+				@credit_accounts = Account.all_credit
+			else
+				@debit_accounts = Account.all_credit
+				@credit_accounts = Account.all_debit
+			end
+			if ttype == 'debit'
+				@transaction.debit_account = @account
+			else
+				@transaction.credit_account = @account
+			end
+		else
+			@debit_accounts = Account.all
+			@credit_accounts = Account.all
+		end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @transaction }
@@ -45,11 +64,12 @@ class TransactionsController < ApplicationController
   # POST /transactions.xml
   def create
     @transaction = Transaction.new(params[:transaction])
+		@account = Account.find(params[:account][:id]) rescue nil
 
     respond_to do |format|
       if @transaction.save
         flash[:notice] = 'Transaction was successfully created.'
-        format.html { redirect_to(@transaction) }
+        format.html { @account ? redirect_to(@account) : redirect_to(@transaction) }
         format.xml  { render :xml => @transaction, :status => :created, :location => @transaction }
       else
         format.html { render :action => "new" }
