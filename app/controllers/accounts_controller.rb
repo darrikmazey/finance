@@ -6,9 +6,9 @@ class AccountsController < ApplicationController
   # GET /accounts.xml
   def index
 		if @user
-			@accounts = @user.accounts
+			@accounts = @user.accounts.find :all, :order => ['type asc, name asc']
 		else
-			@accounts = Account.all
+			@accounts = Account.find :all, :order => ['type asc, name asc']
 		end
 
     respond_to do |format|
