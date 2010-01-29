@@ -16,9 +16,15 @@
 			<div class="field_name">Account number:</div>
 			<div class="field_value"><%=h @account.account_number %></div>
 		</div>
+
 		<div class="field initial_balance">
 			<div class="field_name">Initial balance:</div>
 			<div class="field_value"><%=h number_to_currency(@account.initial_balance) %></div>
+		</div>
+
+		<div class="field balance">
+			<div class="field_name">Current balance:</div>
+			<div class="field_value"><%=h number_to_currency(@account.balance) %></div>
 		</div>
 
 		<div class="field type">
@@ -47,11 +53,11 @@
 <%= link_to 'Back', accounts_path %>
 
 <% if @account.recent_transactions.size > 0 -%>
-<div class="list transactions">
+<div class="list account_transactions transactions">
 	<div class="heading">transactions</div>
 	<div class="content">
-		<%= render :partial => 'transactions/list_header' %>
-		<%= render :partial => 'transactions/transaction', :collection => @account.recent_transactions %>
+		<%= render :partial => 'transaction_list_header' %>
+		<%= render :partial => 'transaction', :collection => @account.recent_transactions %>
 	</div>
 </div>
 <% end -%>

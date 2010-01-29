@@ -171,14 +171,34 @@ a:hover { color: #fff; text-decoration: underline; }
 
 .list.transactions .field.ref {
 	width: 5%;
+	display: none;
 }
 
 .list.transactions .field.description {
 	width: 15%;
 }
 
-.list.transactions .field.account {
+.list.account_transactions .field.description {
+	width: 25%;
+}
+
+.list.account_transactions .field.account {
 	width: 15%;
+}
+
+.list.transactions .field.credit_account,
+.list.transactions .field.debit_account {
+	width: 15%;
+}
+
+.decr_transaction .field.debit_amount.non_zero,
+.incr_transaction .field.debit_amount.non_zero {
+	background-color: #131;
+}
+
+.incr_transaction .field.credit_amount.non_zero,
+.decr_transaction .field.credit_amount.non_zero {
+	background-color: #311;
 }
 
 .edit_item .heading,

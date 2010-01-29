@@ -1,6 +1,7 @@
 class Account < ActiveRecord::Base
   belongs_to :user
-	has_many :transactions
+	has_many :credits, :class_name => 'Transaction', :foreign_key => 'credit_account_id'
+	has_many :debits, :class_name => 'Transaction', :foreign_key => 'debit_account_id'
 
 	PERIODS = { 1 => :yearly, 2 => :semi_annually, 4 => :quarterly, 6 => :bi_monthly, 12 => :monthly, 24 => :semi_monthly, 26 => :bi_weekly, 52 => :weekly }
 	TYPES = [ :debit_account, :credit_account, :billing_account, :debt_account, :bank_account ]
@@ -36,8 +37,12 @@ class Account < ActiveRecord::Base
 		f
 	end
 
-	def recent_transactions
-		self.transactions.find :all, :order => ['trans_date desc, id desc']
+	def transactions
+		Transaction.find(:all, :conditions => ['credit_account_id = ? or debit_account_id = ?', self.id, self.id])
+	end
+
+	def recent_transactions(limit = 20)
+		Transaction.find(:all, :conditions => ['credit_account_id = ? or debit_account_id = ?', self.id, self.id], :order => ['trans_date desc, id desc'], :limit => limit)
 	end
 
 	def current_period_end
@@ -81,8 +86,8 @@ class Account < ActiveRecord::Base
 	end
 
 	def balance
-		debits = DebitTransaction.sum(:debit_amount, :conditions => ['account_id = ?', self.id])
-		credits = CreditTransaction.sum(:credit_amount, :conditions => ['account_id = ?', self.id])
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ?', self.id])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
 		
 		if self.is_debit_account?
 			self.initial_balance + debits - credits
@@ -92,8 +97,8 @@ class Account < ActiveRecord::Base
 	end
 
 	def balance_before(t)
-		debits = DebitTransaction.sum(:debit_amount, :conditions => ['account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
-		credits = CreditTransaction.sum(:credit_amount, :conditions => ['account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
 
 		if self.is_debit_account?
 			self.initial_balance + debits - credits
@@ -103,8 +108,8 @@ class Account < ActiveRecord::Base
 	end
 
 	def balance_at(t)
-		debits = DebitTransaction.sum(:debit_amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
-		credits = CreditTransaction.sum(:credit_amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
+		debits = DebitTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
+		credits = CreditTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
 
 		if self.is_debit_account?
 			self.initial_balance + debits - credits

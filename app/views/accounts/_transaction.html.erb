@@ -2,10 +2,14 @@
 	<div class="field first trans_date"><%=h transaction.trans_date.short_date %></div>
 	<div class="field ref"><%=h transaction.ref %></div>
 	<div class="field description"><%=h transaction.description %></div>
-	<div class="field credit_account"><%= credit_account_link(transaction) %></div>
+	<% if @account == transaction.credit_account -%>
 	<div class="field credit_amount <%= transaction.credit_amount_flags %>"><%=h number_to_currency(transaction.credit_amount) %></div>
-	<div class="field debit_account"><%= debit_account_link(transaction) %></div>
+	<div class="field account"><%= debit_account_link(transaction) %></div>
+	<% end -%>
+	<% if @account == transaction.debit_account -%>
 	<div class="field debit_amount <%= transaction.debit_amount_flags %>"><%=h number_to_currency(transaction.debit_amount) %></div>
+	<div class="field account"><%= credit_account_link(transaction) %></div>
+	<% end -%>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', transaction %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_transaction_path(transaction) %></div>
