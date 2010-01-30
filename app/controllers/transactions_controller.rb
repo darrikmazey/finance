@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.xml
   def index
 		if @account.nil?
-			@transactions = Transaction.find :all, :order => ['trans_date desc, id desc']
+			@transactions = Transaction.find :all, :conditions => ['credit_account_id in (select id from accounts where user_id = ?) or debit_account_id in (select id from accounts where user_id = ?)', @current_user.id, @current_user.id], :order => ['trans_date desc, id desc']
 		else
 			@transactions = @account.transactions.find :all, :order => ['trans_date desc, id desc']
 		end
@@ -37,23 +37,23 @@ class TransactionsController < ApplicationController
 		if @account
 			if ttype == 'transfer'
 				if @account.is_debit_account?
-					@debit_accounts = Account.all_debit
-					@credit_accounts = Account.all_debit
+					@debit_accounts = @current_user.debit_accounts
+					@credit_accounts = @current_user.debit_accounts
 					@transaction.credit_account = @account
 					@transaction.description = 'transfer'
 				else
-					@debit_accounts = Account.all_credit
-					@credit_accounts = Account.all_credit
+					@debit_accounts = @current_user.credit_accounts
+					@credit_accounts = @current_user.credit_accounts
 					@transaction.debit_account = @account
 					@transaction.description = 'transfer'
 				end
 			else
 				if (ttype == 'debit' and @account.is_debit_account?) or (ttype == 'credit' and @account.is_credit_account?)
-					@debit_accounts = Account.all_debit
-					@credit_accounts = Account.all_credit
+					@debit_accounts = @current_user.debit_accounts
+					@credit_accounts = @current_user.credit_accounts
 				else
-					@debit_accounts = Account.all_credit
-					@credit_accounts = Account.all_debit
+					@debit_accounts = @current_user.credit_accounts
+					@credit_accounts = @current_user.debit_accounts
 				end
 				if ttype == 'debit'
 					@transaction.debit_account = @account

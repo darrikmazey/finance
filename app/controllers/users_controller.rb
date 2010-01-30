@@ -2,6 +2,14 @@ class UsersController < ApplicationController
 	
 	before_filter :require_user, :except => [ :login ]
 
+	def quick_switch
+		reset_session
+		session[:user_id] = params[:id]
+		@current_user = User.find(params[:id])
+		flash[:notice] = "you are now '#{@current_user.username}'"
+		redirect_to :back
+	end
+
 	# GET /users/login
 	def login
 		if request.get?

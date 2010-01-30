@@ -1,2 +1,0 @@
-class BillingAccount < CreditAccount
-end

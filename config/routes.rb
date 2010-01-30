@@ -6,6 +6,11 @@ ActionController::Routing::Routes.draw do |map|
 	#map.resources :billing_accounts, :controller => 'accounts'
   map.resources :accounts, :has_many => :transactions
 
+	map.quick_switch '/users/quick_switch/:id', :controller => 'users', :action => 'quick_switch'
+
+	map.account_graph '/graphs/account/:id', :controller => 'graphs', :action => 'account'
+	map.summary_graph '/graphs/summary', :controller => 'graphs', :action => 'summary'
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

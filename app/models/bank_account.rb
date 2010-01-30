@@ -4,4 +4,7 @@ class BankAccount < DebitAccount
 		[]
 	end
 
+	def is_endpoint?
+		false
+	end
 end

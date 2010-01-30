@@ -1,2 +1,3 @@
-class BudgetAccount < CreditAccount
+class BudgetAccount < DebitAccount
+	
 end

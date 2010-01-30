@@ -4,7 +4,7 @@ class Account < ActiveRecord::Base
 	has_many :debits, :class_name => 'Transaction', :foreign_key => 'debit_account_id'
 
 	PERIODS = { 1 => :yearly, 2 => :semi_annually, 4 => :quarterly, 6 => :bi_monthly, 12 => :monthly, 24 => :semi_monthly, 26 => :bi_weekly, 52 => :weekly }
-	TYPES = [ :debit_account, :credit_account, :billing_account, :debt_account, :bank_account, :budget_account ]
+	TYPES = [ :debit_account, :credit_account, :client_account, :payee_account, :debt_account, :bank_account, :budget_account ]
 
 	def self.hidden_fields
 		[]
@@ -19,64 +19,8 @@ class Account < ActiveRecord::Base
 		return name
 	end
 
-	def self.all_credit
-		Account.all.select { |a| a.is_credit_account? }
-	end
-
-	def self.all_debit
-		Account.all.select { |a| a.is_debit_account? }
-	end
-
-	def self.net_annual_debit
-		debit = 0
-		Account.all_debit.each do |d|
-			debit += d.net_annual
-		end
-		debit
-	end
-
-	def self.net_monthly_debit
-		self.net_annual_debit / 12
-	end
-
-	def self.net_annual_credit
-		credit = 0
-		Account.all_credit.each do |d|
-			credit += d.net_annual
-		end
-		credit
-	end
-
-	def self.net_monthly_credit
-		self.net_annual_credit / 12
-	end
-
-	def self.net_annual
-		self.net_annual_debit - self.net_annual_credit
-	end
-
-	def self.net_monthly
-		self.net_annual / 12
-	end
-
-	def self.credit_balance
-		sum = 0
-		Account.all_credit.each do |c|
-			sum += c.balance
-		end
-		sum
-	end
-
-	def self.debit_balance
-		sum = 0
-		Account.all_debit.each do |c|
-			sum += c.balance
-		end
-		sum
-	end
-
-	def self.net_balance
-		self.debit_balance - self.credit_balance
+	def name_and_monthly
+		self.name + ' (' + '%0.02f' % self.net_monthly + ')'
 	end
 
 	def net_annual
@@ -166,6 +110,48 @@ class Account < ActiveRecord::Base
 		if self.is_debit_account?
 			self.initial_balance + debits - credits
 		elsif self.is_credit_account?
+			self.initial_balance - credits + debits
+		end
+	end
+
+	def primary
+		if self.is_credit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ?', self.id])
+		end
+	end
+
+	def secondary
+		if self.is_debit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ?', self.id])
+		end
+	end
+
+	def primary_on_date(d)
+		if self.is_credit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		end
+	end
+
+	def secondary_on_date(d)
+		if self.is_debit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		end
+	end
+
+	def balance_on_date(d)
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		else
 			self.initial_balance + credits - debits
 		end
 	end
@@ -202,6 +188,9 @@ class Account < ActiveRecord::Base
 
 	def respond_to?(id, include_private = false)
 		id_str = id.to_s
+		if id_str == 'is_endpoint?'
+			return true
+		end
 		if id_str =~ /is_(.*_account)\?/
 			account_type = $1
 			if account_type.to_sym == :abstract_account
@@ -215,6 +204,9 @@ class Account < ActiveRecord::Base
 
 	def method_missing(id, *args)
 		id_str = id.to_s
+		if id_str == 'is_endpoint?'
+			return false
+		end
 		if id_str =~ /is_(.*_account)\?/
 			account_type = $1
 			if account_type.to_sym == :abstract_account

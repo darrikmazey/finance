@@ -74,6 +74,11 @@ a:hover { color: #fff; text-decoration: underline; }
   list-style: square;
 }
 
+.column {
+	display: inline-block;
+	width: 48%;
+}
+
 .list {
 	margin-top: 15px;
 }
@@ -133,12 +138,14 @@ a:hover { color: #fff; text-decoration: underline; }
 
 .list_item.summary.monthly_debit .field.amount,
 .list_item.summary.current_debit .field.balance,
+.list_item.summary.current_debit .field.amount,
 .list_item.summary.annual_debit .field.amount {
 	background-color: #131;
 }
 
 .list_item.summary.monthly_credit .field.amount,
 .list_item.summary.current_credit .field.balance,
+.list_item.summary.current_credit .field.amount,
 .list_item.summary.annual_credit .field.amount {
 	background-color: #311;
 }
@@ -162,11 +169,43 @@ a:hover { color: #fff; text-decoration: underline; }
 	border-bottom: 1px solid #ccc;
 }
 
+.list.accounts .field.type {
+	display: none;
+}
+
+.list .field.color_code {
+	width: 1%;
+}
+
+.list_item .field.color_code {
+	border: 1px solid #ccc;
+}
+
+.list_item.bank_account .field.color_code {
+	background-color: #131;
+}
+
+.list_item.budget_account .field.color_code {
+	background-color: #235;
+}
+
+.list_item.client_account .field.color_code {
+	background-color: #661;
+}
+
+.list_item.payee_account .field.color_code {
+	background-color: #411;
+}
+
 .list_item.positive_account .field.balance {
 }
 
 .list_item.negative_account .field.balance {
 	background-color: #311;
+}
+
+.list_item.client_account .field.balance {
+	background-color: #000;
 }
 
 .list_item.current_account .field.due_date {
