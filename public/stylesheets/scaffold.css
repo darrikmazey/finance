@@ -74,6 +74,10 @@ a:hover { color: #fff; text-decoration: underline; }
   list-style: square;
 }
 
+.graph {
+	text-align: center;
+}
+
 .column {
 	display: inline-block;
 	width: 48%;
