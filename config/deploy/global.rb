@@ -60,7 +60,7 @@ after 'deploy:setup', 'deploy:setup_code'
 after 'deploy:update_code', 'deploy:copy_code_to_release'
 before 'deploy:copy_code_to_release', 'deploy:make_release_dir'
 after 'deploy:copy_code_to_release', 'deploy:migrate_db'
-after 'deploy:update_code', 'deploy:update_version'
+after 'deploy:symlink', 'deploy:update_version'
 
 before 'deploy:restart', 'deploy:symlink_pids_dir'
 before 'deploy:symlink_pids_dir', 'deploy:make_tmp_dir'
