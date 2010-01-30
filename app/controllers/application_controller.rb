@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 	
 	before_filter :load_user
 	before_filter :preload
+	before_filter :get_version
 
 	private
 
@@ -44,6 +45,20 @@ class ApplicationController < ActionController::Base
 		end
 		if params[:account_id]
 			@account = Account.find params[:account_id] rescue nil
+		end
+	end
+
+	def get_version
+		@VERSION = %x[cd #{RAILS_ROOT} && cat VERSION]
+		if @VERSION.nil?
+			@VERSION = 'none'
+		end
+		@VERSION.chomp!
+		if RAILS_ENV == "development"
+			@VERSION += ' [dev]'
+		end
+		if RAILS_ENV == "test"
+			@VERSION += ' [test]'
 		end
 	end
 
