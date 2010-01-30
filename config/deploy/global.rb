@@ -74,7 +74,7 @@ namespace :release do
 	desc "clean up releases"
 	task :clean, :roles => :web do
 		keep = variables[:keep] ? variables[:keep] + 1 : 6
-		run "cd #{deploy_to}/releases && for i in `ls -1 | sort -rk1 | tail -n +#{keep}`; do echo rm -rf $i; done"
+		run "cd #{deploy_to}/releases && for i in `ls -1 | sort -rk1 | tail -n +#{keep}`; do echo rm -rf $i; rm -rf $i; done"
 	end
 end
 
