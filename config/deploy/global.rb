@@ -42,12 +42,12 @@ namespace :deploy do
 
 	desc "restart mongrel"
 	task :restart, :roles => :app do
-		run "cd #{release_path} && mongrel_rails cluster::restart"
+		run "cd #{deploy_to}/current && mongrel_rails cluster::restart"
 	end
 
 	desc "make tmp directory"
 	task :make_tmp_dir, :roles => :app do
-		run "cd #{release_path} && mkdir -p tmp"
+		run "cd #{deploy_to}/current && mkdir -p tmp"
 	end
 
 	desc "symlink pids directory"
@@ -62,8 +62,8 @@ before 'deploy:copy_code_to_release', 'deploy:make_release_dir'
 after 'deploy:copy_code_to_release', 'deploy:migrate_db'
 after 'deploy:symlink', 'deploy:update_version'
 
-before 'deploy:restart', 'deploy:symlink_pids_dir'
-before 'deploy:symlink_pids_dir', 'deploy:make_tmp_dir'
+after 'deploy:symlink', 'deploy:make_tmp_dir'
+after 'deploy:make_tmp_dir', 'deploy:symlink_pids_dir'
 
 namespace :release do
 	desc "count releases"
