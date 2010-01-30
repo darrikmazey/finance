@@ -17,7 +17,7 @@ namespace :deploy do
 
 	desc "update VERSION"
 	task :update_version, :roles => :app do
-		run "cd #{deploy_to}/cache && git rev-parse --verify HEAD > ../current/VERSION"
+		run "cd #{deploy_to}/cache && git rev-parse --verify HEAD > ../current/VERSION && cat ../current/VERSION"
 	end
 
 	desc "update codebase"
