@@ -62,8 +62,8 @@ class GraphsController < ApplicationController
 		debit_data = Array.new
 		count = -1
 		while d <= DateTime.now
-			balance_data << @current_user.net_balance_on_date(d)
-			credit_data << @current_user.credit_balance_on_date(d)
+			balance_data << @current_user.net_balance_sans_client_on_date(d)
+			credit_data << @current_user.credit_balance_sans_client_on_date(d)
 			debit_data << @current_user.debit_balance_on_date(d)
 			d += 2.days
 			count += 1

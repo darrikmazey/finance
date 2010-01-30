@@ -25,6 +25,14 @@ class User < ActiveRecord::Base
 		sum
 	end
 
+	def credit_balance_sans_client_on_date(d)
+		sum = 0
+		self.credit_accounts.select { |c| !c.is_client_account? }.each do |c|
+			sum += c.balance_on_date(d)
+		end
+		sum
+	end
+
 	def credit_balance
 		sum = 0
 		self.credit_accounts.each do |c|
@@ -59,6 +67,10 @@ class User < ActiveRecord::Base
 
 	def net_balance_sans_client
 		self.debit_balance - self.credit_balance_sans_client
+	end
+
+	def net_balance_sans_client_on_date(d)
+		self.debit_balance_on_date(d) - self.credit_balance_sans_client_on_date(d)
 	end
 
 	def net_balance
