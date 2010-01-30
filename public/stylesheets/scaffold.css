@@ -78,9 +78,16 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-align: center;
 }
 
+.item_data .content {
+}
+
 .column {
 	display: inline-block;
 	width: 48%;
+}
+
+.column.first {
+	vertical-align: top;
 }
 
 .list {
@@ -314,7 +321,7 @@ a:hover { color: #fff; text-decoration: underline; }
 .edit_item .field .field_name,
 .item_data .field .field_name {
 	display: inline-block;
-	width: 12%;
+	width: 35%;
 	text-align: right;
 	margin-right: 5px;
 	font-weight: bold;

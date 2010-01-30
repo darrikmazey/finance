@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :clients
+
   map.resources :transactions
 
   map.resources :users, :collection => { :login => [:get, :post], :logout => [:get] }, :has_many => [:accounts]

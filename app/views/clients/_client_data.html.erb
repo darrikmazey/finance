@@ -1,0 +1,22 @@
+<div class="item_data client">
+	<div class="heading"><%= client_data.class.name.titleize %> : <%= client_data.name %></div>
+
+	<div class="content">
+		<div class="column first">
+			<div class="field name">
+				<div class="field_name">Name:</div>
+				<div class="field_value"><%=h client_data.name %></div>
+			</div>
+
+			<div class="field client_account">
+				<div class="field_name">Account:</div>
+				<div class="field_value"><%= link_to client_data.client_account.name, account_url(client_data.client_account) %></div>
+			</div>
+		</div>
+		<div class="column">
+			<div class="graph">
+				<img src="<%= account_graph_url(client_data.client_account.id) %>" />
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="list_item client">
+	<div class="field first name"><%=h client.name %></div>
+	<div class="field client_account"><%= link_to client.client_account.name, account_url(client.client_account) %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', client %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_client_path(client) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>
