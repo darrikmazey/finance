@@ -8,4 +8,4 @@ port: "8030"
 environment: production
 pid_file: tmp/pids/mongrel.pid
 address: 127.0.0.1
-servers: 1
+servers: 2
