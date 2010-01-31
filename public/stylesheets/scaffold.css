@@ -277,10 +277,14 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 15%;
 }
 
+.list.invoice_transactions .field.description,
+.list.client_transactions .field.description,
 .list.account_transactions .field.description {
 	width: 25%;
 }
 
+.list.invoice_transactions .field.account,
+.list.client_transactions .field.description,
 .list.account_transactions .field.account {
 	width: 15%;
 }
@@ -290,15 +294,54 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 15%;
 }
 
-.decr_transaction .field.debit_amount.non_zero,
+.decr_transaction .field.credit_amount.non_zero,
 .incr_transaction .field.debit_amount.non_zero {
 	background-color: #131;
 }
 
-.incr_transaction .field.credit_amount.non_zero,
+.decr_transaction .field.debit_amount.non_zero,
+.incr_transaction .field.credit_amount.non_zero {
+	background-color: #311;
+}
+
+.transaction .field.debit_amount.zero,
+.transaction .field.credit_amount.zero {
+	background-color: #431;
+}
+
+.account_transactions .incr_transaction .field.credit_amount,
+.account_transactions .incr_transaction .field.debit_amount,
+.client_transactions .incr_transaction .field.credit_amount,
+.client_transactions .incr_transaction .field.debit_amount,
+.invoice_transactions .incr_transaction .field.credit_amount,
+.invoice_transactions .incr_transaction .field.debit_amount,
+.cred_tran_transaction .field.credit_amount,
+.deb_tran_transaction .field.debit_amount {
+	background-color: #131;
+}
+
+.account_transactions .decr_transaction .field.debit_amount,
+.account_transactions .decr_transaction .field.credit_amount,
+.client_transactions .decr_transaction .field.debit_amount,
+.client_transactions .decr_transaction .field.credit_amount,
+.invoice_transactions .decr_transaction .field.debit_amount,
+.invoice_transactions .decr_transaction .field.credit_amount,
+.cred_tran_transaction .field.debit_amount,
+.deb_tran_transaction .field.credit_amount {
+	background-color: #311;
+}
+
+/*
+.decr_transaction .field.debit_amount.non_zero,
 .decr_transaction .field.credit_amount.non_zero {
 	background-color: #311;
 }
+
+.incr_transaction .field.debit_amount.non_zero,
+.incr_transaction .field.credit_amount.non_zero {
+	background-color: #131;
+}
+*/
 
 .edit_item .heading,
 .item_data .heading {

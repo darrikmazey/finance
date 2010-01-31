@@ -1,0 +1,26 @@
+<div class="item_data invoice">
+	<div class="heading"><%= invoice_data.class.name.titleize %> : <%= invoice_data.identifier %></div>
+
+	<div class="content">
+		<div class="column first">
+			<div class="field identifier">
+				<div class="field_name">Identifier:</div>
+				<div class="field_value"><%=h @invoice.identifier %></div>
+			</div>
+
+			<div class="field client">
+				<div class="field_name">Client:</div>
+				<div class="field_value"<%= link_to @invoice.client.name, client_url(@invoice.client) %></div>
+			</div>
+
+			<div class="field created_at">
+				<div class="field_name">Created at:</div>
+				<div class="field_value"><%=h @invoice.created_at.short_date %></div>
+			</div>
+
+			<div class="field billed_at">
+				<div class="field_name">Billed at:</div>
+				<div class="field_value"><%=h @invoice.billed_at.short_date %></div>
+			</div>
+		</div>
+	</div>

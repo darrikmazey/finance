@@ -21,6 +21,7 @@ class InvoicesController < ApplicationController
 			redirect_to invoices_url
 			return
 		end
+		@account = @invoice.client.client_account
 
     respond_to do |format|
       format.html # show.html.erb

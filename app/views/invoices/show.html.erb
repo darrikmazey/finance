@@ -1,23 +1,14 @@
-<p>
-  <b>Identifier:</b>
-  <%=h @invoice.identifier %>
-</p>
-
-<p>
-  <b>Client:</b>
-  <%=h @invoice.client %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%=h @invoice.user %>
-</p>
-
-<p>
-  <b>Billed at:</b>
-  <%=h @invoice.billed_at %>
-</p>
-
+<%= render :partial => 'invoice_data', :object => @invoice %>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>
+
+<% if @invoice.transactions.size > 0 -%>
+<div class="list invoice_transactions transactions">
+	<div class="heading">transactions</div>
+	<div class="content">
+		<%= render :partial => 'accounts/transaction_list_header' %>
+		<%= render :partial => 'accounts/transaction', :collection => @invoice.rev_sorted_transactions %>
+	</div>
+</div>
+<% end -%>

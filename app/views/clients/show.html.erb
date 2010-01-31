@@ -4,7 +4,7 @@
 <%= link_to 'Back', clients_path %>
 
 <% if @client.client_account.recent_transactions.size > 0 -%>
-<div class="list account_transactions transactions">
+<div class="list client_transactions transactions">
 	<div class="heading">transactions</div>
 	<div class="content">
 		<%= render :partial => 'accounts/transaction_list_header' %>

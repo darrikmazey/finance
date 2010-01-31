@@ -1,7 +1,11 @@
 <div class="list_item transaction <%= transaction.flags %>">
 	<div class="field first trans_date"><%=h transaction.trans_date.short_date %></div>
 	<div class="field ref"><%=h transaction.ref %></div>
-	<div class="field description"><%=h transaction.description %></div>
+	<% if !transaction.invoice.nil? -%>
+		<div class="field description"><%= link_to transaction.description, invoice_url(transaction.invoice) %></div>
+	<% else -%>
+		<div class="field description"><%=h transaction.description %></div>
+	<% end -%>
 	<div class="field credit_account"><%= credit_account_link(transaction) %></div>
 	<div class="field credit_amount <%= transaction.credit_amount_flags %>"><%=h number_to_currency(transaction.credit_amount) %></div>
 	<div class="field debit_account"><%= debit_account_link(transaction) %></div>
