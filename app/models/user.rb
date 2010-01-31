@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 	attr_accessor :password_confirmation
 	validates_confirmation_of :password
 
+	def loose_client_accounts
+		self.client_accounts.select { |a| a.client.nil? }
+	end
+
 	def client_accounts
 		ClientAccount.find :all, :conditions => ['user_id = ?', self.id], :order => ['name asc']
 	end

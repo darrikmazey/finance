@@ -35,7 +35,12 @@ class ClientsController < ApplicationController
   # GET /clients/new.xml
   def new
     @client = Client.new
-		@client_accounts = @current_user.client_accounts
+		@client_accounts = @current_user.loose_client_accounts
+		if @client_accounts.size == 0
+			flash[:error] = 'you have no client accounts. create one first.'
+			redirect_to clients_url
+			return
+		end
 
     respond_to do |format|
       format.html # new.html.erb
