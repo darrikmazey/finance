@@ -8,6 +8,10 @@
 	<div class="field annual"><%=h number_to_currency(account.net_annual) %></div>
 	<div class="field monthly"><%=h number_to_currency(convert_period(account.amount, account.period, @period.period)) %></div>
 	<div class="field user"><%=h account.user.username %></div>
+	<% if @is_ajax -%>
+	<div class="field total"><%=h number_to_currency(account.primary_between(@period.start_date, @period.end_date)) %></div>
+	<% else -%>
+	<div class="field total"><%=h number_to_currency(account.primary) %></div>
+	<% end -%>
 	<div class="field due_date"><%=h account.protected_field(:due_date, account.next_due_date.short_date) %></div>
-	<div class="field period"><%=h account.protected_field(:period, Account::Period[account.period].name) %></div>
 </div>

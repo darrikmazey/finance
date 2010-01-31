@@ -24,6 +24,7 @@ class AccountsController < ApplicationController
 
 	# POST /accounts/ajax_list
 	def ajax_list
+		@is_ajax = true
 		if @current_user
 			@accounts = @current_user.accounts.find :all, :order => ['type asc, name asc'] rescue nil
 		else
