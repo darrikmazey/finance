@@ -4,6 +4,16 @@
 <%= link_to 'Destroy', @account, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', accounts_path %>
 
+<% if @account.client.invoices.size > 0 -%>
+<div class="list invoices">
+	<div class="heading">invoices</div>
+	<div class="content">
+		<%= render :partial => 'invoices/list_header' %>
+		<%= render :partial => 'invoices/invoice', :collection => @account.client.invoices %>
+	</div>
+</div>
+<% end -%>
+
 <% if @account.recent_transactions.size > 0 -%>
 <div class="list account_transactions transactions">
 	<div class="heading">transactions</div>
