@@ -1,0 +1,23 @@
+<p>
+  <b>Identifier:</b>
+  <%=h @invoice.identifier %>
+</p>
+
+<p>
+  <b>Client:</b>
+  <%=h @invoice.client %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @invoice.user %>
+</p>
+
+<p>
+  <b>Billed at:</b>
+  <%=h @invoice.billed_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

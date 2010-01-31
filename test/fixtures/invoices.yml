@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  identifier: MyString
+  client: 
+  user: 
+  billed_at: 2010-01-30 21:22:13
+
+two:
+  identifier: MyString
+  client: 
+  user: 
+  billed_at: 2010-01-30 21:22:13

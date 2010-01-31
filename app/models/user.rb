@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	has_many :accounts
 	has_many :clients
+	has_many :invoices
 
 	validates_presence_of :hashed_password
 	validates_presence_of :salt

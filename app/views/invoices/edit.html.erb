@@ -1,0 +1,28 @@
+<h1>Editing invoice</h1>
+
+<% form_for(@invoice) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :identifier %><br />
+    <%= f.text_field :identifier %>
+  </p>
+  <p>
+    <%= f.label :client %><br />
+    <%= f.text_field :client %>
+  </p>
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :billed_at %><br />
+    <%= f.datetime_select :billed_at %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @invoice %> |
+<%= link_to 'Back', invoices_path %>

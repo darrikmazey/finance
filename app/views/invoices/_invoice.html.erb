@@ -1,0 +1,10 @@
+<div class="list_item invoice">
+	<div class="field first identifier"><%=h invoice.identifier %></div>
+	<div class="field client"><%= link_to invoice.client.name, client_url(invoice.client) %></div>
+	<div class="field billed_at"><%=h invoice.billed_at.short_date %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', invoice %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_invoice_path(invoice) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>
