@@ -1,0 +1,4 @@
+<div class="period_selector">
+	<%= collection_select :period, :period, Account::Period.all, :period, :name %>
+</div>
+<%= observe_field :period_period, :url => { :controller => 'accounts', :action => 'ajax_list' }, :update => 'account_list', :with => '"period="+value' %>

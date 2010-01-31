@@ -37,9 +37,7 @@ class ClientsController < ApplicationController
     @client = Client.new
 		@client_accounts = @current_user.loose_client_accounts
 		if @client_accounts.size == 0
-			flash[:error] = 'you have no client accounts. create one first.'
-			redirect_to clients_url
-			return
+			@client_account = ClientAccount.new
 		end
 
     respond_to do |format|
@@ -58,6 +56,14 @@ class ClientsController < ApplicationController
   # POST /clients.xml
   def create
     @client = Client.new(params[:client])
+
+		if params[:client_account]
+			@client_account = ClientAccount.new(params[:client_account])
+			@client_account.name = @client.name
+			@client_account.user = @current_user
+			@client_account.save
+			@client.client_account = @client_account
+		end
 
     respond_to do |format|
       if @client.save

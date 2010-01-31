@@ -292,7 +292,7 @@ class Account < ActiveRecord::Base
 			Account::PERIODS.each_key do |k|
 				Account::Period[k]
 			end
-			@@instances.values.to_a
+			@@instances.values.to_a.sort { |a,b| b.period <=> a.period }
 		end
 
 		def self.[](n)

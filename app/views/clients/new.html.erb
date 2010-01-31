@@ -8,10 +8,53 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
+
+	<% if @client_accounts.size > 0 -%>
   <p>
     <%= f.label :client_account %><br />
     <%= f.collection_select :client_account_id, @client_accounts, :id, :name %>
   </p>
+
+	<% else -%>
+
+	<p>A client account will be created.</p>
+	<div class="embedded_form">
+	<p>
+	<%= label :client_account, :description %><br />
+	<%= text_field :client_account, :description %>
+	</p>
+
+	<p>
+	<%= label :client_account, :account_number %><br />
+	<%= text_field :client_account, :account_number %>
+	</p>
+
+	<p>
+	<%= label :client_account, :initial_balance %><br />
+	<%= text_field :client_account, :initial_balance %>
+	</p>
+
+	<%= hidden_field :client_account, :type, :value => 'ClientAccount' %>
+
+	<p>
+	<%= label :client_account, :amount %><br />
+	<%= text_field :client_account, :amount %>
+	</p>
+	
+	<p>
+	<%= label :client_account, :due_date %><br />
+	<%= date_select :client_account, :due_date %>
+	</p>
+
+	<p>
+	<%= label :client_account, :period %><br />
+	<%= collection_select :client_account, :period, Account::Period.all, :period, :name %>
+	</p>
+
+	</div>
+
+	<% end -%>
+
   <p>
     <%= f.submit 'Create' %>
   </p>

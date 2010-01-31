@@ -10,12 +10,33 @@ class AccountsController < ApplicationController
 		else
 			@accounts = Account.find :all, :order => ['type asc, name asc']
 		end
+		if params[:period]
+			@period = Account::Period[params[:period].to_i]
+		else
+			@period = Account::Period[12]
+		end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @accounts }
     end
   end
+
+	# POST /accounts/ajax_list
+	def ajax_list
+		if @current_user
+			@accounts = @current_user.accounts.find :all, :order => ['type asc, name asc'] rescue nil
+		else
+			@accounts = Account.find :all, :order => ['type asc, name asc']
+		end
+		if params[:period]
+			@period = Account::Period[params[:period].to_i]
+		else
+			@period = Account::Period[12]
+		end
+
+		render :index, :layout => false
+	end
 
   # GET /accounts/1
   # GET /accounts/1.xml

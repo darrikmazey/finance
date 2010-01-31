@@ -6,7 +6,7 @@
 	<div class="field type"><%=h account.type.to_s.sub(/account/i, '').titleize %></div>
 	<div class="field amount"><%=h account.protected_field(:amount, number_to_currency(account.amount)) %></div>
 	<div class="field annual"><%=h number_to_currency(account.net_annual) %></div>
-	<div class="field monthly"><%=h number_to_currency(account.net_monthly) %></div>
+	<div class="field monthly"><%=h number_to_currency(convert_period(account.amount, account.period, @period.period)) %></div>
 	<div class="field user"><%=h account.user.username %></div>
 	<div class="field due_date"><%=h account.protected_field(:due_date, account.next_due_date.short_date) %></div>
 	<div class="field period"><%=h account.protected_field(:period, Account::Period[account.period].name) %></div>

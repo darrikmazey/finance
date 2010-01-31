@@ -1,5 +1,6 @@
-<div class="list accounts">
+<div id="account_list" class="list accounts">
 	<div class="heading">Listing accounts <%= link_to '+', new_account_url %></div>
+	<%= render :partial => 'period_selector' %>
 	<div class="content">
 		<%= render :partial => 'list_header' %>
 		<%= render :partial => 'account', :collection => @accounts %>

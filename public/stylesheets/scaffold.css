@@ -78,6 +78,12 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-align: center;
 }
 
+.embedded_form {
+	width: 25%;
+	border-top: solid 1px #ccc;
+	border-bottom: solid 1px #ccc;
+}
+
 .item_data .content {
 }
 
