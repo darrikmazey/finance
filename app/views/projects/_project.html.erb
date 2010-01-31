@@ -1,0 +1,11 @@
+<div class="list_item client">
+	<div class="field first name"><%= link_to project.name, project_url(project) %></div>
+	<div class="field description"><%=h project.description %></div>
+	<div class="field base_rate"><%=h number_to_currency(project.base_rate) %></div>
+	<div class="field client"><%= link_to project.client.name, client_url(project.client) %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', project %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_project_path(project) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

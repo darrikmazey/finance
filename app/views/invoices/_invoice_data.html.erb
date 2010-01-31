@@ -13,6 +13,11 @@
 				<div class="field_value"<%= link_to @invoice.client.name, client_url(@invoice.client) %></div>
 			</div>
 
+			<div class="field project">
+				<div class="field_name">Project:</div>
+				<div class="field_value"><%= link_to @invoice.project.name, project_url(@invoice.project) %></div>
+			</div>
+
 			<div class="field created_at">
 				<div class="field_name">Created at:</div>
 				<div class="field_value"><%=h @invoice.created_at.short_date %></div>

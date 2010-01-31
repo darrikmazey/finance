@@ -1,8 +1,11 @@
 class ProjectsController < ApplicationController
+	
+	before_filter :require_user
+
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
+    @projects = @current_user.projects
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,12 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
+    @project = @current_user.projects.find(params[:id]) rescue nil
+		if @project.nil?
+			redirect_to projects_url
+			return
+		end
+		@account = @project.client.client_account
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +33,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+		@clients = @current_user.clients
 
     respond_to do |format|
       format.html # new.html.erb

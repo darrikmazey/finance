@@ -1,7 +1,1 @@
-<div class="list invoices">
-	<div class="heading">Listing invoices <%= link_to '+', new_invoice_url %></div>
-	<div class="content">
-		<%= render :partial => 'list_header' %>
-		<%= render :partial => 'invoice', :collection => @invoices %>
-	</div>
-</div>
+<%= render :partial => 'invoice_list', :object => @invoices %>

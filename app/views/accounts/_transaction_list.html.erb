@@ -1,0 +1,8 @@
+<div class="list account_transactions transactions">
+	<div class="heading">transactions</div>
+	<div class="content">
+		<%= render :partial => 'accounts/transaction_list_header' %>
+		<%= render :partial => 'accounts/transaction', :collection => transaction_list %>
+	</div>
+</div>
+

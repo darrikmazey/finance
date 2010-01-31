@@ -1,5 +1,5 @@
 <div class="list_item transaction <%= transaction.flags %>">
-	<div class="field first trans_date"><%=h transaction.trans_date.short_date %></div>
+	<div class="field first trans_date"><%= link_to transaction.trans_date.short_date, transaction %></div>
 	<div class="field ref"><%=h transaction.ref %></div>
 	<% if !transaction.invoice.nil? -%>
 		<div class="field description"><%= link_to transaction.description, invoice_url(transaction.invoice) %></div>

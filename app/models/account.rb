@@ -19,6 +19,10 @@ class Account < ActiveRecord::Base
 		return name
 	end
 
+	def has_client?
+		false
+	end
+
 	def name_and_monthly
 		self.name + ' (' + '%0.02f' % self.net_monthly + ')'
 	end

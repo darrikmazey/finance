@@ -3,14 +3,12 @@
 <%= link_to 'Edit', edit_client_path(@client) %> |
 <%= link_to 'Back', clients_path %>
 
+<% if @client.projects.size > 0 -%>
+	<%= render :partial => 'projects/project_list', :object => @client.projects %>
+<% end -%>
+
 <% if @client.invoices.size > 0 -%>
-<div class="list invoices">
-	<div class="heading">invoices</div>
-	<div class="content">
-		<%= render :partial => 'invoices/list_header' %>
-		<%= render :partial => 'invoices/invoice', :collection => @client.invoices %>
-	</div>
-</div>
+	<%= render :partial => 'invoices/invoice_list', :object => @client.invoices %>
 <% end -%>
 
 <% if @client.client_account.recent_transactions.size > 0 -%>

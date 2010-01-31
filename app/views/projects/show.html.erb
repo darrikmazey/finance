@@ -1,28 +1,12 @@
-<p>
-  <b>Name:</b>
-  <%=h @project.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%=h @project.description %>
-</p>
-
-<p>
-  <b>Base rate:</b>
-  <%=h @project.base_rate %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%=h @project.user %>
-</p>
-
-<p>
-  <b>Client:</b>
-  <%=h @project.client %>
-</p>
-
+<%= render :partial => 'project_data', :object => @project %>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+<% if @project.invoices.size > 0 -%>
+<%= render :partial => 'invoices/invoice_list', :object => @project.invoices %>
+<% end -%>
+
+<% if @project.transactions.size > 0 -%>
+<%= render :partial => 'accounts/transaction_list', :object => @project.transactions %>
+<% end -%>

@@ -250,6 +250,10 @@ a:hover { color: #fff; text-decoration: underline; }
 	font-size: 1.4em;
 }
 
+.list.invoices .field.client,
+.list.projects .field.client,
+.list.projects .field.name,
+.list.clients .field.name,
 .list.accounts .field.name,
 .list.accounts .field.description {
 	width: 15%;
