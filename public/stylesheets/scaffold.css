@@ -84,6 +84,16 @@ a:hover { color: #fff; text-decoration: underline; }
 	border-bottom: solid 1px #ccc;
 }
 
+.list .heading {
+	display: inline-block;
+}
+
+.period_selector {
+	display: inline-block;
+	text-align: right;
+	margin-left: 70%;
+}
+
 .item_data .content {
 }
 
