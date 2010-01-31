@@ -149,11 +149,13 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-align: left;
 }
 
+.list_item.credit_account:hover .field.monthly,
 .list_item.credit_account:hover .field.amount,
 .list_item.credit_account:hover .field.annual {
 	background-color: #311;
 }
 
+.list_item.debit_account:hover .field.monthly,
 .list_item.debit_account:hover .field.amount,
 .list_item.debit_account:hover .field.annual {
 	background-color: #131;

@@ -255,9 +255,11 @@ class Account < ActiveRecord::Base
 		def self.all
 			arr = Array.new
 			Account::TYPES.each do |t|
-				arr << Account::AccountType[t]
+				unless [:debit_account, :credit_account, :debt_account].include? t
+					arr << Account::AccountType[t]
+				end
 			end
-			arr
+			arr.sort { |a, b| a.to_s <=> b.to_s }
 		end
 
 		def self.[](t)

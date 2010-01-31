@@ -1,0 +1,24 @@
+<h1>Listing rates</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Project</th>
+    <th>Modifier</th>
+  </tr>
+
+<% @rates.each do |rate| %>
+  <tr>
+    <td><%=h rate.name %></td>
+    <td><%=h rate.project %></td>
+    <td><%=h rate.modifier %></td>
+    <td><%= link_to 'Show', rate %></td>
+    <td><%= link_to 'Edit', edit_rate_path(rate) %></td>
+    <td><%= link_to 'Destroy', rate, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New rate', new_rate_path %>
