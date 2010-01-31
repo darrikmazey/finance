@@ -1,0 +1,28 @@
+<p>
+  <b>Name:</b>
+  <%=h @project.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @project.description %>
+</p>
+
+<p>
+  <b>Base rate:</b>
+  <%=h @project.base_rate %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @project.user %>
+</p>
+
+<p>
+  <b>Client:</b>
+  <%=h @project.client %>
+</p>
+
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

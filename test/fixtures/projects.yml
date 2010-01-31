@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  base_rate: 1.5
+  user: 
+  client: 
+
+two:
+  name: MyString
+  description: MyString
+  base_rate: 1.5
+  user: 
+  client: 
