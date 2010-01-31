@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	has_many :accounts
+	has_many :clients
 
 	validates_presence_of :hashed_password
 	validates_presence_of :salt
@@ -8,6 +9,10 @@ class User < ActiveRecord::Base
 
 	attr_accessor :password_confirmation
 	validates_confirmation_of :password
+
+	def client_accounts
+		ClientAccount.find :all, :conditions => ['user_id = ?', self.id], :order => ['name asc']
+	end
 
 	def credit_accounts
 		self.accounts.select { |a| a.is_credit_account? }

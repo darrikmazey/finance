@@ -1,8 +1,11 @@
 class ClientsController < ApplicationController
+	
+	before_filter :require_user
+
   # GET /clients
   # GET /clients.xml
   def index
-    @clients = Client.all
+    @clients = @current_user.clients
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,13 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.xml
   def show
-    @client = Client.find(params[:id])
+    @client = @current_user.clients.find(params[:id]) rescue nil
+
+		if @client.nil?
+			redirect_to clients_url
+			return
+		end
+
 		@account = @client.client_account
 
     respond_to do |format|
@@ -26,6 +35,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.xml
   def new
     @client = Client.new
+		@client_accounts = @current_user.client_accounts
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +46,7 @@ class ClientsController < ApplicationController
   # GET /clients/1/edit
   def edit
     @client = Client.find(params[:id])
+		@client_accounts = @current_user.client_accounts
   end
 
   # POST /clients

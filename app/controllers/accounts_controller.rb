@@ -5,8 +5,8 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-		if @user
-			@accounts = @user.accounts.find :all, :order => ['type asc, name asc']
+		if @current_user
+			@accounts = @current_user.accounts.find :all, :order => ['type asc, name asc'] rescue nil
 		else
 			@accounts = Account.find :all, :order => ['type asc, name asc']
 		end
@@ -20,7 +20,11 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
-    @account = Account.find(params[:id])
+    @account = @current_user.accounts.find(params[:id]) rescue nil
+		if @account.nil?
+			redirect_to accounts_url
+			return
+		end
 
     respond_to do |format|
       format.html # show.html.erb

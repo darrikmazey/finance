@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :client_account %><br />
-    <%= f.text_field :client_account %>
+    <%= f.collection_select :client_account_id, @client_accounts, :id, :name %>
   </p>
   <p>
     <%= f.submit 'Update' %>
