@@ -43,33 +43,33 @@
 </div>
 
 <div class="list_item summary monthly_debit">
-	<div class="field first name">Monthly debit</div>
+	<div class="field first name"><%= @period.name.titleize %> debit</div>
 	<div class="field description">&nbsp;</div>
 	<div class="field balance">&nbsp;</div>
 	<div class="field type">&nbsp;</div>
-	<div class="field amount"><%= number_to_currency(@current_user.net_monthly_debit) %></div>
+	<div class="field amount"><%= number_to_currency(convert_period(@current_user.net_monthly_debit, 12, @period.period)) %></div>
 	<div class="field user">&nbsp;</div>
 	<div class="field due_date">&nbsp;</div>
 	<div class="field period">&nbsp;</div>
 </div>
 
 <div class="list_item summary monthly_credit">
-	<div class="field first name">Montly credit</div>
+	<div class="field first name"><%= @period.name.titleize %> credit</div>
 	<div class="field description">&nbsp;</div>
 	<div class="field balance">&nbsp;</div>
 	<div class="field type">&nbsp;</div>
-	<div class="field amount"><%= number_to_currency(@current_user.net_monthly_credit) %></div>
+	<div class="field amount"><%= number_to_currency(convert_period(@current_user.net_monthly_credit, 12, @period.period)) %></div>
 	<div class="field user">&nbsp;</div>
 	<div class="field due_date">&nbsp;</div>
 	<div class="field period">&nbsp;</div>
 </div>
 
 <div class="list_item summary net_monthly">
-	<div class="field first name">Net monthly</div>
+	<div class="field first name">Net <%= @period.name %></div>
 	<div class="field description">&nbsp;</div>
 	<div class="field balance">&nbsp;</div>
 	<div class="field type">&nbsp;</div>
-	<div class="field amount"><%= number_to_currency(@current_user.net_monthly) %></div>
+	<div class="field amount"><%= number_to_currency(convert_period(@current_user.net_monthly, 12, @period.period)) %></div>
 	<div class="field user">&nbsp;</div>
 	<div class="field due_date">&nbsp;</div>
 	<div class="field period">&nbsp;</div>
