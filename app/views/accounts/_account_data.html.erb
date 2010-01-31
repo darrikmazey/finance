@@ -35,6 +35,11 @@
 				<div class="field_value"><%=h number_to_currency(account_data.balance) %></div>
 			</div>
 
+			<div class="field total">
+				<div class="field_name">Total:</div>
+				<div class="field_value"><%=h number_to_currency(account_data.primary) %></div>
+			</div>
+
 			<div class="field type">
 				<div class="field_name">Type:</div>
 				<div class="field_value"><%=h account_data.type.to_s.titleize %></div>

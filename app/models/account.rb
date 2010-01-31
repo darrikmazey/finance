@@ -126,6 +126,30 @@ class Account < ActiveRecord::Base
 		end
 	end
 
+	def primary_before(d)
+		if self.is_credit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date < ?', self.id, d])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date < ?', self.id, d])
+		end
+	end
+
+	def primary_before_incl(d)
+		if self.is_credit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		end
+	end
+
+	def primary_between(d1, d2)
+		if self.is_credit_account?
+			return Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date >= ? and trans_date < ?', self.id, d1, d2])
+		else
+			return Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date >= ? and trans_date < ?', self.id, d1, d2])
+		end
+	end
+
 	def secondary
 		if self.is_debit_account?
 			return Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
