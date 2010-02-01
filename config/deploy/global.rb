@@ -1,4 +1,6 @@
 
+load 'config/deploy/unicorn'
+
 namespace :deploy do
 	
 	desc "deploy application"
@@ -40,9 +42,10 @@ namespace :deploy do
 		run "cd #{release_path} && RAILS_ENV=production rake db:migrate"
 	end
 
-	desc "restart mongrel"
+	desc "restart server"
 	task :restart, :roles => :app do
-		run "cd #{deploy_to}/current && mongrel_rails cluster::restart"
+		#run "cd #{deploy_to}/current && mongrel_rails cluster::restart"
+		unicorn.restart
 	end
 
 	desc "make tmp directory"

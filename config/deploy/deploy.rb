@@ -18,3 +18,4 @@ role :web, "finance.darmasoft.net"
 role :db,  "finance.darmasoft.net", :primary => true
 
 load 'config/deploy/global'
+
