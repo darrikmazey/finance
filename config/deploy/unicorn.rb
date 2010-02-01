@@ -23,7 +23,9 @@ namespace :unicorn do
 	desc "symlink sockets dir"
 	task :symlink_sockets_dir, :roles => :app do
 		run "cd #{release_path}/tmp && ln -s #{deploy_to}/shared/sockets"
+	end
 end
 
 after 'deploy:copy_code_to_release', 'unicorn:make_unicorn_dirs'
+after 'deploy:symlink_pids_directory', 'unicorn:symlink_sockets_dir'
 
