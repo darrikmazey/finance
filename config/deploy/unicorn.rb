@@ -14,5 +14,12 @@ namespace :unicorn do
 	task :no_autostart, :roles => :app do
 		run "sudo rm -f /etc/unicorn/sites/#{application}"
 	end
+
+	desc "make unicorn directories"
+	task :make_unicorn_dirs, :roles => :app do
+		run "cd #{deploy_to} && mkdir -p shared/tmp/sockets shared/tmp/pids"
+	end
 end
+
+after 'deploy:copy_code_to_release', 'unicorn:make_unicorn_dirs'
 
