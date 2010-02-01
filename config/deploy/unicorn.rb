@@ -27,5 +27,5 @@ namespace :unicorn do
 end
 
 after 'deploy:copy_code_to_release', 'unicorn:make_unicorn_dirs'
-after 'deploy:symlink_pids_directory', 'unicorn:symlink_sockets_dir'
+after 'deploy:symlink_pids_dir', 'unicorn:symlink_sockets_dir'
 
