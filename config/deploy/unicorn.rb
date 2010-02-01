@@ -17,8 +17,12 @@ namespace :unicorn do
 
 	desc "make unicorn directories"
 	task :make_unicorn_dirs, :roles => :app do
-		run "cd #{deploy_to} && mkdir -p shared/tmp/sockets shared/tmp/pids"
+		run "cd #{deploy_to} && mkdir -p shared/sockets shared/pids"
 	end
+
+	desc "symlink sockets dir"
+	task :symlink_sockets_dir, :roles => :app do
+		run "cd #{release_path}/tmp && ln -s #{deploy_to}/shared/sockets"
 end
 
 after 'deploy:copy_code_to_release', 'unicorn:make_unicorn_dirs'
