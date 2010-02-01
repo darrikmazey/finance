@@ -2,7 +2,7 @@
 	<div class="field color_code">&nbsp;</div>
 	<div class="field first name"><%= link_to account.name, account %></div>
 	<div class="field description"><%=h account.description %></div>
-	<div class="field balance"><%=h number_to_currency(account.balance) %></div>
+	<div class="field balance"><%=h number_to_currency(account.display_balance) %></div>
 	<div class="field type"><%=h account.type.to_s.sub(/account/i, '').titleize %></div>
 	<div class="field amount"><%=h account.protected_field(:amount, number_to_currency(account.amount)) %></div>
 	<div class="field annual"><%=h number_to_currency(account.net_annual) %></div>

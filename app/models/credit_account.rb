@@ -4,7 +4,7 @@ class CreditAccount < Account
 	end
 
 	def positive?
-		self.balance <= 0
+		self.balance >= 0
 	end
 
 	def negative?

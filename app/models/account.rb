@@ -114,8 +114,12 @@ class Account < ActiveRecord::Base
 		if self.is_debit_account?
 			self.initial_balance + debits - credits
 		elsif self.is_credit_account?
-			self.initial_balance - credits + debits
+			self.initial_balance + credits - debits
 		end
+	end
+
+	def display_balance
+		self.balance.abs
 	end
 
 	def primary
@@ -207,6 +211,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def positive?
+		puts self.balance
 		self.balance >= 0
 	end
 

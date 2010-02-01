@@ -149,12 +149,14 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-align: left;
 }
 
+.list_item.credit_account:hover .field.total,
 .list_item.credit_account:hover .field.monthly,
 .list_item.credit_account:hover .field.amount,
 .list_item.credit_account:hover .field.annual {
 	background-color: #311;
 }
 
+.list_item.debit_account:hover .field.total,
 .list_item.debit_account:hover .field.monthly,
 .list_item.debit_account:hover .field.amount,
 .list_item.debit_account:hover .field.annual {
@@ -227,6 +229,7 @@ a:hover { color: #fff; text-decoration: underline; }
 }
 
 .list_item.positive_account .field.balance {
+	background-color: #131;
 }
 
 .list_item.negative_account .field.balance {
@@ -234,7 +237,6 @@ a:hover { color: #fff; text-decoration: underline; }
 }
 
 .list_item.client_account .field.balance {
-	background-color: #000;
 }
 
 .list_item.current_account .field.due_date {
