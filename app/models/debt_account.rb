@@ -1,2 +1,0 @@
-class DebtAccount < CreditAccount
-end

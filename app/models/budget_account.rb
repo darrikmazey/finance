@@ -1,3 +1,0 @@
-class BudgetAccount < DebitAccount
-	
-end
