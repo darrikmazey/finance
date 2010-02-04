@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 	def credit_balance_sans_client
 		sum = 0
 		self.credit_accounts.select { |c| !c.is_client_account? }.each do |c|
-			sum += c.balance
+			sum += c.real_balance
 		end
 		sum
 	end
@@ -47,7 +47,9 @@ class User < ActiveRecord::Base
 	def credit_balance
 		sum = 0
 		self.credit_accounts.each do |c|
-			sum += c.balance
+			if c.root?
+				sum += c.real_balance
+			end
 		end
 		sum
 	end
@@ -55,7 +57,7 @@ class User < ActiveRecord::Base
 	def credit_balance_on_date(d)
 		sum = 0
 		self.credit_accounts.each do |c|
-			sum += c.balance_on_date(d)
+			sum += c.real_balance_on_date(d)
 		end
 		sum
 	end
@@ -63,7 +65,9 @@ class User < ActiveRecord::Base
 	def debit_balance
 		sum = 0
 		self.debit_accounts.each do |c|
-			sum += c.balance
+			if c.root?
+				sum += c.real_balance
+			end
 		end
 		sum
 	end
@@ -71,7 +75,9 @@ class User < ActiveRecord::Base
 	def debit_balance_on_date(d)
 		sum = 0
 		self.debit_accounts.each do |c|
-			sum += c.balance_on_date(d)
+			if c.root?
+				sum += c.real_balance_on_date(d)
+			end
 		end
 		sum
 	end

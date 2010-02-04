@@ -261,6 +261,14 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 27%;
 }
 
+.list_item .transaction_links {
+	width: 10%;
+}
+
+.list_item .transaction_links .link {
+	width: 12%;
+}
+
 .list_item .link:hover a {
 	text-decoration: none;
 }

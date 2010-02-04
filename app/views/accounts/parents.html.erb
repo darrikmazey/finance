@@ -1,0 +1,4 @@
+<p id="account_parent">
+	<%= label @account_class, :parent %><br />
+	<%= collection_select @account_class, :parent_id, @parents, :id, :name, :include_blank => true %>
+</p>

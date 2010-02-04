@@ -2,7 +2,7 @@
 	<div class="field color_code">&nbsp;</div>
 	<div class="field first name"><%= link_to account.name, account %></div>
 	<div class="field description"><%=h account.description %></div>
-	<div class="field balance"><%=h number_to_currency(account.display_balance) %></div>
+	<div class="field balance"><%=h number_to_currency(account.perceived_balance.abs) %></div>
 	<div class="field type"><%=h account.type.to_s.sub(/account/i, '').titleize %></div>
 	<div class="field amount"><%=h account.protected_field(:amount, number_to_currency(account.amount)) %></div>
 	<div class="field annual"><%=h number_to_currency(account.net_annual) %></div>
@@ -14,4 +14,23 @@
 	<div class="field total"><%=h number_to_currency(account.primary) %></div>
 	<% end -%>
 	<div class="field due_date"><%=h account.protected_field(:due_date, account.next_due_date.short_date) %></div>
+	<div class="transaction_links links">
+		<div class="link plus">
+		<%=
+			link_to_if account.is_credit_account?, '+', new_account_transaction_url(account, { :type => 'credit' }) do
+				link_to '+', new_account_transaction_url(account, { :type => 'debit' })
+			end
+		%>
+		</div>
+		<div class="link minus">
+		<%=
+			link_to_if account.is_credit_account?, '-', new_account_transaction_url(account, { :type => 'debit' }) do
+				link_to '-', new_account_transaction_url(account, { :type => 'credit' })
+			end
+		%>
+		</div>
+		<div class="link transfer">
+		<%= link_to '>', new_account_transaction_url(account, { :type => 'transfer' }) %>
+		</div>
+	</div>
 </div>

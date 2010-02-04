@@ -22,6 +22,22 @@ class AccountsController < ApplicationController
     end
   end
 
+	# POST /accounts/parents
+	def parents
+		@is_ajax = true
+		if !params[:atype]
+			render :nothing
+			return
+		end
+		@form_class = params[:atype].to_sym
+		if params[:atype].constantize.new.is_credit_account?
+			@parents = @current_user.credit_accounts
+		else
+			@parents = @current_user.debit_accounts
+		end
+		render :layout => false
+	end
+
 	# POST /accounts/ajax_list
 	def ajax_list
 		@is_ajax = true
@@ -58,7 +74,8 @@ class AccountsController < ApplicationController
   # GET /accounts/new.xml
   def new
     @account = Account.new
-		@account.user = User.first
+		@account.user = @current_user
+		@parents = @current_user.debit_accounts
 
     respond_to do |format|
       format.html # new.html.erb
@@ -69,6 +86,11 @@ class AccountsController < ApplicationController
   # GET /accounts/1/edit
   def edit
     @account = Account.find(params[:id])
+		if @account.is_credit_account?
+			@parents = @current_user.credit_accounts
+		else
+			@parents = @current_user.debit_accounts
+		end
   end
 
   # POST /accounts

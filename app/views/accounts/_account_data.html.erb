@@ -8,6 +8,11 @@
 				<div class="field_value"><%=h account_data.name %></div>
 			</div>
 
+			<div class="field parent">
+				<div class="field_name">Parent:</div>
+				<div class="field_value"><%=h account_data.parent_name %></div>
+			</div>
+
 			<% if account_data.is_client_account? -%>
 			<div class="field account">
 				<div class="field_name">Client:</div>

@@ -2,12 +2,22 @@ class Account < ActiveRecord::Base
   belongs_to :user
 	has_many :credits, :class_name => 'Transaction', :foreign_key => 'credit_account_id'
 	has_many :debits, :class_name => 'Transaction', :foreign_key => 'debit_account_id'
+	belongs_to :parent, :class_name => 'Account', :foreign_key => 'parent_id'
+	has_many :children, :class_name => 'Account', :foreign_key => 'parent_id'
 
 	PERIODS = { 1 => :yearly, 2 => :semi_annually, 4 => :quarterly, 6 => :bi_monthly, 12 => :monthly, 24 => :semi_monthly, 26 => :bi_weekly, 52 => :weekly, 365 => :daily }
 	TYPES = [ :debit_account, :credit_account, :client_account, :payee_account, :debt_account, :bank_account, :budget_account ]
 
 	def self.hidden_fields
 		[]
+	end
+
+	def self.root
+		self.all.select { |x| x.root? }
+	end
+
+	def root?
+		self.parent.nil?
 	end
 
 	def self.model_name
@@ -21,6 +31,10 @@ class Account < ActiveRecord::Base
 
 	def has_client?
 		false
+	end
+
+	def name_and_perceived_balance
+		self.name + ' (' + '%0.02f' % self.perceived_balance + ')'
 	end
 
 	def name_and_monthly
@@ -103,11 +117,19 @@ class Account < ActiveRecord::Base
 		ndd
 	end
 
+	def parent_name
+		if self.parent.nil?
+			'none'
+		else
+			self.parent.name
+		end
+	end
+
 	def overdue?
 		(DateTime.now + 3.days) > self.next_due_date
 	end
 
-	def balance
+	def perceived_balance
 		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ?', self.id])
 		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
 		
@@ -117,9 +139,75 @@ class Account < ActiveRecord::Base
 			self.initial_balance + credits - debits
 		end
 	end
+		
+	def real_balance
+		child_balance = 0
+		self.children.map { |c| child_balance += c.real_balance }
 
-	def display_balance
-		self.balance.abs
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ?', self.id])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ?', self.id])
+		
+		if self.is_debit_account?
+			self.initial_balance + child_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + child_balance + credits - debits
+		end
+	end
+
+	def perceived_balance_on_date(d)
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		else
+			self.initial_balance + credits - debits
+		end
+	end
+
+	def real_balance_on_date(d)
+		child_balance = 0
+		self.children.map { |c| child_balance += c.real_balance }
+
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
+		if self.is_debit_account?
+			self.initial_balance + child_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + child_balance + credits - debits
+		end
+	end
+
+	def perceived_balance_before(t)
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + credits - debits
+		end
+	end
+
+	def real_balance_before(t)
+		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
+
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + credits - debits
+		end
+	end
+
+	def balance_at(t)
+		debits = DebitTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
+		credits = CreditTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
+
+		if self.is_debit_account?
+			self.initial_balance + debits - credits
+		elsif self.is_credit_account?
+			self.initial_balance + credits - debits
+		end
 	end
 
 	def primary
@@ -178,40 +266,11 @@ class Account < ActiveRecord::Base
 		end
 	end
 
-	def balance_on_date(d)
-		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ?', self.id, d])
-		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ?', self.id, d])
-		if self.is_debit_account?
-			self.initial_balance + debits - credits
-		else
-			self.initial_balance + credits - debits
-		end
-	end
-
-	def balance_before(t)
-		debits = Transaction.sum(:amount, :conditions => ['debit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
-		credits = Transaction.sum(:amount, :conditions => ['credit_account_id = ? and trans_date <= ? and not id = ?', self.id, t.trans_date, t.id])
-
-		if self.is_debit_account?
-			self.initial_balance + debits - credits
-		elsif self.is_credit_account?
-			self.initial_balance + credits - debits
-		end
-	end
-
-	def balance_at(t)
-		debits = DebitTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
-		credits = CreditTransaction.sum(:amount, :conditions => ['account_id = ? and trans_date <= ?', self.id, t.trans_date])
-
-		if self.is_debit_account?
-			self.initial_balance + debits - credits
-		elsif self.is_credit_account?
-			self.initial_balance + credits - debits
-		end
+	def balance
+		self.real_balance
 	end
 
 	def positive?
-		puts self.balance
 		self.balance >= 0
 	end
 

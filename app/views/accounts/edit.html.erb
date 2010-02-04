@@ -9,6 +9,10 @@
 				<div class="field_name"><%= f.label :name %></div>
 				<div class="field_value"><%= f.text_field :name %></div>
 			</div>
+			<div class="field parent">
+				<div class="field_name"><%= f.label :parent %></div>
+				<div class="field_value"><%= f.collection_select :parent_id, @parents, :id, :name, :include_blank => true %></div>
+			</div>
 			<div class="field description">
 				<div class="field_name"><%= f.label :description %></div>
 				<div class="field_value"><%= f.text_field :description %></div>
