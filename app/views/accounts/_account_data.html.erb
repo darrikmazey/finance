@@ -67,7 +67,7 @@
 		</div>
 		<div class="column">
 			<div class="graph">
-				<img src="/graphs/account/<%= account_data.id %>" />
+				<%= link_to "<img src=\"#{account_graph_url(account_data)}\" />", large_graph_account_url(account_data) %>
 			</div>
 		</div>
 	</div>

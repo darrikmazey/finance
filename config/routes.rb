@@ -12,7 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => { :login => [:get, :post], :logout => [:get] }, :has_many => [:accounts]
 
 	#map.resources :billing_accounts, :controller => 'accounts'
-  map.resources :accounts, :has_many => :transactions, :collection => { :ajax_list => [ :post ], :parents => [ :post ] }
+  map.resources :accounts, :has_many => :transactions, :collection => { :ajax_list => [ :post ], :parents => [ :post ] }, :member => { :large_graph => [ :get ] }
 
 	map.quick_switch '/users/quick_switch/:id', :controller => 'users', :action => 'quick_switch'
 

@@ -70,6 +70,19 @@ class AccountsController < ApplicationController
     end
   end
 
+	# GET /accounts/1/large_graph
+	def large_graph
+		@account = @current_user.accounts.find(params[:id]) rescue nil
+		if @account.nil?
+			redirect_to accounts_url
+			return
+		end
+
+		respond_to do |format|
+			format.html
+		end
+	end
+
   # GET /accounts/new
   # GET /accounts/new.xml
   def new

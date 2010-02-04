@@ -5,6 +5,7 @@ class GraphsController < ApplicationController
 
 	def account
 		@account = Account.find params[:id] rescue nil
+		@size = params[:size] || 400
 
 #		g = Gruff::Bar.new(400)
 #		g.title = "account summary (#{@account.name})"
@@ -24,7 +25,7 @@ class GraphsController < ApplicationController
 #		send_data g.to_blob, { :type => 'image/jpeg', :disposition => 'inline', :filename => 'account_summary.jpg' }
 #		return
 		
-		g = Gruff::Line.new(400)
+		g = Gruff::Line.new(@size.to_i)
 		g.title = "account summary (#{@account.name})"
 		d = @account.period_start(1)
 		balance_data = Array.new
@@ -46,8 +47,8 @@ class GraphsController < ApplicationController
 			g.data('credits', primary_data)
 			g.data('debits', secondary_data)
 		else
-			g.data('credits', secondary_data)
 			g.data('debits', primary_data)
+			g.data('credits', secondary_data)
 		end
 		g.baseline_value = @account.amount
 		g.baseline_color = '#991111'
