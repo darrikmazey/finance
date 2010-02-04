@@ -149,61 +149,6 @@ a:hover { color: #fff; text-decoration: underline; }
 	text-align: left;
 }
 
-.list_item.credit_account:hover .field.total,
-.list_item.credit_account:hover .field.monthly,
-.list_item.credit_account:hover .field.amount,
-.list_item.credit_account:hover .field.annual {
-	background-color: #311;
-}
-
-.list_item.debit_account:hover .field.total,
-.list_item.debit_account:hover .field.monthly,
-.list_item.debit_account:hover .field.amount,
-.list_item.debit_account:hover .field.annual {
-	background-color: #131;
-}
-
-.summary .field.first {
-	font-weight: bold;
-}
-
-.list_item.summary.monthly_debit .field.amount,
-.list_item.summary.current_debit .field.balance,
-.list_item.summary.current_debit .field.amount,
-.list_item.summary.annual_debit .field.amount {
-	background-color: #131;
-}
-
-.list_item.summary.monthly_credit .field.amount,
-.list_item.summary.current_credit .field.balance,
-.list_item.summary.current_credit .field.amount,
-.list_item.summary.annual_credit .field.amount {
-	background-color: #311;
-}
-
-.list_item.summary.net_monthly .field.amount,
-.list_item.summary.net_annual .field.amount {
-	/*background-color: #431;*/
-}
-
-.list_item.current_net {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.list_item.net_annual {
-	border-top: 1px solid #ccc;
-}
-
-.list_item.net_monthly {
-	border-top: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-}
-
-.list.accounts .field.type {
-	display: none;
-}
-
 .list .field.color_code {
 	width: 1%;
 }
@@ -212,11 +157,11 @@ a:hover { color: #fff; text-decoration: underline; }
 	border: 1px solid #ccc;
 }
 
-.list_item.bank_account .field.color_code {
+.list_item.asset_account .field.color_code {
 	background-color: #131;
 }
 
-.list_item.budget_account .field.color_code {
+.list_item.capital_account .field.color_code {
 	background-color: #235;
 }
 
@@ -224,7 +169,7 @@ a:hover { color: #fff; text-decoration: underline; }
 	background-color: #661;
 }
 
-.list_item.payee_account .field.color_code {
+.list_item.liability_account .field.color_code {
 	background-color: #411;
 }
 
