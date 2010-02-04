@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  initial_balance: 1.5
+  type: MyString
+  user: 
+  due_date: 1
+  period: 1
+  account_number: MyString
+  amount: 1.5
+  parent: 
+
+two:
+  name: MyString
+  description: MyString
+  initial_balance: 1.5
+  type: MyString
+  user: 
+  due_date: 1
+  period: 1
+  account_number: MyString
+  amount: 1.5
+  parent: 
