@@ -1,5 +1,0 @@
-matt - 02/02/2008
-	- delete for accounts
-	- edit for accounts 
-		- add the HoursInvoice model
-		- add the invoice id field that pulls invoice names from HoursInvoice

@@ -1,1 +1,0 @@
-<div class="item"><%= link_to "entries", { :controller => "entry", :action => "index", :account_id => account_item.id } %> - <%= link_to account_item.type_and_name, { :controller => "account", :action => "view", :id => account_item.id } %> [<%= format_currency(account_item.account_balance) %>]</div>
