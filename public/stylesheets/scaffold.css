@@ -165,20 +165,24 @@ a:hover { color: #fff; text-decoration: underline; }
 	background-color: #235;
 }
 
-.list_item.client_account .field.color_code {
-	background-color: #661;
-}
-
 .list_item.liability_account .field.color_code {
 	background-color: #411;
 }
 
-.list_item.positive_account .field.balance {
+.list_item.positive .field.balance {
 	background-color: #131;
 }
 
-.list_item.negative_account .field.balance {
+.list_item.negative .field.balance {
 	background-color: #311;
+}
+
+.list_item.liability_account.positive .field.balance {
+	background-color: #311;
+}
+
+.list_item.liability_account.negative .field.balance {
+	background-color: #131;
 }
 
 .list_item.client_account .field.balance {

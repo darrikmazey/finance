@@ -1,7 +1,7 @@
 <div class="list_item base <%= account.div_classes.join(' ') %>">
 	<div class="field color_code">&nbsp;</div>
 	<div class="field first name"><%=h account.name %></div>
-	<div class="field balance"><%=h number_to_currency(account.balance) %></div>
+	<div class="field balance"><%=h number_to_currency(account.balance.abs) %></div>
 	<div class="field due_date"><%=h account.due_date.short_date rescue 'none' %></div>
 	<div class="field amount"><%=h number_to_currency(account.amount) %></div>
 	<div class="links">

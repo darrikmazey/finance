@@ -3,4 +3,8 @@ class AssetAccount < Account
 		f = super
 		f << 'asset_account'
 	end
+
+	def asset?
+		true
+	end
 end

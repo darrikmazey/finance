@@ -3,4 +3,8 @@ class CapitalAccount < Account
 		f = super
 		f << 'capital_account'
 	end
+
+	def capital?
+		true
+	end
 end

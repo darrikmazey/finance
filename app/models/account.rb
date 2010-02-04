@@ -13,10 +13,36 @@ class Account < ActiveRecord::Base
 	end
 
 	def div_classes
-		['account']
+		f = ['account']
+		if positive?
+			f << 'positive'
+		else
+			f << 'negative'
+		end
+		f
 	end
 
 	def balance
-		0
+		initial_balance
+	end
+
+	def asset?
+		false
+	end
+
+	def liability?
+		false
+	end
+
+	def capital?
+		false
+	end
+
+	def positive?
+		balance >= 0
+	end
+
+	def negative?
+		!positive?
 	end
 end
