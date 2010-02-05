@@ -7,4 +7,8 @@ class AssetAccount < Account
 	def asset?
 		true
 	end
+
+	def balance
+		initial_balance + debit_sum - credit_sum
+	end
 end

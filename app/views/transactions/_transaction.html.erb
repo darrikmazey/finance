@@ -1,4 +1,4 @@
-<div class="list_item transaction <%= transaction.flags %>">
+<div class="list_item transaction <%= transaction.flags.join(" ") %>">
 	<div class="field first trans_date"><%= link_to transaction.trans_date.short_date, transaction %></div>
 	<div class="field ref"><%=h transaction.ref %></div>
 	<% if !transaction.invoice.nil? -%>
@@ -7,9 +7,9 @@
 		<div class="field description"><%=h transaction.description %></div>
 	<% end -%>
 	<div class="field credit_account"><%= credit_account_link(transaction) %></div>
-	<div class="field credit_amount <%= transaction.credit_amount_flags %>"><%=h number_to_currency(transaction.credit_amount) %></div>
+	<div class="field credit_amount <%= transaction.credit_amount_flags.join(" ") %>"><%=h number_to_currency(transaction.credit_amount) %></div>
 	<div class="field debit_account"><%= debit_account_link(transaction) %></div>
-	<div class="field debit_amount <%= transaction.debit_amount_flags %>"><%=h number_to_currency(transaction.debit_amount) %></div>
+	<div class="field debit_amount <%= transaction.debit_amount_flags.join(" ") %>"><%=h number_to_currency(transaction.debit_amount) %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', transaction %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_transaction_path(transaction) %></div>

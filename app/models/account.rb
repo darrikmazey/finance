@@ -21,6 +21,26 @@ class Account < ActiveRecord::Base
 		end
 		f
 	end
+	
+	def transactions
+		Transaction.for_account(self)
+	end
+
+	def credits
+		Transaction.credits_for_account(self)
+	end
+
+	def credit_sum
+		credits.sum(:amount)
+	end
+
+	def debits
+		Transaction.debits_for_account(self)
+	end
+
+	def debit_sum
+		debits.sum(:amount)
+	end
 
 	def balance
 		initial_balance
@@ -45,4 +65,25 @@ class Account < ActiveRecord::Base
 	def negative?
 		!positive?
 	end
+
+	def credit_sum
+		Transaction.sum(:amount, :conditions => ['credit_account_id = ?', id])
+	end
+
+	def debit_sum
+		Transaction.sum(:amount, :conditions => ['debit_account_id = ?', id])
+	end
+
+	def self.all_superclasses
+		c = Array.new
+		c << self.name
+		o = self.superclass
+		while o != ActiveRecord::Base
+			puts o
+			c << o.name
+			o = o.superclass
+		end
+		c
+	end
+
 end

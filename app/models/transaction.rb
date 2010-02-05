@@ -3,6 +3,11 @@ class Transaction < ActiveRecord::Base
 	belongs_to :credit_account, :class_name => 'Account'
 	belongs_to :invoice
 
+	named_scope :before_date, lambda { |d| { :conditions => ['trans_date < ?', d.utc] } }
+	named_scope :for_account, lambda { |a| { :conditions => ['credit_account_id = ? or debit_account_id = ?', a.id, a.id] } }
+	named_scope :credits_for_account, lambda { |a| { :conditions => ['credit_account_id = ?', a.id ] } }
+	named_scope :debits_for_account, lambda { |a| { :conditions => ['debit_account_id = ?', a.id ] } }
+
 	def self.model_name
 		name = 'transaction'
 		name.instance_eval do
@@ -21,52 +26,15 @@ class Transaction < ActiveRecord::Base
 	end
 
 	def credit_amount_flags
-		f = ''
-		if self.credit_amount > 0
-			f += 'non_zero '
-		else
-			f += 'zero '
-		end
-		f
+		[]
 	end
 
 	def debit_amount_flags
-		f = ''
-		if self.debit_amount > 0
-			f += 'non_zero '
-		else
-			f += 'zero '
-		end
-		f
+		[]
 	end
 
 	def flags
-		f = ''
-
-		if self.credit_account and self.debit_account
-			if (self.credit_account.is_credit_account? and self.debit_account.is_credit_account?)
-				f += 'cred_tran_transaction'
-				return f
-			elsif (self.credit_account.is_debit_account? and self.debit_account.is_debit_account?)
-				f += 'deb_tran_transaction'
-				return f
-			end
-		end
-		if self.credit_account
-			if self.credit_account.is_credit_account?
-				f += 'incr_transaction '
-			else
-				f += 'decr_transaction '
-			end
-		elsif self.debit_account
-			if self.debit_account.is_debit_account?
-				f += 'incr_transaction '
-			else
-				f += 'decr_transaction '
-			end
-		end
-		
-		f
+		[]
 	end
 
 end

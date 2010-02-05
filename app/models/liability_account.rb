@@ -11,4 +11,8 @@ class LiabilityAccount < Account
 	def positive?
 		balance > 0
 	end
+
+	def balance
+		initial_balance + credit_sum - debit_sum
+	end
 end

@@ -7,4 +7,8 @@ class CapitalAccount < Account
 	def capital?
 		true
 	end
+
+	def balance
+		initial_balance + credit_sum - debit_sum
+	end
 end

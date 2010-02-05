@@ -1,1 +1,10 @@
-<%= render :partial => account_item.class.name.underscore, :object => account_item rescue render :partial => 'account', :object => account_item %>
+<%
+	sc = account_item.class.all_superclasses
+	@output = nil
+	while @output.nil?
+		c = sc.shift
+		@output = render :partial => c.underscore, :object => account_item rescue nil
+	end
+%>
+
+<%= @output %>
