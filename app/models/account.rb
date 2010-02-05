@@ -26,6 +26,10 @@ class Account < ActiveRecord::Base
 		Transaction.for_account(self)
 	end
 
+	def recent_transactions
+		transactions.recent
+	end
+
 	def credits
 		Transaction.credits_for_account(self)
 	end

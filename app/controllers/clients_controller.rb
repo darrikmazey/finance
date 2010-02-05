@@ -23,7 +23,7 @@ class ClientsController < ApplicationController
 			return
 		end
 
-		@account = @client.client_account
+		@account = @client.account
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,9 +35,9 @@ class ClientsController < ApplicationController
   # GET /clients/new.xml
   def new
     @client = Client.new
-		@client_accounts = @current_user.loose_client_accounts
+		@client_accounts = @current_user.accounts
 		if @client_accounts.size == 0
-			@client_account = ClientAccount.new
+			@client_account = AssetAccount.new
 		end
 
     respond_to do |format|
@@ -49,7 +49,7 @@ class ClientsController < ApplicationController
   # GET /clients/1/edit
   def edit
     @client = Client.find(params[:id])
-		@client_accounts = @current_user.client_accounts
+		@client_accounts = @current_user.accounts
   end
 
   # POST /clients

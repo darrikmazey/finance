@@ -161,6 +161,10 @@ a:hover { color: #fff; text-decoration: underline; }
 	background-color: #131;
 }
 
+.list_item.bank_account .field.color_code {
+	background-color: #151;
+}
+
 .list_item.capital_account .field.color_code {
 	background-color: #235;
 }

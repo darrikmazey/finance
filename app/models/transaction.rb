@@ -7,6 +7,7 @@ class Transaction < ActiveRecord::Base
 	named_scope :for_account, lambda { |a| { :conditions => ['credit_account_id = ? or debit_account_id = ?', a.id, a.id] } }
 	named_scope :credits_for_account, lambda { |a| { :conditions => ['credit_account_id = ?', a.id ] } }
 	named_scope :debits_for_account, lambda { |a| { :conditions => ['debit_account_id = ?', a.id ] } }
+	named_scope :recent, lambda { { :conditions => [ 'trans_date >= ?', (2.weeks.ago)] } }
 
 	def self.model_name
 		name = 'transaction'

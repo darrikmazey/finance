@@ -1,0 +1,47 @@
+<div class="item_data account">
+	<div class="heading"><%= account_data.class.name.titleize %> : <%= account_data.name %></div>
+
+	<div class="content">
+		<div class="column first">
+			<div class="field first name">
+				<div class="field_name">Name:</div>
+				<div class="field_value"><%=h account_data.name %></div>
+			</div>
+
+			<div class="field parent">
+				<div class="field_name">Parent:</div>
+				<div class="field_value"><%=h account_data.parent.name rescue 'none' %></div>
+			</div>
+
+			<div class="field description">
+				<div class="field_name">Description:</div>
+				<div class="field_value"><%=h account_data.description %></div>
+			</div>
+
+			<div class="field initial_balance">
+				<div class="field_name">Initial balance:</div>
+				<div class="field_value"><%=h number_to_currency(account_data.initial_balance) %></div>
+			</div>
+
+			<div class="field due_date">
+				<div class="field_name">Due date:</div>
+				<div class="field_value"><%=h account_data.due_date.short_date rescue '&nbsp;' %></div>
+			</div>
+
+			<div class="field period">
+				<div class="field_name">Period:</div>
+				<div class="field_value"><%=h account_data.period %></div>
+			</div>
+
+			<div class="field account_number">
+				<div class="field_name">Account number:</div>
+				<div class="field_value"><%=h account_data.account_number %></div>
+			</div>
+
+			<div class="field amount">
+				<div class="field_name">Amount:</div>
+				<div class="field_value"><%=h number_to_currency(account_data.amount) %></div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -8,8 +8,8 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :client_account %><br />
-    <%= f.collection_select :client_account_id, @client_accounts, :id, :name %>
+    <%= f.label :account %><br />
+    <%= f.collection_select :account_id, @client_accounts, :id, :name, :include_blank => true %>
   </p>
   <p>
     <%= f.submit 'Update' %>

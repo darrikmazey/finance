@@ -11,12 +11,14 @@
 	<%= render :partial => 'invoices/invoice_list', :object => @client.invoices %>
 <% end -%>
 
-<% if @client.client_account.recent_transactions.size > 0 -%>
-<div class="list client_transactions transactions">
-	<div class="heading">transactions</div>
-	<div class="content">
-		<%= render :partial => 'accounts/transaction_list_header' %>
-		<%= render :partial => 'accounts/transaction', :collection => @client.client_account.recent_transactions %>
+<% if @client.account -%>
+	<% if @client.account.recent_transactions.size > 0 -%>
+	<div class="list client_transactions transactions">
+		<div class="heading">transactions</div>
+		<div class="content">
+			<%= render :partial => 'transactions/list_header' %>
+			<%= render :partial => 'transactions/transaction', :collection => @client.account.recent_transactions %>
+		</div>
 	</div>
-</div>
+	<% end -%>
 <% end -%>

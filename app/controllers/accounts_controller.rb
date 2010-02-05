@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.all
+    @accounts = @current_user.accounts
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,11 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
-    @account = Account.find(params[:id])
+    @account = @current_user.accounts.find(params[:id]) rescue nil
+		if @account.nil?
+			redirect_to accounts_url
+			return
+		end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +41,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-    @account = Account.find(params[:id])
+    @account = @current_user.accounts.find(params[:id]) rescue nil
+		if @account.nil?
+			redirect_to accounts_url
+			return
+		end
   end
 
   # POST /accounts
