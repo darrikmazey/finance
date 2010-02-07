@@ -1,7 +1,7 @@
 class Period
 	@@NAMES = {
 		1 => 'annually',
-		2 => 'semi=annually',
+		2 => 'semi-annually',
 		4 => 'quarterly',
 		6 => 'bi-monthly',
 		12 => 'monthly',
@@ -47,8 +47,16 @@ class Period
 		@@instances[n]
 	end
 
+	def self.all
+		@@NAMES.keys.sort.reverse.map { |v| self[v] }
+	end
+
 	def initialize(n)
 		@period = n
+	end
+
+	def value
+		@period
 	end
 
 	def name

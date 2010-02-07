@@ -30,7 +30,7 @@
   </p>
   <p>
     <%= f.label :period %><br />
-    <%= f.text_field :period %>
+    <%= f.collection_select :period, Period.all, :value, :name %>
   </p>
   <p>
     <%= f.label :account_number %><br />

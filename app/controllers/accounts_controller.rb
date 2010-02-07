@@ -53,6 +53,8 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
+		@account.type = params[:account][:type]
+		@account.save
 
     respond_to do |format|
       if @account.save
