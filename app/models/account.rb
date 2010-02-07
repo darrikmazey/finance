@@ -90,4 +90,36 @@ class Account < ActiveRecord::Base
 		c
 	end
 
+	def self.types
+		Type.all
+	end
+
+	class Type
+		@@instances = Hash.new
+		@@types = [ :bank, :asset, :liability, :capital ]
+
+		def self.[](t)
+			if !@@instances[t]
+				@@instances[t] = Type.new(t)
+			end
+			@@instances[t]
+		end
+
+		def initialize(t)
+		  @t = t
+		end
+
+		def class_name
+			(@t.to_s + '_account').camelize
+		end
+
+		def display_name
+			(@t.to_s + '_account').titleize
+		end
+
+		def self.all
+			@@types.map {|t| Type.new(t) }
+		end
+	end
 end
+
