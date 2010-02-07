@@ -10,7 +10,7 @@
 
 			<div class="field parent">
 				<div class="field_name">Parent:</div>
-				<div class="field_value"><%=h account_data.parent.name rescue 'none' %></div>
+				<div class="field_value"><%= link_to account_data.parent.name, account_data.parent rescue 'none' %></div>
 			</div>
 
 			<div class="field description">
