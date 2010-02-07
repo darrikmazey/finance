@@ -67,6 +67,27 @@ class Period
 		@@DELTAS[@period]
 	end
 
+	def start_date(n = 0)
+		d = start_of_year
+		while d < DateTime.now
+			d += delta
+		end
+		if n > 0
+			n.times do
+				d = d + delta
+			end
+		elsif n < 0
+			n.abs.times do
+				d = d - delta
+			end
+		end
+		d - delta
+	end
+
+	def end_date(n = 0)
+		start_date(n) + delta - 1.second
+	end
+
   #private
 
 	def start_of_year
