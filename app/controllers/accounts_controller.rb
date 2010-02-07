@@ -47,6 +47,7 @@ class AccountsController < ApplicationController
 			redirect_to accounts_url
 			return
 		end
+		@parents = @current_user.accounts
   end
 
   # POST /accounts

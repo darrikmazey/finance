@@ -96,7 +96,7 @@ class Account < ActiveRecord::Base
 
 	class Type
 		@@instances = Hash.new
-		@@types = [ :bank, :asset, :liability, :capital ]
+		@@types = [ :bank, :budget, :asset, :liability, :capital ]
 
 		def self.[](t)
 			if !@@instances[t]

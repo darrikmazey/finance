@@ -4,4 +4,6 @@ class BankAccount < AssetAccount
 		f = super
 		f << 'bank_account'
 	end
+
+
 end
