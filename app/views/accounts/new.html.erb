@@ -21,7 +21,7 @@
   </p>
   <p>
     <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.collection_select :type, Account.types, :class_name, :display_name %>
   </p>
 	<%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
