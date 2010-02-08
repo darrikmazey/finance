@@ -1,0 +1,10 @@
+<div class="list_item rate">
+	<div class="field first name"><%=h rate.name %></div>
+	<div class="field project"><%=h rate.project.name %></div>
+	<div class="field modifier"><%=h "%0.02f" % rate.modifier %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', rate %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_rate_path(rate) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', rate, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

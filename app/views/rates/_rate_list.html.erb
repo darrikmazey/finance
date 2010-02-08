@@ -1,0 +1,7 @@
+<div class="list rates">
+	<div class="heading">rates <%= link_to '+', new_rate_url %></div>
+	<div class="content">
+		<%= render :partial => 'rates/list_header' %>
+		<%= render :partial => 'rates/rate', :collection => rate_list %>
+	</div>
+</div>

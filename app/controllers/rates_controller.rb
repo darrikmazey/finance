@@ -1,8 +1,11 @@
 class RatesController < ApplicationController
+
+	before_filter :require_user
+
   # GET /rates
   # GET /rates.xml
   def index
-    @rates = Rate.all
+    @rates = @current_user.rates.find(:all, :order => 'project_id asc, id asc')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,11 @@ class RatesController < ApplicationController
   # GET /rates/1
   # GET /rates/1.xml
   def show
-    @rate = Rate.find(params[:id])
+    @rate = @current_user.rates.find(params[:id]) rescue nil
+		if @rate.nil?
+			redirect_to rates_url
+			return
+		end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +41,11 @@ class RatesController < ApplicationController
 
   # GET /rates/1/edit
   def edit
-    @rate = Rate.find(params[:id])
+    @rate = @current_user.rates.find(params[:id]) rescue nil
+		if @rate.nil?
+			redirect_to rates_url
+			return
+		end
   end
 
   # POST /rates
@@ -45,7 +56,7 @@ class RatesController < ApplicationController
     respond_to do |format|
       if @rate.save
         flash[:notice] = 'Rate was successfully created.'
-        format.html { redirect_to(@rate) }
+        format.html { redirect_to rates_url }
         format.xml  { render :xml => @rate, :status => :created, :location => @rate }
       else
         format.html { render :action => "new" }
@@ -62,7 +73,7 @@ class RatesController < ApplicationController
     respond_to do |format|
       if @rate.update_attributes(params[:rate])
         flash[:notice] = 'Rate was successfully updated.'
-        format.html { redirect_to(@rate) }
+        format.html { redirect_to rates_url }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	has_many :invoices
 	has_many :projects
 	has_many :work_items
+	has_many :rates, :through => :projects
 
 	validates_presence_of :hashed_password
 	validates_presence_of :salt

@@ -240,6 +240,8 @@ a:hover { color: #fff; text-decoration: underline; }
 	font-size: 1.4em;
 }
 
+.list.rates .field.name,
+.list.rates .field.project,
 .list.work_items .field.rate,
 .list.work_items .field.project,
 .list.invoices .field.client,
