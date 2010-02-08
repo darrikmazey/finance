@@ -60,7 +60,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'
-        format.html { redirect_to(@account) }
+        format.html { redirect_to(accounts_url) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
         format.html { render :action => "new" }

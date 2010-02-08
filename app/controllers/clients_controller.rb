@@ -35,10 +35,8 @@ class ClientsController < ApplicationController
   # GET /clients/new.xml
   def new
     @client = Client.new
-		@client_accounts = @current_user.accounts
-		if @client_accounts.size == 0
-			@client_account = AssetAccount.new
-		end
+		@account_parents = EquityAccount.root + RevenueAccount.all
+		@client_account = RevenueAccount.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,11 +56,11 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
 
 		if params[:client_account]
-			@client_account = ClientAccount.new(params[:client_account])
+			@client_account = RevenueAccount.new(params[:client_account])
 			@client_account.name = @client.name
 			@client_account.user = @current_user
 			@client_account.save
-			@client.client_account = @client_account
+			@client.account = @client_account
 		end
 
     respond_to do |format|
