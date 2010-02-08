@@ -4,6 +4,7 @@
 	<div class="field project"><%= link_to invoice.project.name, project_url(invoice.project) %></div>
 	<div class="field created_at"><%=h invoice.created_at.short_date rescue '&nbsp;' %></div>
 	<div class="field billed_at"><%= link_to(invoice.billed_at.short_date, unbill_invoice_url(invoice), :method => :post) rescue link_to('bill', bill_invoice_url(invoice), :method => :post) %></div>
+	<div class="field total"><%=h number_to_currency(invoice.total) %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', invoice %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_invoice_path(invoice) %></div>

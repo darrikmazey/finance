@@ -5,13 +5,24 @@ class WorkItemsController < ApplicationController
   # GET /work_items
   # GET /work_items.xml
   def index
-    @work_items = @current_user.work_items
+		@list_type = :loose
+    @work_items = @current_user.work_items.loose
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @work_items }
     end
   end
+
+	def all
+		@list_type = :all
+		@work_items = @current_user.work_items
+
+		respond_to do |format|
+			format.html { render :action => :index }
+			format.xml { render :xml => @work_items }
+		end
+	end
 
   # GET /work_items/1
   # GET /work_items/1.xml

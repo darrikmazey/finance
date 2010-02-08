@@ -27,5 +27,15 @@
 				<div class="field_name">Billed at:</div>
 				<div class="field_value"><%=h @invoice.billed_at.short_date rescue '&nbsp;' %></div>
 			</div>
+
+			<div class="field hours">
+				<div class="field_name">Hours:</div>
+				<div class="field_value"><%=h "%0.02f" % @invoice.hours %></div>
+			</div>
+
+			<div class="field total">
+				<div class="field_name">Total:</div>
+				<div class="field_value"><%=h number_to_currency(@invoice.total) %></div>
+			</div>
 		</div>
 	</div>

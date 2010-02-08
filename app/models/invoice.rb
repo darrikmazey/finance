@@ -16,4 +16,12 @@ class Invoice < ActiveRecord::Base
 	def unbill
 		self.billed_at = nil
 	end
+
+	def total
+		work_items.inject(0) { |s,v| s += v.total }
+	end
+
+	def hours
+		work_items.inject(0) { |s,v| s += v.hours }
+	end
 end
