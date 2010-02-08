@@ -21,12 +21,12 @@
     <%= f.text_field :amount %>
   </p>
   <p>
-    <%= f.label :credit_account %><br />
-    <%= f.collection_select :credit_account_id, @accounts, :id, :name, :include_blank => :true %>
-  </p>
-  <p>
     <%= f.label :debit_account %><br />
     <%= f.collection_select :debit_account_id, @accounts, :id, :name, :include_blank => :true %>
+  </p>
+  <p>
+    <%= f.label :credit_account %><br />
+    <%= f.collection_select :credit_account_id, @accounts, :id, :name, :include_blank => :true %>
   </p>
   <p>
     <%= f.submit 'Create' %>
