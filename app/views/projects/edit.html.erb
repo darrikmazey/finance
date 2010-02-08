@@ -18,7 +18,7 @@
   <%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
     <%= f.label :client %><br />
-    <%= f.collection_select :client_id, @clients, :id, :name %>
+    <%= f.collection_select :client_id, @current_user.clients, :id, :name %>
   </p>
   <p>
     <%= f.submit 'Update' %>
