@@ -1,0 +1,2 @@
+class AccountsReceivableAccount < AssetAccount
+end

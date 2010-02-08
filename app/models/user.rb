@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	has_many :projects
 	has_many :work_items
 	has_many :rates, :through => :projects
+	has_many :transactions, :through => :invoices
 
 	validates_presence_of :hashed_password
 	validates_presence_of :salt
@@ -36,9 +37,9 @@ class User < ActiveRecord::Base
 		WorkItem.find :first, :conditions => { :user_id => self.id }, :order => 'start_time DESC'
 	end
 
-	def transactions
-		accounts.map { |a| a.transactions }.flatten.uniq
-	end
+#	def transactions
+#		accounts.map { |a| a.transactions }.flatten.uniq
+#	end
 
 	def asset_accounts
 		accounts_of_type(AssetAccount)

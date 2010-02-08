@@ -1,0 +1,2 @@
+class AccountsPayableAccount < LiabilityAccount
+end
