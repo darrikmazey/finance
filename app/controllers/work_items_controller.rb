@@ -6,7 +6,7 @@ class WorkItemsController < ApplicationController
   # GET /work_items.xml
   def index
 		@list_type = :loose
-    @work_items = @current_user.work_items.loose
+    @work_items = @current_user.work_items.loose.ascending_creation
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class WorkItemsController < ApplicationController
 
 	def all
 		@list_type = :all
-		@work_items = @current_user.work_items
+		@work_items = @current_user.work_items.ascending_creation
 
 		respond_to do |format|
 			format.html { render :action => :index }
