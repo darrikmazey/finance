@@ -35,7 +35,7 @@ class ClientsController < ApplicationController
   # GET /clients/new.xml
   def new
     @client = Client.new
-		@account_parents = EquityAccount.root + RevenueAccount.all
+		@account_parents = (@current_user.accounts.of_type(:equity).root + @current_user.accounts.of_type(:revenue)).uniq
 		@client_account = RevenueAccount.new
 
     respond_to do |format|
