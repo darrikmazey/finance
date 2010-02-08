@@ -1,8 +1,11 @@
 class WorkItemsController < ApplicationController
+
+	before_filter :require_user
+
   # GET /work_items
   # GET /work_items.xml
   def index
-    @work_items = WorkItem.all
+    @work_items = @current_user.work_items
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +16,11 @@ class WorkItemsController < ApplicationController
   # GET /work_items/1
   # GET /work_items/1.xml
   def show
-    @work_item = WorkItem.find(params[:id])
+    @work_item = @current_user.work_items.find(params[:id]) rescue nil
+		if @work_item.nil?
+			redirect_to work_items_url
+			return
+		end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -63,8 +70,8 @@ class WorkItemsController < ApplicationController
 		@work_item.user = @current_user
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
-		@work_item.project = @current_user.last_project
-		@work_item.rate = @current_user.last_rate
+		@work_item.project = @current_user.last_project || @current_user.projects.first
+		@work_item.rate = @current_user.last_rate || @work_item.project.rates.first
 
     respond_to do |format|
       format.html # new.html.erb
@@ -74,7 +81,11 @@ class WorkItemsController < ApplicationController
 
   # GET /work_items/1/edit
   def edit
-    @work_item = WorkItem.find(params[:id])
+    @work_item = @current_user.work_items.find(params[:id]) rescue nil
+		if @work_item.nil?
+			redirect_to work_items_url
+			return
+		end
   end
 
   # POST /work_items
@@ -85,7 +96,7 @@ class WorkItemsController < ApplicationController
     respond_to do |format|
       if @work_item.save
         flash[:notice] = 'WorkItem was successfully created.'
-        format.html { redirect_to(@work_item) }
+        format.html { redirect_to work_items_url }
         format.xml  { render :xml => @work_item, :status => :created, :location => @work_item }
       else
         format.html { render :action => "new" }
