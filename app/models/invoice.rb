@@ -39,10 +39,30 @@ class Invoice < ActiveRecord::Base
 
 	def paid
 		self.paid_at = DateTime.now
+		ar = user.accounts.of_type(:accounts_receivable).first
+		ba = user.accounts.of_type(:bank).first
+		if ar and ba
+			t = Transaction.new
+			t.trans_date = DateTime.now
+			t.description = "Payment : Invoice #{identifier}"
+			t.amount = total
+			t.credit_account = ar
+			t.debit_account = ba
+			t.invoice = self
+			t.save
+		end
 	end
 
 	def unpaid
 		self.paid_at = nil
+		ar = user.accounts.of_type(:accounts_receivable).first
+		ba = user.accounts.of_type(:bank).first
+		if ar and ba
+			t = user.transactions.find(:first, :conditions => { :credit_account_id => ar, :debit_account_id => ba, :invoice_id => self } ) rescue nil
+			if !t.nil?
+				t.destroy
+			end
+		end
 	end
 
 	def total
