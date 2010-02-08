@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
 			redirect_to projects_url
 			return
 		end
-		@account = @project.client.client_account
+		@account = @project.client.account
 
     respond_to do |format|
       format.html # show.html.erb
