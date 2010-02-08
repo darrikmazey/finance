@@ -5,6 +5,8 @@
 	<div class="field project"><%= link_to work_item.project.name, work_item.project rescue 'none' %></div>
 	<div class="field rate"><%= link_to work_item.rate.name, work_item.rate rescue 'none' %></div>
 	<div class="field invoice"><%= link_to work_item.invoice.identifier, work_item.invoice rescue 'none' %></div>
+	<div class="field hours"><%= work_item.hours %></div>
+	<div class="field subtotal"><%= number_to_currency(work_item.subtotal) %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', work_item %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_work_item_path(work_item) %></div>
