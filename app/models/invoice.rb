@@ -37,6 +37,14 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
+	def paid
+		self.paid_at = DateTime.now
+	end
+
+	def unpaid
+		self.paid_at = nil
+	end
+
 	def total
 		work_items.inject(0) { |s,v| s += v.total }
 	end

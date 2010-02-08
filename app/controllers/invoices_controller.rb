@@ -13,6 +13,42 @@ class InvoicesController < ApplicationController
     end
   end
 
+	# POST /invoices/1/paid
+	def paid
+		@invoice = @current_user.invoices.find(params[:id]) rescue nil
+		if @invoice.nil?
+			redirect_to invoices_url
+			return
+		end
+
+		@invoice.paid
+		if (@invoice.save)
+			flash[:notice] = 'invoice paid.'
+			redirect_to invoices_url
+			return
+		end
+		flash[:error] = 'invoice could not be paid.'
+		redirect_to invoices_url
+	end
+
+	# POST /invoices/1/unpaid
+	def unpaid
+		@invoice = @current_user.invoices.find(params[:id]) rescue nil
+		if @invoice.nil?
+			redirect_to invoices_url
+			return
+		end
+
+		@invoice.unpaid
+		if (@invoice.save)
+			flash[:notice] = 'invoice marked unpaid.'
+			redirect_to invoices_url
+			return
+		end
+		flash[:error] = 'invoice could not be marked unpaid.'
+		redirect_to invoices_url
+	end
+
 	# POST /invoices/1/bill
 	def bill
 		@invoice = @current_user.invoices.find(params[:id]) rescue nil

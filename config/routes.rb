@@ -7,7 +7,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :projects
 
-  map.resources :invoices, :member => { :bill => [ :post ], :unbill => [ :post ] }
+  map.resources :invoices, :member => { :bill => [ :post ], :unbill => [ :post ], :paid => [ :post ], :unpaid => [ :post ] }
 
   map.resources :clients
 
