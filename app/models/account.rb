@@ -4,6 +4,7 @@ class Account < ActiveRecord::Base
 	has_many :children, :class_name => 'Account', :foreign_key => 'parent_id'
 
 	named_scope :root, { :conditions => { :parent_id => nil } }
+	named_scope :of_type, lambda { |t| { :conditions => { :type => (t.to_s + '_account').camelize } } }
 
 	def self.model_name
 		name = 'account'
