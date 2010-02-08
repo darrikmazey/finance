@@ -2,8 +2,8 @@
 	<div class="field first identifier"><%= link_to invoice.identifier, invoice_url(invoice) %></div>
 	<div class="field client"><%= link_to invoice.client.name, client_url(invoice.client) %></div>
 	<div class="field project"><%= link_to invoice.project.name, project_url(invoice.project) %></div>
-	<div class="field created_at"><%=h invoice.created_at.short_date %></div>
-	<div class="field billed_at"><%=h invoice.billed_at.short_date %></div>
+	<div class="field created_at"><%=h invoice.created_at.short_date rescue '&nbsp;' %></div>
+	<div class="field billed_at"><%=h invoice.billed_at.short_date rescue '&nbsp;' %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', invoice %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_invoice_path(invoice) %></div>

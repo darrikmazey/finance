@@ -1,8 +1,8 @@
 class Invoice < ActiveRecord::Base
-  belongs_to :client
   belongs_to :user
 	has_many :transactions
 	belongs_to :project
+	has_one :client, :through => :project
 
 	def rev_sorted_transactions
 		self.transactions.sort { |a, b| b.created_at <=> a.created_at }

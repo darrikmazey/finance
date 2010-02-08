@@ -20,12 +20,12 @@
 
 			<div class="field created_at">
 				<div class="field_name">Created at:</div>
-				<div class="field_value"><%=h @invoice.created_at.short_date %></div>
+				<div class="field_value"><%=h @invoice.created_at.short_date rescue '&nbsp;' %></div>
 			</div>
 
 			<div class="field billed_at">
 				<div class="field_name">Billed at:</div>
-				<div class="field_value"><%=h @invoice.billed_at.short_date %></div>
+				<div class="field_value"><%=h @invoice.billed_at.short_date rescue '&nbsp;' %></div>
 			</div>
 		</div>
 	</div>

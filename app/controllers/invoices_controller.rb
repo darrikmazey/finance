@@ -21,7 +21,7 @@ class InvoicesController < ApplicationController
 			redirect_to invoices_url
 			return
 		end
-		@account = @invoice.client.client_account
+		@account = @invoice.client.account
 
     respond_to do |format|
       format.html # show.html.erb
@@ -33,7 +33,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.xml
   def new
     @invoice = Invoice.new
-		@clients = @current_user.clients
+		@projects = @current_user.projects
 
     respond_to do |format|
       format.html # new.html.erb

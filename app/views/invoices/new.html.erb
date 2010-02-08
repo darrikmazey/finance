@@ -8,13 +8,13 @@
     <%= f.text_field :identifier %>
   </p>
   <p>
-    <%= f.label :client %><br />
-    <%= f.collection_select :client_id, @clients, :id, :name %>
+    <%= f.label :project %><br />
+    <%= f.collection_select :project_id, @projects, :id, :name %>
   </p>
   <%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
     <%= f.label :billed_at %><br />
-    <%= f.date_select :billed_at %>
+    <%= f.date_select :billed_at, :include_blank => true %>
   </p>
   <p>
     <%= f.submit 'Create' %>
