@@ -13,6 +13,42 @@ class InvoicesController < ApplicationController
     end
   end
 
+	# POST /invoices/1/bill
+	def bill
+		@invoice = @current_user.invoices.find(params[:id]) rescue nil
+		if @invoice.nil?
+			redirect_to invoices_url
+			return
+		end
+
+		@invoice.bill
+		if (@invoice.save)
+			flash[:notice] = 'invoice billed.'
+			redirect_to invoices_url
+			return
+		end
+		flash[:error] = 'invoice could not be billed.'
+		redirect_to invoices_url
+	end
+
+	# POST /invoices/1/unbill
+	def unbill
+		@invoice = @current_user.invoices.find(params[:id]) rescue nil
+		if @invoice.nil?
+			redirect_to invoices_url
+			return
+		end
+
+		@invoice.unbill
+		if (@invoice.save)
+			flash[:notice] = 'invoice marked as not billed.'
+			redirect_to invoices_url
+			return
+		end
+		flash[:error] = 'invoice could not be marked unbilled.'
+		redirect_to invoices_url
+	end
+
   # GET /invoices/1
   # GET /invoices/1.xml
   def show
