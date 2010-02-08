@@ -6,23 +6,29 @@
 	<%= f.hidden_field :user_id, :value => @current_user.id %>
   <p>
     <%= f.label :project %><br />
-    <%= f.collection_select :project_id, @projects, :id, :name %>
+    <%= f.collection_select :project_id, @current_user.projects, :id, :name %>
   </p>
-  <p>
+  <p id="project_rates">
     <%= f.label :rate %><br />
-    <%= f.collection_select :rate_id, @rates, :id, :name %>
+    <%= f.collection_select :rate_id, @work_item.project.rates, :id, :name %>
   </p>
-  <p>
+
+	<%= observe_field :work_item_project_id, :url => { :controller => 'rates', :action => 'for_project' }, :update => 'project_rates', :with => '"c=work_item&id="+value' %>
+
+  <p id="project_invoices">
     <%= f.label :invoice %><br />
-    <%= f.collection_select :invoice_id, @invoices, :id, :identifier, :include_blank => true %>
+    <%= f.collection_select :invoice_id, @work_item.project.invoices, :id, :identifier, :include_blank => true %>
   </p>
+
+	<%= observe_field :work_item_project_id, :url => { :controller => 'invoices', :action => 'for_project' }, :update => 'project_invoices', :with => '"c=work_item&id="+value' %>
+
   <p>
     <%= f.label :start_time %><br />
-    <%= f.datetime_select :start_time %>
+    <%= f.datetime_select :start_time, { :minute_step => 5 } %>
   </p>
   <p>
     <%= f.label :end_time %><br />
-    <%= f.datetime_select :end_time, :include_blank => true %>
+    <%= f.datetime_select :end_time, { :include_blank => true, :minute_step => 5 } %>
   </p>
   <p>
     <%= f.submit 'Create' %>

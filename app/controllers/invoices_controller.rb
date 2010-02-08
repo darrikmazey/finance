@@ -91,4 +91,11 @@ class InvoicesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+	def for_project
+		@invoices = Project.find(params[:id]).invoices rescue []
+		if request.xhr?
+			render :partial => 'invoices/invoices_for_project', :object => @invoices, :locals => { :form_class => params[:c] }
+		end
+	end
 end

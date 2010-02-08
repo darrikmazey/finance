@@ -12,6 +12,28 @@ class User < ActiveRecord::Base
 	attr_accessor :password_confirmation
 	validates_confirmation_of :password
 
+	def last_project
+		wi = self.last_work_item
+		if wi
+			wi.project
+		else
+			nil
+		end
+	end
+
+	def last_rate
+		wi = self.last_work_item
+		if wi
+			wi.rate
+		else
+			nil
+		end
+	end
+
+	def last_work_item
+		WorkItem.find :first, :conditions => { :user_id => self.id }, :order => 'start_time DESC'
+	end
+
 	def transactions
 		accounts.map { |a| a.transactions }.flatten.uniq
 	end

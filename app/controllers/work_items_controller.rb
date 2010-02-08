@@ -25,9 +25,11 @@ class WorkItemsController < ApplicationController
   # GET /work_items/new.xml
   def new
     @work_item = WorkItem.new
-		@invoices = @current_user.invoices
-		@rates = Rate.all
-		@projects = @current_user.projects
+		@work_item.user = @current_user
+		@work_item.start_time = DateTime.now
+		@work_item.align_start_time
+		@work_item.project = @current_user.last_project
+		@work_item.rate = @current_user.last_rate
 
     respond_to do |format|
       format.html # new.html.erb

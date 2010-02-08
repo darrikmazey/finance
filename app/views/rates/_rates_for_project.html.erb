@@ -1,0 +1,4 @@
+		<p id="project_rates">
+			<%= label form_class, :rate %><br />
+			<%= collection_select form_class, :rate_id, rates_for_project, :id, :name %>
+		</p>

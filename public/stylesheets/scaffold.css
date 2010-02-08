@@ -240,6 +240,8 @@ a:hover { color: #fff; text-decoration: underline; }
 	font-size: 1.4em;
 }
 
+.list.work_items .field.rate,
+.list.work_items .field.project,
 .list.invoices .field.client,
 .list.projects .field.client,
 .list.projects .field.name,
@@ -252,6 +254,15 @@ a:hover { color: #fff; text-decoration: underline; }
 .list.accounts .field.user,
 .list.accounts .field.description {
 	display: none;
+}
+
+.list.work_items .field.date {
+	width: 8%;
+}
+
+.list.work_items .field.start_time,
+.list.work_items .field.end_time {
+	width: 5%;
 }
 
 .list.accounts .field.type {

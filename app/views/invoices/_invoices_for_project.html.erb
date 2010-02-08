@@ -1,0 +1,4 @@
+		<p id="project_invoices">
+			<%= label form_class, :invoice %><br />
+			<%= collection_select form_class, :invoice_id, invoices_for_project, :id, :identifier, { :include_blank => true } %>
+		</p>

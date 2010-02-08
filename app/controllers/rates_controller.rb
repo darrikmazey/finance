@@ -82,4 +82,11 @@ class RatesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+	def for_project
+		@rates = Project.find(params[:id]).rates rescue []
+		if request.xhr?
+			render :partial => 'rates/rates_for_project', :object => @rates, :locals => { :form_class => params[:c] }
+		end
+	end
 end
