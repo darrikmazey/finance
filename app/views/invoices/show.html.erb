@@ -8,11 +8,5 @@
 <% end -%>
 
 <% if @invoice.transactions.size > 0 -%>
-<div class="list invoice_transactions transactions">
-	<div class="heading">transactions</div>
-	<div class="content">
-		<%= render :partial => 'accounts/transaction_list_header' %>
-		<%= render :partial => 'accounts/transaction', :collection => @invoice.rev_sorted_transactions %>
-	</div>
-</div>
+<%= render :partial => 'transactions/transaction_list', :object => @invoice.rev_sorted_transactions %>
 <% end -%>

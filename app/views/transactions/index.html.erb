@@ -1,13 +1,1 @@
-<div class="list transactions">
-	<div class="heading">Listing transactions</div>
-	<div class="content">
-
-		<%= render :partial => 'list_header' %>
-		<%= render :partial => 'transaction', :collection => @transactions %>
-
-	</div>
-</div>
-
-<br />
-
-<%= link_to 'New transaction', new_transaction_path %>
+<%= render :partial => 'transaction_list', :object => @transactions %>

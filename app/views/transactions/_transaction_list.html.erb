@@ -1,0 +1,10 @@
+<div class="list transactions">
+	<div class="heading">transactions <%= link_to '+', new_transaction_url %></div>
+	<div class="content">
+
+		<%= render :partial => 'transactions/list_header' %>
+		<%= render :partial => 'transactions/transaction', :collection => transaction_list %>
+
+	</div>
+</div>
+

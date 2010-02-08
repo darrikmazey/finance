@@ -2,3 +2,7 @@
 
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>
+
+<% if @account.transactions.size > 0 -%>
+<%= render :partial => 'transactions/transaction_list', :object => @account.transactions %>
+<% end -%>
