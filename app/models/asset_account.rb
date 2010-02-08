@@ -1,4 +1,9 @@
 class AssetAccount < Account
+
+	def after_initialize
+		@increasing = :debit
+	end
+
 	def div_classes
 		f = super
 		f << 'asset_account'
@@ -8,7 +13,4 @@ class AssetAccount < Account
 		true
 	end
 
-	def balance
-		initial_balance + debit_sum - credit_sum
-	end
 end

@@ -22,6 +22,16 @@
 				<div class="field_name">Initial balance:</div>
 				<div class="field_value"><%=h number_to_currency(account_data.initial_balance) %></div>
 			</div>
+			
+			<div class="field balance">
+				<div class="field_name">Balance:</div>
+				<div class="field_value"><%=h number_to_currency(account_data.real_balance) %></div>
+			</div>
+
+			<div class="field unallocated_balance">
+				<div class="field_name">Unallocated:</div>
+				<div class="field_value"><%=h number_to_currency(account_data.balance) %></div>
+			</div>
 
 			<div class="field due_date">
 				<div class="field_name">Due date:</div>

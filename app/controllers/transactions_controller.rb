@@ -35,37 +35,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
 
 		ttype = params[:type]
-		if @account
-			if ttype == 'transfer'
-				if @account.is_debit_account?
-					@debit_accounts = @current_user.debit_accounts
-					@credit_accounts = @current_user.debit_accounts
-					@transaction.credit_account = @account
-					@transaction.description = 'transfer'
-				else
-					@debit_accounts = @current_user.credit_accounts
-					@credit_accounts = @current_user.credit_accounts
-					@transaction.debit_account = @account
-					@transaction.description = 'transfer'
-				end
-			else
-				if (ttype == 'debit' and @account.is_debit_account?) or (ttype == 'credit' and @account.is_credit_account?)
-					@debit_accounts = @current_user.debit_accounts
-					@credit_accounts = @current_user.credit_accounts
-				else
-					@debit_accounts = @current_user.credit_accounts
-					@credit_accounts = @current_user.debit_accounts
-				end
-				if ttype == 'debit'
-					@transaction.debit_account = @account
-				else
-					@transaction.credit_account = @account
-				end
-			end
-		else
-			@debit_accounts = Account.all
-			@credit_accounts = Account.all
-		end
+		@accounts = @current_user.accounts
 
     respond_to do |format|
       format.html # new.html.erb

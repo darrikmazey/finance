@@ -3,6 +3,8 @@ class Account < ActiveRecord::Base
   belongs_to :parent, :class_name => 'Account', :foreign_key => 'parent_id'
 	has_many :children, :class_name => 'Account', :foreign_key => 'parent_id'
 
+	named_scope :root, { :conditions => { :parent_id => nil } }
+
 	def self.model_name
 		name = 'account'
 		name.instance_eval do
@@ -12,6 +14,14 @@ class Account < ActiveRecord::Base
 		return name
 	end
 
+	def after_initialize
+		@increasing = :none
+	end
+
+	def increasing
+		@increasing
+	end
+
 	def div_classes
 		f = ['account']
 		if positive?
@@ -19,7 +29,20 @@ class Account < ActiveRecord::Base
 		else
 			f << 'negative'
 		end
+		if root?
+			f << 'root'
+		end
+		if credit_increasing?
+			f << 'credit_increasing'
+		end
+		if debit_increasing?
+			f << 'debit_increasing'
+		end
 		f
+	end
+
+	def root?
+		parent == nil
 	end
 	
 	def transactions
@@ -46,8 +69,48 @@ class Account < ActiveRecord::Base
 		debits.sum(:amount)
 	end
 
+	def real_balance
+		balance + child_balance
+	end
+
+	def child_balance
+		if credit_increasing?
+			return children.inject(0) { |s, v| s += v.credit_balance }
+		end
+		if debit_increasing?
+			return children.inject(0) { |s, v| s += v.debit_balance }
+		end
+		0
+	end
+
 	def balance
-		initial_balance
+		if credit_increasing?
+			return initial_balance + credit_sum - debit_sum
+		end
+		if debit_increasing?
+			return initial_balance - credit_sum + debit_sum
+		end
+		0
+	end
+
+	def credit_balance
+		if credit_increasing?
+			return balance
+		end
+		if debit_increasing?
+			return -1 * balance
+		end
+		0
+	end
+
+	def debit_balance
+		if credit_increasing?
+			return -1 * balance
+		end
+		if debit_increasing?
+			return balance
+		end
+		0
 	end
 
 	def asset?
@@ -63,7 +126,7 @@ class Account < ActiveRecord::Base
 	end
 
 	def positive?
-		balance >= 0
+		real_balance >= 0
 	end
 
 	def negative?
@@ -78,12 +141,19 @@ class Account < ActiveRecord::Base
 		Transaction.sum(:amount, :conditions => ['debit_account_id = ?', id])
 	end
 
+	def credit_increasing?
+		@increasing == :credit
+	end
+
+	def debit_increasing?
+		@increasing == :debit
+	end
+
 	def self.all_superclasses
 		c = Array.new
 		c << self.name
 		o = self.superclass
 		while o != ActiveRecord::Base
-			puts o
 			c << o.name
 			o = o.superclass
 		end
@@ -96,7 +166,7 @@ class Account < ActiveRecord::Base
 
 	class Type
 		@@instances = Hash.new
-		@@types = [ :bank, :budget, :asset, :liability, :capital ]
+		@@types = [ :bank, :budget, :equity, :expense, :revenue, :asset, :liability, :capital ]
 
 		def self.[](t)
 			if !@@instances[t]

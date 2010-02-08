@@ -22,15 +22,15 @@
   </p>
   <p>
     <%= f.label :credit_account %><br />
-    <%= f.collection_select :credit_account_id, @credit_accounts, :id, :name_and_perceived_balance, :include_blank => :true %>
+    <%= f.collection_select :credit_account_id, @accounts, :id, :name, :include_blank => :true %>
   </p>
   <p>
     <%= f.label :debit_account %><br />
-    <%= f.collection_select :debit_account_id, @debit_accounts, :id, :name_and_perceived_balance, :include_blank => :true %>
+    <%= f.collection_select :debit_account_id, @accounts, :id, :name, :include_blank => :true %>
   </p>
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', account_url(@account) %>
+<%= link_to 'Back', account_url(@account) rescue nil %>

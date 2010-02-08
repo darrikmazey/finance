@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	validates_confirmation_of :password
 
 	def transactions
-		accounts.map { |a| a.transactions }.flatten
+		accounts.map { |a| a.transactions }.flatten.uniq
 	end
 
 	def asset_accounts

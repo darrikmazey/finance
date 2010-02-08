@@ -1,4 +1,4 @@
-class CapitalAccount < Account
+class RevenueAccount < CapitalAccount
 
 	def after_initialize
 		@increasing = :credit
@@ -6,10 +6,10 @@ class CapitalAccount < Account
 
 	def div_classes
 		f = super
-		f << 'capital_account'
+		f << 'revenue_account'
 	end
 
-	def capital?
+	def revenue?
 		true
 	end
 

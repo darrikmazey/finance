@@ -153,6 +153,18 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 1%;
 }
 
+.list_item.root {
+	background-color: #151515;
+}
+
+.list_item.root .field.name {
+	font-weight: bold;
+}
+
+.list_item.root .field.name a {
+	color: #fff;
+}
+
 .list_item .field.color_code {
 	border: 1px solid #ccc;
 }
@@ -173,29 +185,26 @@ a:hover { color: #fff; text-decoration: underline; }
 	background-color: #411;
 }
 
-.list_item.positive .field.balance {
-	background-color: #131;
-}
-
-.list_item.negative .field.balance {
+.list_item.expense_account .field.color_code {
 	background-color: #311;
-}
-
-.list_item.liability_account.positive .field.balance {
-	background-color: #311;
-}
-
-.list_item.liability_account.negative .field.balance {
-	background-color: #131;
-}
-
-.list_item.client_account .field.balance {
 }
 
 .list_item.current_account .field.due_date {
 }
 
 .list_item.overdue_account .field.due_date {
+	background-color: #311;
+}
+
+.list_item.liability_account.negative .field.balance,
+.list_item.equity_account.positive .field.balance,
+.list_item.asset_account.positive .field.balance {
+	background-color: #131;
+}
+
+.list_item.liability_account.positive .field.balance,
+.list_item.equity_account.negative .field.balance,
+.list_item.asset_account.negative .field.balance {
 	background-color: #311;
 }
 
