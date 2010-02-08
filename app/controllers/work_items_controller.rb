@@ -21,6 +21,41 @@ class WorkItemsController < ApplicationController
     end
   end
 
+	# POST /work_items/1/close
+	def close
+		@work_item = @current_user.work_items.find(params[:id]) rescue nil
+		if @work_item.nil?
+			redirect_to work_items_url
+			return
+		end
+		
+		@work_item.close
+		if (@work_item.save)
+			flash[:notice] = 'work item closed.'
+			redirect_to work_items_url
+			return
+		end
+		flash[:error] = 'work item could not be closed'
+		redirect_to work_items_url
+	end
+
+	# POST /work_items/1/open
+	def open
+		@work_item = @current_user.work_items.find(params[:id]) rescue nil
+		if @work_item.nil?
+			redirect_to work_items_url
+			return
+		end
+		@work_item.open
+		if (@work_item.save)
+			flash[:notice] = 'work item opened.'
+			redirect_to work_items_url
+			return
+		end
+		flash[:error] = 'work item could not be opened.'
+		redirect_to work_items_url
+	end
+
   # GET /work_items/new
   # GET /work_items/new.xml
   def new

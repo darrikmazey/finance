@@ -22,6 +22,7 @@ class ProjectsController < ApplicationController
 			return
 		end
 		@account = @project.client.account
+		@open_work_items = @project.work_items.open
 
     respond_to do |format|
       format.html # show.html.erb

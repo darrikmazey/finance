@@ -1,5 +1,5 @@
 <div class="list projects">
-	<div class="heading">Listing projects <%= link_to '+', new_project_url %></div>
+	<div class="heading">projects <%= link_to '+', new_project_url %></div>
 	<div class="content">
 		<%= render :partial => 'projects/list_header' %>
 		<%= render :partial => 'projects/project', :collection => project_list %>

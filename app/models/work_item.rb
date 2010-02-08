@@ -4,6 +4,8 @@ class WorkItem < ActiveRecord::Base
   belongs_to :rate
   belongs_to :invoice
 
+	named_scope :open, { :conditions => { :end_time => nil } }
+
 	def align_start_time
 		if self.start_time.nil?
 			return nil

@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :work_items
+  map.resources :work_items, :member => { :open => [ :post ], :close => [ :post ] }
 
   map.resources :accounts
 

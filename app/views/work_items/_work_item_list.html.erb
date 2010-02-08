@@ -1,0 +1,7 @@
+<div class="list work_items">
+	<div class="heading">work items <%= link_to '+', new_work_item_url %></div>
+	<div class="content">
+		<%= render :partial => 'work_items/list_header' %>
+		<%= render :partial => 'work_items/work_item', :collection => work_item_list %>
+	</div>
+</div>

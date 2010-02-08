@@ -299,6 +299,12 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 15%;
 }
 
+.list.work_items .field.hours,
+.list.work_items .field.subtotal {
+	text-align: right;
+	padding-right: 10px;
+}
+
 .decr_transaction .field.credit_amount.non_zero,
 .incr_transaction .field.debit_amount.non_zero {
 	background-color: #131;

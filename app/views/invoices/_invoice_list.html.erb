@@ -1,5 +1,5 @@
 <div class="list invoices">
-	<div class="heading">Listing invoices <%= link_to '+', new_invoice_url %></div>
+	<div class="heading">invoices <%= link_to '+', new_invoice_url %></div>
 	<div class="content">
 		<%= render :partial => 'invoices/list_header' %>
 		<%= render :partial => 'invoices/invoice', :collection => invoice_list %>

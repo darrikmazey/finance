@@ -3,6 +3,10 @@
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |
 <%= link_to 'Back', invoices_path %>
 
+<% if @invoice.work_items.size > 0 -%>
+<%= render :partial => 'work_items/work_item_list', :object => @invoice.work_items %>
+<% end -%>
+
 <% if @invoice.transactions.size > 0 -%>
 <div class="list invoice_transactions transactions">
 	<div class="heading">transactions</div>

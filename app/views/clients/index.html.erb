@@ -1,5 +1,5 @@
 <div class="list clients">
-	<div class="heading">Listing clients <%= link_to '+', new_client_url %></div>
+	<div class="heading">clients <%= link_to '+', new_client_url %></div>
 	<div class="content">
 		<%= render :partial => 'list_header' %>
 		<%= render :partial => 'client', :collection => @clients %>
