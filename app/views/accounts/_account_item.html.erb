@@ -9,18 +9,4 @@
 
 <%= @output %>
 
-<%
-	account_item.children.each do |child|
-		sc = child.class.all_superclasses
-		@output = nil
-		while @output.nil?
-			c = sc.shift
-			@output = render :partial => c.underscore, :object => child rescue nil
-		end
-%>
-
-<%= @output %>
-
-<%
-	end
-%>
+<%= render :partial => 'account_item', :collection => account_item.children %>
