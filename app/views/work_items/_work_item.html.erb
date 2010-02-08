@@ -1,0 +1,12 @@
+<div class="list_item work_item">
+	<div class="field first start_time"><%=h work_item.start_time %></div>
+	<div class="field end_time"><%=h work_item.end_time %></div>
+	<div class="field project"><%=h work_item.project.name rescue 'none' %></div>
+	<div class="field rate"><%=h work_item.rate.name rescue 'none' %></div>
+	<div class="field invoice"><%=h work_item.invoice.identifier rescue 'none' %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', work_item %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_work_item_path(work_item) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', work_item, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

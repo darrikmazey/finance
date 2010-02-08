@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :work_items
+
   map.resources :accounts
 
   map.resources :rates

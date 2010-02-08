@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  project: 
+  rate: 
+  invoice: 
+  start_time: 2010-02-08 06:46:20
+  end_time: 2010-02-08 06:46:20
+
+two:
+  user: 
+  project: 
+  rate: 
+  invoice: 
+  start_time: 2010-02-08 06:46:20
+  end_time: 2010-02-08 06:46:20
