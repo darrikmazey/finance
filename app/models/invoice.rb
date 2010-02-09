@@ -65,6 +65,16 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
+	def scoop_loose_work_items
+		if project
+			wis = project.work_items.loose
+			wis.each do |wi|
+				wi.invoice = self
+				wi.save
+			end
+		end
+	end
+
 	def total
 		work_items.inject(0) { |s,v| s += v.total }
 	end

@@ -125,6 +125,7 @@ class InvoicesController < ApplicationController
 
     respond_to do |format|
       if @invoice.save
+				@invoice.scoop_loose_work_items
         flash[:notice] = 'Invoice was successfully created.'
         format.html { redirect_to(@invoice) }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
