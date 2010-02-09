@@ -10,7 +10,7 @@ class Transaction < ActiveRecord::Base
 	named_scope :recent, lambda { { :conditions => [ 'trans_date >= ?', (2.weeks.ago)] } }
 
 	def self.all_for_user(u)
-		u.accounts.collect { |a| a.transactions }.flatten.uniq.sort { |a,b| a.trans_date <=> b.trans_date }
+		u.accounts.collect { |a| a.transactions }.flatten.uniq.sort { |a,b| b.trans_date <=> a.trans_date }
 	end
 
 	def self.model_name
