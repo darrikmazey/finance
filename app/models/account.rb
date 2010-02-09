@@ -84,10 +84,10 @@ class Account < ActiveRecord::Base
 
 	def child_amount
 		if credit_increasing?
-			return children.inject(0) { |s, v| s += v.credit_amount }
+			return children.inject(0) { |s, v| s += Period.convert(v.credit_amount, v.period, self.period) }
 		end
 		if debit_increasing?
-			return children.inject(0) { |s, v| s += v.debit_amount }
+			return children.inject(0) { |s, v| s += Period.convert(v.debit_amount, v.period, self.period) }
 		end
 		0
 	end

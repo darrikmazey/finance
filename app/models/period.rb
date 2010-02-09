@@ -51,6 +51,10 @@ class Period
 		@@NAMES.keys.sort.reverse.map { |v| self[v] }
 	end
 
+	def self.convert(amount, from, to)
+		amount * from / to
+	end
+
 	def initialize(n)
 		@period = n
 	end
