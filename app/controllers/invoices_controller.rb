@@ -156,7 +156,15 @@ class InvoicesController < ApplicationController
   # DELETE /invoices/1
   # DELETE /invoices/1.xml
   def destroy
-    @invoice = Invoice.find(params[:id])
+    @invoice = @current_user.invoices.find(params[:id]) rescue nil
+		if @invoice.nil?
+			redirect_to invoices_url
+			return
+		end
+		if @invoice.work_items.each do |wi|
+			wi.invoice = nil
+			wi.save
+		end
     @invoice.destroy
 
     respond_to do |format|
