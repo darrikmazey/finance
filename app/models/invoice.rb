@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
 	has_many :transactions
 	belongs_to :project
 	has_one :client, :through => :project
-	has_many :work_items
+	has_many :work_items, :order => 'start_time asc, id asc'
 
 	def rev_sorted_transactions
 		self.transactions.sort { |a, b| b.created_at <=> a.created_at }

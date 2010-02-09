@@ -54,6 +54,14 @@ class Account < ActiveRecord::Base
 		transactions.recent
 	end
 
+	def total_amount
+		if children.size > 0
+			return amount + child_amount
+		else
+			return amount
+		end
+	end
+
 	def credits
 		Transaction.credits_for_account(self)
 	end
@@ -74,6 +82,16 @@ class Account < ActiveRecord::Base
 		balance + child_balance
 	end
 
+	def child_amount
+		if credit_increasing?
+			return children.inject(0) { |s, v| s += v.credit_amount }
+		end
+		if debit_increasing?
+			return children.inject(0) { |s, v| s += v.debit_amount }
+		end
+		0
+	end
+
 	def child_balance
 		if credit_increasing?
 			return children.inject(0) { |s, v| s += v.credit_balance }
@@ -90,6 +108,26 @@ class Account < ActiveRecord::Base
 		end
 		if debit_increasing?
 			return initial_balance - credit_sum + debit_sum
+		end
+		0
+	end
+
+	def credit_amount
+		if credit_increasing?
+			return amount
+		end
+		if debit_increasing?
+			return -1 * amount
+		end
+		0
+	end
+
+	def debit_amount
+		if credit_increasing?
+			return -1 * amount
+		end
+		if debit_increasing?
+			return amount
 		end
 		0
 	end
