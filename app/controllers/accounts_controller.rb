@@ -6,12 +6,26 @@ class AccountsController < ApplicationController
   # GET /accounts.xml
   def index
     @accounts = @current_user.accounts.root
+		if params[:period]
+			@period = Period[params[:period].to_i]
+		else
+			@period = Period[12]
+		end
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @accounts }
     end
   end
+
+	def ajax_index
+		@accounts = @current_user.accounts.root
+		if params[:period]
+			@period = Period[params[:period].to_i]
+		end
+
+		render :layout => false
+	end
 
   # GET /accounts/1
   # GET /accounts/1.xml
