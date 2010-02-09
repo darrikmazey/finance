@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.xml
   def index
 		if @account.nil?
-			@transactions = @current_user.transactions.find(:all, :order => ['trans_date desc, id desc'])
+			@transactions = Ttransactions.all_for_user(@current_user)
 			#@transactions = Transaction.find :all, :conditions => ['credit_account_id in (select id from accounts where user_id = ?) or debit_account_id in (select id from accounts where user_id = ?)', @current_user.id, @current_user.id], :order => ['trans_date desc, id desc']
 		else
 			@transactions = @account.transactions.find :all, :order => ['trans_date desc, id desc']

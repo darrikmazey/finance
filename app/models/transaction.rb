@@ -9,6 +9,10 @@ class Transaction < ActiveRecord::Base
 	named_scope :debits_for_account, lambda { |a| { :conditions => ['debit_account_id = ?', a.id ] } }
 	named_scope :recent, lambda { { :conditions => [ 'trans_date >= ?', (2.weeks.ago)] } }
 
+	def self.all_for_user(u)
+		u.accounts.collect { |a| a.transactions }.flatten.uniq.sort { |a,b| a.trans_date <=> b.trans_date }
+	end
+
 	def self.model_name
 		name = 'transaction'
 		name.instance_eval do
