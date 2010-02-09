@@ -161,7 +161,7 @@ class InvoicesController < ApplicationController
 			redirect_to invoices_url
 			return
 		end
-		if @invoice.work_items.each do |wi|
+		@invoice.work_items.each do |wi|
 			wi.invoice = nil
 			wi.save
 		end
