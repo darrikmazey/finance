@@ -1,7 +1,7 @@
 <% account = equity_summary_data %>
 <div class="list_item">
 	<div class="field first description">total</div>
-	<div class="field net <%= account.net_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.net, account.period, @period.value)) %></div>
-	<div class="field revenue <%= account.revenue_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.revenue_total, account.period, @period.value)) %></div>
-	<div class="field expenses <%= account.expense_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.expense_total, account.period, @period.value)) %></div>
+	<div class="field net <%= account.net_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.net, account.period, @period.value).abs) %></div>
+	<div class="field revenue <%= account.revenue_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.revenue_total, account.period, @period.value).abs) %></div>
+	<div class="field expenses <%= account.expense_div_flags.join(" ") %>"><%= number_to_currency(convert_period(account.expense_total, account.period, @period.value).abs) %></div>
 </div>
