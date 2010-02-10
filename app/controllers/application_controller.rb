@@ -46,6 +46,9 @@ class ApplicationController < ActionController::Base
 		if params[:account_id]
 			@account = Account.find params[:account_id] rescue nil
 		end
+		if params[:period]
+			@period = Period[params[:period].to_i]
+		end
 	end
 
 	def get_version

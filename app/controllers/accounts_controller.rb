@@ -20,9 +20,6 @@ class AccountsController < ApplicationController
 
 	def ajax_index
 		@accounts = @current_user.accounts.root
-		if params[:period]
-			@period = Period[params[:period].to_i]
-		end
 
 		render :layout => false
 	end
