@@ -44,11 +44,11 @@ class EquityAccount < CapitalAccount
 	end
 
 	def revenue_total
-		children.of_type(:revenue).inject(0) { |s,v| Period.convert(v.amount, v.period, period) }
+		children.of_type(:revenue).inject(0) { |s,v| s += Period.convert(v.total_amount, v.period, period) }
 	end
 
 	def expense_total
-		children.of_type(:expense).inject(0) { |s,v| Period.convert(v.amount, v.period, period) }
+		children.of_type(:expense).inject(0) { |s,v| s += Period.convert(v.total_amount, v.period, period) }
 	end
 
 	def net
