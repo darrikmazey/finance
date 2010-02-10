@@ -82,6 +82,24 @@ class Account < ActiveRecord::Base
 		balance + child_balance
 	end
 
+	def real_balance_div_flags
+		f = Array.new
+		if real_balance >= 0
+			f << 'positive'
+		else
+			f << 'negative'
+		end
+		f
+	end
+
+	def unallocated_balance
+		balance
+	end
+
+	def allocated_balance
+		child_balance
+	end
+
 	def child_amount
 		if credit_increasing?
 			return children.inject(0) { |s, v| s += Period.convert(v.credit_amount, v.period, self.period) }

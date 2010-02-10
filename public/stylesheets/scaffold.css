@@ -407,3 +407,13 @@ a:hover { color: #fff; text-decoration: underline; }
 .credit_transaction .field.amount {
 	background-color: #311;
 }
+
+.bank_summary .field.positive,
+.equity_summary .field.positive {
+	background-color: #131;
+}
+
+.bank_summary .field.negative,
+.equity_summary .field.negative {
+	background-color: #311;
+}
