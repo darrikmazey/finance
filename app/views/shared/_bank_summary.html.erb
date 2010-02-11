@@ -3,6 +3,6 @@
 	<div class="heading">bank summary</div>
 	<div class="content">
 		<%= render :partial => 'shared/bank_summary_header' %>
-		<%= render :partial => 'shared/bank_summary_data', :object => bank_summary %>
+		<%= render :partial => 'shared/bank_summary_data', :collection => @current_user.accounts.of_type(:bank) %>
 	</div>
 </div>
