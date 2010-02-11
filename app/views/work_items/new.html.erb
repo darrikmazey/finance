@@ -10,14 +10,14 @@
   </p>
   <p id="project_rates">
     <%= f.label :rate %><br />
-    <%= f.collection_select :rate_id, @work_item.project.rates, :id, :name %>
+    <%= f.collection_select :rate_id, (@work_item.project.nil? ? Array.new : @work_item.project.rates), :id, :name %>
   </p>
 
 	<%= observe_field :work_item_project_id, :url => { :controller => 'rates', :action => 'for_project' }, :update => 'project_rates', :with => '"c=work_item&id="+value' %>
 
   <p id="project_invoices">
     <%= f.label :invoice %><br />
-    <%= f.collection_select :invoice_id, @work_item.project.invoices, :id, :identifier, :include_blank => true %>
+    <%= f.collection_select :invoice_id, (@work_item.project.nil? ? Array.new : @work_item.project.invoices), :id, :identifier, :include_blank => true %>
   </p>
 
 	<%= observe_field :work_item_project_id, :url => { :controller => 'invoices', :action => 'for_project' }, :update => 'project_invoices', :with => '"c=work_item&id="+value' %>

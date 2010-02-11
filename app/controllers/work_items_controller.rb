@@ -82,7 +82,7 @@ class WorkItemsController < ApplicationController
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
 		@work_item.project = @current_user.last_project || @current_user.projects.first
-		@work_item.rate = @current_user.last_rate || @work_item.project.rates.first
+		@work_item.rate = @current_user.last_rate || (@work_item.project.rates.first if @work_item.project)
 
     respond_to do |format|
       format.html # new.html.erb
