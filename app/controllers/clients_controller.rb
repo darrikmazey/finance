@@ -39,7 +39,7 @@ class ClientsController < ApplicationController
 		@client_account = RevenueAccount.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @client }
     end
   end
@@ -66,10 +66,10 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         flash[:notice] = 'Client was successfully created.'
-        format.html { redirect_to(@client) }
+        format.html { redirect_to(clients_url) }
         format.xml  { render :xml => @client, :status => :created, :location => @client }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @client.errors, :status => :unprocessable_entity }
       end
     end
@@ -83,7 +83,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.update_attributes(params[:client])
         flash[:notice] = 'Client was successfully updated.'
-        format.html { redirect_to(@client) }
+        format.html { redirect_to(clients_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

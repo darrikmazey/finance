@@ -56,7 +56,11 @@ class WorkItem < ActiveRecord::Base
 	end
 
 	def subtotal
-		self.hours * project.base_rate * rate.modifier
+    if !project.nil?
+      self.hours * project.base_rate * rate.modifier
+    else
+      return 0
+    end
 	end
 
 	def total

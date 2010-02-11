@@ -32,9 +32,10 @@ class RatesController < ApplicationController
   # GET /rates/new.xml
   def new
     @rate = Rate.new
+    @rate.modifier = 1.00
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' } 
       format.xml  { render :xml => @rate }
     end
   end
@@ -59,7 +60,7 @@ class RatesController < ApplicationController
         format.html { redirect_to rates_url }
         format.xml  { render :xml => @rate, :status => :created, :location => @rate }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @rate.errors, :status => :unprocessable_entity }
       end
     end
