@@ -22,11 +22,11 @@
   </p>
   <p>
     <%= f.label :debit_account %><br />
-    <%= f.collection_select :debit_account_id, @accounts, :id, :name, :include_blank => :true %>
+		<%= f.select :debit_account_id, accounts_options_for_select %>
   </p>
   <p>
     <%= f.label :credit_account %><br />
-    <%= f.collection_select :credit_account_id, @accounts, :id, :name, :include_blank => :true %>
+		<%= f.select :credit_account_id, accounts_options_for_select %>
   </p>
   <p>
     <%= f.submit 'Create' %>

@@ -9,7 +9,7 @@
   </p>
   <p>
     <%= f.label :parent %><br />
-    <%= f.collection_select :parent_id, @parents, :id, :name, :include_blank => true %>
+		<%= f.select :parent_id, accounts_options_for_select %>
   </p>
   <p>
     <%= f.label :description %><br />
