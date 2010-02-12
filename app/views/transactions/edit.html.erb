@@ -6,8 +6,8 @@
   <%= f.text_field :ref %>
   <%= f.text_field :description %>
   <%= f.text_field :amount %>
-  <%= f.select :debit_account_id, accounts_options_for_select(@transaction.debit_account_id) %>
   <%= f.select :credit_account_id, accounts_options_for_select(@transaction.credit_account_id) %>
+  <%= f.select :debit_account_id, accounts_options_for_select(@transaction.debit_account_id) %>
   <%= f.submit 'Update' %>
 <% end %>
 
