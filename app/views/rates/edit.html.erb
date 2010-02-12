@@ -1,24 +1,10 @@
-<h1>Editing rate</h1>
+<h1><%= @rate.new_record? ? 'New' : 'Editing' -%> Rate</h1>
 
-<% form_for(@rate) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :project %><br />
-    <%= f.collection_select :project_id, @current_user.projects, :id, :name %>
-  </p>
-  <p>
-    <%= f.label :modifier %><br />
-    <%= f.text_field :modifier %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+<% form_builder_for(@rate) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.collection_select :project_id, @current_user.projects, :id, :name %>
+  <%= f.text_field :modifier %>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Show', @rate %> |
 <%= link_to 'Back', rates_path %>

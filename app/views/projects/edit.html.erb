@@ -1,29 +1,12 @@
-<h1>Editing project</h1>
+<h1><%= @project.new_record? ? 'New' : 'Editing' -%> Project</h1>
 
-<% form_for(@project) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </p>
-  <p>
-    <%= f.label :base_rate %><br />
-    <%= f.text_field :base_rate %>
-  </p>
+<% form_builder_for(@project) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :description %>
+  <%= f.text_field :base_rate %>
   <%= f.hidden_field :user_id, :value => @current_user.id %>
-  <p>
-    <%= f.label :client %><br />
-    <%= f.collection_select :client_id, @current_user.clients, :id, :name %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= f.collection_select :client_id, @current_user.clients, :id, :name %>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Show', @project %> |
 <%= link_to 'Back', projects_path %>

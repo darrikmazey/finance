@@ -1,20 +1,63 @@
-<h1>Editing client</h1>
+<h1><%= @client.new_record? ? 'New' : 'Editing' -%> Client</h1>
 
-<% form_for(@client) do |f| %>
-  <%= f.error_messages %>
+<% form_builder_for(@client) do |f| %>
+  <%= f.text_field :name %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :account %><br />
+  <% if @client.new_record? -%> 
+    <%= f.hidden_field :user_id, :value => @current_user.id %>
+
+    <p>A client account will be created.</p>
+    <div class="embedded_form">
+
+    <p>
+    <%= label :client_account, :parent %><br />
+    <%= collection_select :client_account, :parent_id, @account_parents, :id, :name %>
+    </p>
+
+    <p>
+    <%= label :client_account, :description %><br />
+    <%= text_field :client_account, :description %>
+    </p>
+
+    <p>
+    <%= label :client_account, :account_number %><br />
+    <%= text_field :client_account, :account_number %>
+    </p>
+
+    <p>
+    <%= label :client_account, :initial_balance %><br />
+    <%= text_field :client_account, :initial_balance %>
+    </p>
+
+    <%= hidden_field :client_account, :type, :value => 'ClientAccount' %>
+
+    <p>
+    <%= label :client_account, :amount %><br />
+    <%= text_field :client_account, :amount %>
+    </p>
+    
+    <p>
+    <%= label :client_account, :due_date %><br />
+    <%= date_select :client_account, :due_date %>
+    </p>
+
+    <p>
+    <%= label :client_account, :period %><br />
+    <%= collection_select :client_account, :period, Account::Period.all, :value, :name %>
+    </p>
+
+    </div>
+  <% else -%>
     <%= f.collection_select :account_id, @client_accounts, :id, :name, :include_blank => true %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <% end -%>
+  <%= f.submit 'Update' %>
 <% end %>
 
 <%= link_to 'Show', @client %> |
 <%= link_to 'Back', clients_path %>
+
+
+
+
+
+

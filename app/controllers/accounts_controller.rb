@@ -46,7 +46,7 @@ class AccountsController < ApplicationController
 		@parents = @current_user.accounts
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @account }
     end
   end
@@ -74,7 +74,7 @@ class AccountsController < ApplicationController
         format.html { redirect_to(accounts_url) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
     end
@@ -88,7 +88,7 @@ class AccountsController < ApplicationController
     respond_to do |format|
       if @account.update_attributes(params[:account])
         flash[:notice] = 'Account was successfully updated.'
-        format.html { redirect_to(@account) }
+        format.html { redirect_to(accounts_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

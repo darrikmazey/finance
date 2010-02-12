@@ -82,10 +82,10 @@ class WorkItemsController < ApplicationController
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
 		@work_item.project = @current_user.last_project || @current_user.projects.first
-		@work_item.rate = @current_user.last_rate || @work_item.project.rates.first
+		@work_item.rate = @current_user.last_rate || (@work_item.project.rates.first if @work_item.project)
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @work_item }
     end
   end
@@ -110,7 +110,7 @@ class WorkItemsController < ApplicationController
         format.html { redirect_to work_items_url }
         format.xml  { render :xml => @work_item, :status => :created, :location => @work_item }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @work_item.errors, :status => :unprocessable_entity }
       end
     end
@@ -124,7 +124,7 @@ class WorkItemsController < ApplicationController
     respond_to do |format|
       if @work_item.update_attributes(params[:work_item])
         flash[:notice] = 'WorkItem was successfully updated.'
-        format.html { redirect_to(@work_item) }
+        format.html { redirect_to(work_items_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

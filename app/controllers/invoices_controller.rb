@@ -108,7 +108,7 @@ class InvoicesController < ApplicationController
 		@projects = @current_user.projects
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @invoice }
     end
   end
@@ -127,10 +127,10 @@ class InvoicesController < ApplicationController
       if @invoice.save
 				@invoice.scoop_loose_work_items
         flash[:notice] = 'Invoice was successfully created.'
-        format.html { redirect_to(@invoice) }
+        format.html { redirect_to(invoices_url) }
         format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
       end
     end
@@ -144,7 +144,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       if @invoice.update_attributes(params[:invoice])
         flash[:notice] = 'Invoice was successfully updated.'
-        format.html { redirect_to(@invoice) }
+        format.html { redirect_to(invoices_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

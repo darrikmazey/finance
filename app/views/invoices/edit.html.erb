@@ -1,28 +1,16 @@
-<h1>Editing invoice</h1>
+<h1><%= @invoice.new_record? ? 'New' : 'Editing' -%> Invoice</h1>
 
-<% form_for(@invoice) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :identifier %><br />
-    <%= f.text_field :identifier %>
-  </p>
-  <p>
-    <%= f.label :client %><br />
-    <%= f.text_field :client %>
-  </p>
-  <p>
-    <%= f.label :user %><br />
+<% form_builder_for(@invoice) do |f| %>
+  <%= f.text_field :identifier %>
+  <%= f.text_field :client %>
+  <% if @invoice.new_record? -%>
+    <%= f.collection_select :project_id, @projects, :id, :name %>
+    <%= f.hidden_field :user_id, :value => @current_user.id %>
+  <% else -%>
     <%= f.text_field :user %>
-  </p>
-  <p>
-    <%= f.label :billed_at %><br />
-    <%= f.datetime_select :billed_at %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <% end -%>
+  <%= f.datetime_select :billed_at %>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Show', @invoice %> |
 <%= link_to 'Back', invoices_path %>

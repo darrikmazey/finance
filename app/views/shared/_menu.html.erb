@@ -15,12 +15,4 @@
 			<%= link_to 'login', login_users_url %>
 		<% end -%>
 	</div>
-	<div class="link switch">
-		<% if @current_user.id == 1 -%>
-			<%= link_to User.find(2).username, quick_switch_url(2) %>
-		<% else -%>
-			<%= link_to User.find(1).username, quick_switch_url(1) %>
-		<% end -%>
-	</div>
-
 </div>

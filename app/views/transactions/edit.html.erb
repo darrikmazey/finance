@@ -1,37 +1,14 @@
-<h1>Editing transaction</h1>
+<h1><%= @transaction.new_record? ? 'New' : 'Editing' -%> Transaction</h1>
 
-<% form_for(@transaction) do |f| %>
-  <%= f.error_messages %>
-
+<% form_builder_for(@transaction) do |f| %>
 	<%= hidden_field :account, :id %>
-  <p>
-    <%= f.label :trans_date %><br />
-    <%= f.datetime_select :trans_date %>
-  </p>
-  <p>
-    <%= f.label :ref %><br />
-    <%= f.text_field :ref %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </p>
-  <p>
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </p>
-  <p>
-    <%= f.label :debit_account %><br />
-		<%= f.select :debit_account_id, accounts_options_for_select(@transaction.debit_account_id) %>
-  </p>
-  <p>
-    <%= f.label :credit_account %><br />
-		<%= f.select :credit_account_id, accounts_options_for_select(@transaction.credit_account_id) %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= f.datetime_select :trans_date %>
+  <%= f.text_field :ref %>
+  <%= f.text_field :description %>
+  <%= f.text_field :amount %>
+  <%= f.select :debit_account_id, accounts_options_for_select(@transaction.debit_account_id) %>
+  <%= f.select :credit_account_id, accounts_options_for_select(@transaction.credit_account_id) %>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Show', @transaction %> |
 <%= link_to 'Back', transactions_path %>

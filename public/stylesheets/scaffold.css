@@ -417,3 +417,48 @@ a:hover { color: #fff; text-decoration: underline; }
 .equity_summary .field.negative {
 	background-color: #311;
 }
+
+.form_line {
+  padding: 3px;
+}
+
+.form_line input,
+.form_line textarea {
+  border: 1px solid #888;
+  padding: 2px;
+  width: 680px;
+  font-size: 90%;
+}
+
+.form_line input:focus,
+.form_line textarea:focus {
+  background-color: lightyellow;
+}
+
+.form_line .form_field_label {
+  float: left;
+  width: 140px;
+  text-align: right;
+}
+
+.form_line .form_field {
+  margin-left: 150px;
+}
+
+.form_button {
+  padding-top: 3px;
+  margin-left: 150px;
+  clear: both;
+}
+
+.form_line .error {
+  color: red;
+}
+
+.form_line .fieldWithErrors textarea,
+.form_line .fieldWithErrors input {
+  border: 2px solid red;
+}
+
+
+

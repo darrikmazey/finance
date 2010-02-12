@@ -38,7 +38,7 @@ class TransactionsController < ApplicationController
 		@accounts = @current_user.accounts
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @transaction }
     end
   end
@@ -60,7 +60,7 @@ class TransactionsController < ApplicationController
         format.html { @account ? redirect_to(@account) : redirect_to(@transaction) }
         format.xml  { render :xml => @transaction, :status => :created, :location => @transaction }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "edit" }
         format.xml  { render :xml => @transaction.errors, :status => :unprocessable_entity }
       end
     end
@@ -74,7 +74,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])
         flash[:notice] = 'Transaction was successfully updated.'
-        format.html { redirect_to(@transaction) }
+        format.html { redirect_to(transactions_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,48 +1,17 @@
-<h1>Editing account</h1>
+<h1><%= @account.new_record? ? 'New' : 'Editing' -%> Account</h1>
 
-<% form_for(@account) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :parent %><br />
-		<%= f.select :parent_id, accounts_options_for_select(@account.parent_id), :include_blank => true %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </p>
-  <p>
-    <%= f.label :initial_balance %><br />
-    <%= f.text_field :initial_balance %>
-  </p>
-  <p>
-    <%= f.label :type %><br />
-    <%= f.collection_select :type, Account.types, :class_name, :display_name %>
-  </p>
+<% form_builder_for(@account) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.select :parent_id, accounts_options_for_select(@account.parent_id), { :include_blank => true } %>
+  <%= f.text_field :description %>
+  <%= f.text_field :initial_balance %>
+  <%= f.collection_select :type, Account.types, :class_name, :display_name %>
 	<%= f.hidden_field :user_id, :value => @current_user.id %>
-  <p>
-    <%= f.label :due_date %><br />
-    <%= f.date_select :due_date %>
-  </p>
-  <p>
-    <%= f.label :period %><br />
-    <%= f.collection_select :period, Period.all, :value, :name %>
-  </p>
-  <p>
-    <%= f.label :account_number %><br />
-    <%= f.text_field :account_number %>
-  </p>
-  <p>
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </p>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= f.date_select :due_date %>
+  <%= f.collection_select :period, Period.all, :value, :name %>
+  <%= f.text_field :account_number %>
+  <%= f.text_field :amount %>
+  <%= f.submit 'Update' %>
 <% end %>
 
 <%= link_to 'Show', @account %> |
