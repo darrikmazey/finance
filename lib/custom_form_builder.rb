@@ -22,7 +22,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   end 
 
   def select(method, choices, options = {}, html_options = {})
-    generate_form_field(method, super(method, options, html_options), options)
+    generate_form_field(method, super(method, choices, options, html_options), options)
   end
 
   def datetime_select(method, options = {}, html_options = {})
