@@ -14,6 +14,24 @@
 			</div>
 		</div>
 		<div class="column">
+			<div class="field billing_contact">
+				<div class="field_name">Billing Contact:</div>
+				<div class="field_value"><%=h client_data.contact_name %></div>
+			</div>
+			<div class="field contact_street1">
+				<div class="field_name">&nbsp;</div>
+				<div class="field_value"><%=h client_data.contact_street1 %></div>
+			</div>
+			<% if !client_data.contact_street2.blank? -%>
+			<div class="field contact_street2">
+				<div class="field_name">&nbsp;</div>
+				<div class="field_value"><%=h client_data.contact_street2 %></div>
+			</div>
+			<% end -%>
+			<div class="field contact_city_state_zip">
+				<div class="field_name">&nbsp;</div>
+				<div class="field_value"><%=h client_data.city_state_zip %></div>
+			</div>
 		</div>
 	</div>
 </div>

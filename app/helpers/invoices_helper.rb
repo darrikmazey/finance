@@ -37,7 +37,7 @@ module InvoicesHelper
 				pdf.text invoice.client.name, :size => 10
 				pdf.text 'c/o ' + invoice.client.contact_name, :size => 9
 				pdf.text invoice.client.contact_street1, :size => 9
-				if !invoice.client.contact_street2.nil?
+				if !invoice.client.contact_street2.blank?
 					pdf.text invoice.client.contact_street2, :size => 9
 				end
 				pdf.text invoice.client.city_state_zip, :size => 9
