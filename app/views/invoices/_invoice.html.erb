@@ -10,5 +10,6 @@
 		<div class="link show"><%= link_to 'Show', invoice %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_invoice_path(invoice) %></div>
 		<div class="link destroy"><%= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link pdf"><%= link_to 'Pdf', invoice_url(invoice, :format => 'pdf') %></div>
 	</div>
 </div>

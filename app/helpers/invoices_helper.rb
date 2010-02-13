@@ -49,7 +49,7 @@ module InvoicesHelper
 				Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
 				Prawn::Table::Cell.new( :text => work_item.start_time.short_time, :background_color => row_color),
 				Prawn::Table::Cell.new( :text => work_item.end_time.short_time, :background_color => row_color),
-				Prawn::Table::Cell.new( :text => 'test', :background_color => row_color),
+				Prawn::Table::Cell.new( :text => '', :background_color => row_color),
 				Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
 				Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
 				Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
