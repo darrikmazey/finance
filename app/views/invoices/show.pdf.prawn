@@ -16,6 +16,7 @@ if @invoice.work_items.size > 0
 		generate_table_data(pdf, @invoice),
 		:headers => generate_table_headers(pdf, @invoice),
 		:align => generate_table_alignments(pdf, @invoice),
+		:align_headers => :center,
 		:vertical_padding => 0,
 		:column_widths => generate_table_widths(pdf, @invoice),
 		:font_size => 10

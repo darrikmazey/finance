@@ -69,7 +69,7 @@ module InvoicesHelper
 	end
 
 	def generate_table_headers(pdf, invoice)
-		[ 'date', 'in', 'out', 'description', 'rate', 'hours', 'amount'  ]
+		[ 'Date', 'In', 'Out', 'Description', 'Rate', 'Hours', 'Amount'  ]
 	end
 
 	def generate_table_widths(pdf, invoice)
