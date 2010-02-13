@@ -3,6 +3,16 @@
 <% form_builder_for(@client) do |f| %>
   <%= f.text_field :name %>
 
+	<h3>Billing Contact</h3>
+	<%= f.text_field :contact_first_name, :label => 'First name' %>
+	<%= f.text_field :contact_last_name, :label => 'Last name' %>
+	<%= f.text_field :contact_street1, :label => 'Street' %>
+	<%= f.text_field :contact_street2, :label => '' %>
+	<%= f.text_field :contact_city, :label => 'City' %>
+	<%= f.text_field :contact_state, :label => 'State' %>
+	<%= f.text_field :contact_zipcode, :label => 'Zipcode' %>
+
+	<h3>Account</h3>
   <% if @client.new_record? -%> 
     <%= f.hidden_field :user_id, :value => @current_user.id %>
 

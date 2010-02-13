@@ -30,13 +30,19 @@ module InvoicesHelper
 	end
 
 	def pdf_invoice_data(pdf, invoice)
-		pdf.bounding_box [0, pdf.cursor], :width => pdf.bounds.width, :height => 60 do
+		pdf.bounding_box [0, pdf.cursor], :width => pdf.bounds.width, :height => 70 do
 			pdf.stroke_bounds
 			half_width = pdf.bounds.width / 2
-			pdf.bounding_box [10, 50], :width => (half_width - 15), :height => 50 do
+			pdf.bounding_box [10, 60], :width => (half_width - 15), :height => 60 do
 				pdf.text invoice.client.name, :size => 10
+				pdf.text 'c/o ' + invoice.client.contact_name, :size => 9
+				pdf.text invoice.client.contact_street1, :size => 9
+				if !invoice.client.contact_street2.nil?
+					pdf.text invoice.client.contact_street2, :size => 9
+				end
+				pdf.text invoice.client.city_state_zip, :size => 9
 			end
-			pdf.bounding_box [((pdf.bounds.width)/2), 50], :width => (half_width - 15), :height => 50 do
+			pdf.bounding_box [((pdf.bounds.width)/2), 60], :width => (half_width - 15), :height => 60 do
 				pdf.text 'Invoice #' + invoice.identifier, :size => 10, :align => :right
 				pdf.text 'Billed: ' + invoice.billed_at.short_date, :size => 10, :align => :right
 			end
