@@ -46,3 +46,4 @@ if @invoice.work_items.size > 0
 	)
 end
 
+pdf_footer(pdf, @invoice)

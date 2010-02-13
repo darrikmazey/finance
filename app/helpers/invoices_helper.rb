@@ -1,15 +1,18 @@
 module InvoicesHelper
 	def pdf_footer(pdf, invoice)
-		pdf.bounding_box [0, 10], :width => pdf.bounds.width, :height => 10 do
-			pdf.stroke_horizontal_rule
-			pdf.bounding_box [0, 8], :width => (pdf.bounds.width / 3), :height => 8 do
-				pdf.text Date.today.to_s.gsub(/-/, '.'), :size => 8, :align => :left
-			end
-			pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
-				pdf.text 'DarmaSoft, LLC.', :size => 8, :align => :center
-			end
-			pdf.bounding_box [(pdf.bounds.width / 3 * 2), 8], :width => (pdf.bounds.width / 3), :height => 8 do
-				pdf.text 'Invoice #' + invoice.identifier, :size => 8, :align => :right
+		(1 .. pdf.page_count).each do |page|
+			pdf.go_to_page(page)
+			pdf.bounding_box [0, 0], :width => pdf.bounds.width, :height => 10 do
+				pdf.stroke_horizontal_rule
+				pdf.bounding_box [0, 8], :width => (pdf.bounds.width / 3), :height => 8 do
+					pdf.text Date.today.to_s.gsub(/-/, '.'), :size => 8, :align => :left
+				end
+				pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
+					pdf.text 'DarmaSoft, LLC.', :size => 8, :align => :center
+				end
+				pdf.bounding_box [(pdf.bounds.width / 3 * 2), 8], :width => (pdf.bounds.width / 3), :height => 8 do
+					pdf.text 'Invoice #' + invoice.identifier, :size => 8, :align => :right
+				end
 			end
 		end
 	end
