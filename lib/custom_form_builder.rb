@@ -21,6 +21,10 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
     generate_form_field(method, super(method, collection, value_method, text_method, options, html_options), options)
   end 
 
+	def check_box(method, options = {})
+		generate_form_field(method, super(method, options), options)
+	end
+
   def select(method, choices, options = {}, html_options = {})
     generate_form_field(method, super(method, choices, options, html_options), options)
   end
