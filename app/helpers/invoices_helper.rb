@@ -5,10 +5,10 @@ module InvoicesHelper
 			pdf.bounding_box [0, 0], :width => pdf.bounds.width, :height => 10 do
 				pdf.stroke_horizontal_rule
 				pdf.bounding_box [0, 8], :width => (pdf.bounds.width / 3), :height => 8 do
-					pdf.text Date.today.to_s.gsub(/-/, '.'), :size => 8, :align => :left
+					pdf.text invoice.billed_at.short_date.gsub(/-/, '.'), :size => 8, :align => :left
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
-					pdf.text 'DarmaSoft, LLC.', :size => 8, :align => :center
+					pdf.text invoice.user.company_name, :size => 8, :align => :center
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3 * 2), 8], :width => (pdf.bounds.width / 3), :height => 8 do
 					pdf.text 'Invoice #' + invoice.identifier, :size => 8, :align => :right
@@ -21,10 +21,10 @@ module InvoicesHelper
 		pdf.bounding_box [ 0, pdf.bounds.top ], :width => pdf.bounds.width, :height => 100 do
 			pdf.stroke_bounds
 			pdf.bounding_box [ 10, 80 ], :width => (pdf.bounds.width), :height => 80 do
-				pdf.text 'DarmaSoft, LLC', :align => :center, :size => 20
-				pdf.text '1627 Marigold Avenue', :align => :center, :size => 12
-				pdf.text 'Akron, OH 44301-2627', :align => :center, :size => 12
-				pdf.text '330.983.9941', :align => :center, :size => 12
+				pdf.text invoice.user.company_name, :align => :center, :size => 20
+				pdf.text invoice.user.company_street1, :align => :center, :size => 12
+				pdf.text invoice.user.city_state_zip, :align => :center, :size => 12
+				pdf.text invoice.user.company_phone, :align => :center, :size => 12
 			end
 		end
 	end

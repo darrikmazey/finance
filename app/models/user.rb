@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def city_state_zip
+		company_city + ', ' + company_state + ' ' + company_zipcode
+	end
+
 	def last_work_item
 		WorkItem.find :first, :conditions => { :user_id => self.id }, :order => 'start_time DESC'
 	end
