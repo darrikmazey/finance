@@ -98,6 +98,7 @@ class InvoicesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @invoice }
+			format.pdf { prawnto :inline => true }
     end
   end
 

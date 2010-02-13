@@ -75,6 +75,14 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
+	def subtotal
+		work_items.inject(0) { |s,v| s += v.subtotal }
+	end
+
+	def tax
+		work_items.inject(0) { |s,v| s += v.tax }
+	end
+
 	def total
 		work_items.inject(0) { |s,v| s += v.total }
 	end

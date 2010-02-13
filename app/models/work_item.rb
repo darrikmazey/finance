@@ -63,6 +63,10 @@ class WorkItem < ActiveRecord::Base
     end
 	end
 
+	def tax
+		0
+	end
+
 	def total
 		subtotal
 	end
