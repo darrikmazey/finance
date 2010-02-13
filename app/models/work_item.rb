@@ -64,11 +64,15 @@ class WorkItem < ActiveRecord::Base
 	end
 
 	def tax
-		0
+		if rate.taxeable?
+			subtotal * rate.tax
+		else
+			0
+		end
 	end
 
 	def total
-		subtotal
+		subtotal + tax
 	end
 
 	def hours

@@ -4,6 +4,8 @@
   <%= f.text_field :name %>
   <%= f.collection_select :project_id, @current_user.projects, :id, :name %>
   <%= f.text_field :modifier %>
+	<%= f.check_box :taxeable, :label => 'Taxeable?' %>
+	<%= f.text_field :tax, :label => 'Tax Rate' %>
   <%= f.submit 'Update' %>
 <% end %>
 

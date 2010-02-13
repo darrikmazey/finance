@@ -2,6 +2,8 @@
 	<div class="field first name"><%=h rate.name %></div>
 	<div class="field project"><%=h rate.project.name %></div>
 	<div class="field modifier"><%=h "%0.02f" % rate.modifier %></div>
+	<div class="field taxeable"><%=h rate.taxeable? ? 'yes' : 'no' %></div>
+	<div class="field tax_rate"><%=h "%0.02f%" % (rate.tax * 100) %></div>
 	<div class="links">
 		<div class="link show"><%= link_to 'Show', rate %></div>
 		<div class="link edit"><%= link_to 'Edit', edit_rate_path(rate) %></div>

@@ -23,27 +23,30 @@ if @invoice.work_items.size > 0
 	)
 
 	pdf.table(
-		[ ['subtotal', '', number_to_currency(@invoice.subtotal)] ],
+		[ ['Subtotal', "%0.02f" % @invoice.hours, number_to_currency(@invoice.subtotal)] ],
 		:column_widths => summary_table_widths(pdf, @invoice),
 		:align => summary_table_alignments(pdf, @invoice),
 		:vertical_padding => 0,
-		:row_colors => [ odd_color ]
+		:row_colors => [ odd_color ],
+		:font_size => 10
 	)
 
 	pdf.table(
-		[ ['tax', '', number_to_currency(@invoice.tax)] ],
+		[ ['Tax', "%0.02f" % @invoice.taxeable_hours, number_to_currency(@invoice.tax)] ],
 		:column_widths => summary_table_widths(pdf, @invoice),
 		:align => summary_table_alignments(pdf, @invoice),
 		:vertical_padding => 0,
-		:row_colors => [ even_color ]
+		:row_colors => [ even_color ],
+		:font_size => 10
 	)
 
 	pdf.table(
-		[ ['total', '', number_to_currency(@invoice.total)] ],
+		[ ['Total', "%0.02f" % @invoice.hours, number_to_currency(@invoice.total)] ],
 		:column_widths => summary_table_widths(pdf, @invoice),
 		:align => summary_table_alignments(pdf, @invoice),
 		:vertical_padding => 0,
-		:row_colors => [ odd_color ]
+		:row_colors => [ odd_color ],
+		:font_size => 10
 	)
 end
 

@@ -90,4 +90,9 @@ class Invoice < ActiveRecord::Base
 	def hours
 		work_items.inject(0) { |s,v| s += v.hours }
 	end
+
+	def taxeable_hours
+		work_items.inject(0) { |s,v| s += v.hours if v.rate.taxeable?; s }
+	end
+
 end
