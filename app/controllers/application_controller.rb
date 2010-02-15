@@ -49,6 +49,9 @@ class ApplicationController < ActionController::Base
 		if params[:period]
 			@period = Period[params[:period].to_i]
 		end
+		if params[:work_item_id]
+			@work_item = WorkItem.find params[:work_item_id] rescue nil
+		end
 	end
 
 	def get_version

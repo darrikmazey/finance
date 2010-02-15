@@ -1,8 +1,15 @@
 class CommentsController < ApplicationController
+	
+	before_filter :require_user
+
   # GET /comments
   # GET /comments.xml
   def index
-    @comments = Comment.all
+		if @work_item.nil?
+			@comments = Comment.all
+		else
+			@comments = @work_item.comments
+		end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,6 +32,9 @@ class CommentsController < ApplicationController
   # GET /comments/new.xml
   def new
     @comment = Comment.new
+		if @work_item
+			@comment.work_item = @work_item
+		end
 
     respond_to do |format|
       format.html # new.html.erb

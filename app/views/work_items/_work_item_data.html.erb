@@ -1,0 +1,40 @@
+<div class="item_data work_item">
+	<div class="heading"><%= work_item_data.class.name.titleize %> : <%= work_item_data.start_time.short_date + ' ' + work_item_data.start_time.short_time %></div>
+
+	<div class="content">
+		<div class="column first">
+			<div class="field project">
+				<div class="field_name">Project:</div>
+				<div class="field_value"><%=h work_item_data.project.name rescue 'none' %></div>
+			</div>
+
+			<div class="field rate">
+				<div class="field_name">Rate:</div>
+				<div class="field_value"><%=h work_item_data.rate.name %></div>
+			</div>
+
+			<div class="field invoice">
+				<div class="field_name">Invoice:</div>
+				<div class="field_value"><%=h work_item_data.invoice.identifier rescue 'none' %></div>
+			</div>
+
+			<div class="field start_date">
+				<div class="field_name">Start date:</div>
+				<div class="field_value"><%=h work_item_data.start_time.short_date %></div>
+			</div>
+
+			<div class="field start_time">
+				<div class="field_name">Start time:</div>
+				<div class="field_value"><%=h work_item_data.start_time.short_time %></div>
+			</div>
+
+			<div class="field end_time">
+				<div class="field_name">End time:</div>
+				<div class="field_value"><%=h work_item_data.end_time.short_time rescue 'open' %></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= link_to 'Edit', edit_work_item_path(work_item_data) %> |
+<%= link_to 'Back', work_items_path %>

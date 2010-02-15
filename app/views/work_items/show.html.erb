@@ -1,35 +1,4 @@
-<p>
-  <b>User:</b>
-  <%=h @work_item.user %>
-</p>
-
-<p>
-  <b>Project:</b>
-  <%=h @work_item.project %>
-</p>
-
-<p>
-  <b>Rate:</b>
-  <%=h @work_item.rate %>
-</p>
-
-<p>
-  <b>Invoice:</b>
-  <%=h @work_item.invoice %>
-</p>
-
-<p>
-  <b>Start time:</b>
-  <%=h @work_item.start_time %>
-</p>
-
-<p>
-  <b>End time:</b>
-  <%=h @work_item.end_time %>
-</p>
-
-<%= link_to 'Edit', edit_work_item_path(@work_item) %> |
-<%= link_to 'Back', work_items_path %>
+<%= render :partial => 'work_item_data', :object => @work_item %>
 
 <% if @work_item.comments.size > 0 -%>
 <%= render :partial => 'comments/comment_list', :object => @work_item.comments %>

@@ -7,10 +7,7 @@
     <%= f.label :body %><br />
     <%= f.text_field :body %>
   </p>
-  <p>
-    <%= f.label :work_item %><br />
-    <%= f.text_field :work_item %>
-  </p>
+	<%= f.hidden_field :work_item_id, :value => @work_item.id %>
   <p>
     <%= f.submit 'Create' %>
   </p>
