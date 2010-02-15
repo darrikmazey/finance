@@ -15,7 +15,7 @@
 
 			<div class="field invoice">
 				<div class="field_name">Invoice:</div>
-				<div class="field_value"><%=h work_item_data.invoice.identifier rescue 'none' %></div>
+				<div class="field_value"><%= link_to(work_item_data.invoice.identifier, work_item_data.invoice) rescue 'none' %></div>
 			</div>
 
 			<div class="field start_date">

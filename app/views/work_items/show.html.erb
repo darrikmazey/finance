@@ -1,5 +1,3 @@
 <%= render :partial => 'work_item_data', :object => @work_item %>
 
-<% if @work_item.comments.size > 0 -%>
 <%= render :partial => 'comments/comment_list', :object => @work_item.comments %>
-<% end -%>

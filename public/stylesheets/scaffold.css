@@ -460,5 +460,10 @@ a:hover { color: #fff; text-decoration: underline; }
   border: 2px solid red;
 }
 
+.list_item.comment .field.body {
+	width: 50%;
+	text-align: left;
+}
+
 
 

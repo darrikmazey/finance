@@ -55,7 +55,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash[:notice] = 'Comment was successfully created.'
-        format.html { redirect_to(@comment) }
+        format.html { redirect_to(@comment.work_item) }
         format.xml  { render :xml => @comment, :status => :created, :location => @comment }
       else
         format.html { render :action => "new" }
@@ -72,7 +72,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
         flash[:notice] = 'Comment was successfully updated.'
-        format.html { redirect_to(@comment) }
+        format.html { redirect_to(@comment.work_item) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

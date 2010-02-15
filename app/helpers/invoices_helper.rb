@@ -54,15 +54,53 @@ module InvoicesHelper
 		i = 0
 		invoice.work_items.each do |work_item|
 			row_color = (i % 2 == 0) ? odd_color : even_color
-			data << [
-				Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
-				Prawn::Table::Cell.new( :text => work_item.start_time.short_time, :background_color => row_color),
-				Prawn::Table::Cell.new( :text => work_item.end_time.short_time, :background_color => row_color),
-				Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-				Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
-				Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
-				Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
-			]
+			if work_item.comments.size == 0
+				data << [
+					Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+					Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
+				]
+			elsif work_item.comments.size == 1
+				data << [
+					Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => work_item.comments.first.body, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
+					Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
+				]
+			else
+				first_comment = true
+				work_item.comments.each do |c|
+					if first_comment
+						first_comment = false
+						data << [
+							Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+							Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
+							Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
+							Prawn::Table::Cell.new( :text => c.body, :background_color => row_color),
+							Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
+							Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
+							Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
+						]
+					else
+						data << [
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+							Prawn::Table::Cell.new( :text => c.body, :background_color => row_color),
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
+						]
+					end
+				end
+			end
 			i += 1
 		end
 		data
