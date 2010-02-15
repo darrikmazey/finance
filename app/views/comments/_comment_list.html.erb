@@ -1,0 +1,7 @@
+<div class="list comments">
+	<div class="heading">comments <%= link_to '+', new_comment_url %></div>
+	<div class="content">
+		<%= render :partial => 'comments/list_header' %>
+		<%= render :partial => 'comments/comment', :collection => comment_list %>
+	</div>
+</div>

@@ -28,6 +28,9 @@
   <%=h @work_item.end_time %>
 </p>
 
-
 <%= link_to 'Edit', edit_work_item_path(@work_item) %> |
 <%= link_to 'Back', work_items_path %>
+
+<% if @work_item.comments.size > 0 -%>
+<%= render :partial => 'comments/comment_list', :object => @work_item.comments %>
+<% end -%>

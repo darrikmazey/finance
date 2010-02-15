@@ -1,0 +1,8 @@
+<div class="list_item comment">
+	<div class="field first comment_date"><%=h comment.created_at.short_date %></div>
+	<div class="field body"><%=h comment.body %></div>
+	<div class="links">
+		<div class="link edit"><%= link_to 'Edit', edit_comment_path(comment) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', comment, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

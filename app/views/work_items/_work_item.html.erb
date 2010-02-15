@@ -4,6 +4,7 @@
 	<div class="field end_time"><%= link_to(work_item.end_time.short_time, open_work_item_url(work_item), :method => :post) rescue link_to('close', close_work_item_url(work_item), :method => :post) %></div>
 	<div class="field project"><%= link_to work_item.project.name, work_item.project rescue 'none' %></div>
 	<div class="field rate"><%= link_to work_item.rate.name, work_item.rate rescue 'none' %></div>
+	<div class="field comments"><%= work_item.comments.size %></div>
 	<div class="field hours"><%= "%0.02f" % work_item.hours %></div>
 	<div class="field subtotal"><%= number_to_currency(work_item.subtotal) %></div>
 	<div class="links">

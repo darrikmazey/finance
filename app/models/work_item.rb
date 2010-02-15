@@ -3,6 +3,7 @@ class WorkItem < ActiveRecord::Base
   belongs_to :project
   belongs_to :rate
   belongs_to :invoice
+	has_many :comments
 
 	named_scope :open, { :conditions => { :end_time => nil } }
 	named_scope :loose, { :conditions => { :invoice_id => nil } }
