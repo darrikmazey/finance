@@ -5,7 +5,7 @@ module InvoicesHelper
 			pdf.bounding_box [0, 0], :width => pdf.bounds.width, :height => 10 do
 				pdf.stroke_horizontal_rule
 				pdf.bounding_box [0, 8], :width => (pdf.bounds.width / 3), :height => 8 do
-					pdf.text invoice.billed_at.short_date.gsub(/-/, '.'), :size => 8, :align => :left
+					pdf.text (invoice.billed_at.short_date.gsub(/-/, '.') rescue 'none'), :size => 8, :align => :left
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
 					pdf.text invoice.user.company_name, :size => 8, :align => :center
@@ -44,7 +44,7 @@ module InvoicesHelper
 			end
 			pdf.bounding_box [((pdf.bounds.width)/2), 60], :width => (half_width - 15), :height => 60 do
 				pdf.text 'Invoice #' + invoice.identifier, :size => 10, :align => :right
-				pdf.text 'Billed: ' + invoice.billed_at.short_date, :size => 10, :align => :right
+				pdf.text 'Billed: ' + (invoice.billed_at.short_date rescue 'none'), :size => 10, :align => :right
 			end
 		end
 	end
@@ -56,7 +56,7 @@ module InvoicesHelper
 			row_color = (i % 2 == 0) ? odd_color : even_color
 			if work_item.comments.size == 0
 				data << [
-					Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => '', :background_color => row_color),
@@ -66,7 +66,7 @@ module InvoicesHelper
 				]
 			elsif work_item.comments.size == 1
 				data << [
-					Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+					Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
 					Prawn::Table::Cell.new( :text => work_item.comments.first.body, :background_color => row_color),
@@ -80,7 +80,7 @@ module InvoicesHelper
 					if first_comment
 						first_comment = false
 						data << [
-							Prawn::Table::Cell.new( :text => work_item.start_time.short_date, :background_color => row_color),
+							Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
 							Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
 							Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
 							Prawn::Table::Cell.new( :text => c.body, :background_color => row_color),
