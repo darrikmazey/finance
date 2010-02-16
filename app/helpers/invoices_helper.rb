@@ -5,7 +5,7 @@ module InvoicesHelper
 			pdf.bounding_box [0, 0], :width => pdf.bounds.width, :height => 10 do
 				pdf.stroke_horizontal_rule
 				pdf.bounding_box [0, 8], :width => (pdf.bounds.width / 3), :height => 8 do
-					pdf.text (invoice.billed_at.short_date.gsub(/-/, '.') rescue 'none'), :size => 8, :align => :left
+					pdf.text((invoice.billed_at.short_date.gsub(/-/, '.') rescue 'none'), :size => 8, :align => :left)
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
 					pdf.text invoice.user.company_name, :size => 8, :align => :center
