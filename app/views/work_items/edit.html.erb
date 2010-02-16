@@ -6,11 +6,11 @@
   <p id="project_rates">
     <%= f.collection_select :rate_id, (@work_item.project.nil? ? [] : @work_item.project.rates), :id, :name %>
   </p>
-	<%= observe_field :work_item_project_id, :url => { :controller => 'rates', :action => 'for_project' }, :update => 'project_rates', :with => '"c=work_item&id="+value' %>
+	<%= observe_field :work_item_project_id, :url => { :controller => 'rates', :action => 'for_project' }, :update => 'work_item_rate_id', :with => '"c=work_item&id="+value' %>
   <p id="project_invoices">
     <%= f.collection_select :invoice_id, (@work_item.project.nil? ? [] : @work_item.project.invoices), :id, :identifier, :include_blank => true %>
   </p>
-	<%= observe_field :work_item_project_id, :url => { :controller => 'invoices', :action => 'for_project' }, :update => 'project_invoices', :with => '"c=work_item&id="+value' %>
+	<%= observe_field :work_item_project_id, :url => { :controller => 'invoices', :action => 'for_project' }, :update => 'work_item_invoice_id', :with => '"c=work_item&id="+value' %>
   <%= f.datetime_select :start_time, { :minute_step => 5 } %>
   <%= f.datetime_select :end_time, { :include_blank => true, :minute_step => 5 } %>
   <%= f.submit 'Update' %>
