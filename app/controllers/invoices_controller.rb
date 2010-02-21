@@ -22,6 +22,7 @@ class InvoicesController < ApplicationController
 		end
 
 		@invoice.paid
+    @invoice.bill if @invoice.billed_at.nil?
 		if (@invoice.save)
 			flash[:notice] = 'invoice paid.'
 			redirect_to invoices_url
