@@ -1,0 +1,9 @@
+<div class="item_data rate">
+  <% custom_fields_for rate_data do |f| %>
+    <div class="column first">
+      <%= f.field :name %>
+      <%= f.field :project, { :function => :name } %>
+      <%= f.field :modifier %>
+    </div>
+  <% end %>
+</div>

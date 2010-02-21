@@ -1,0 +1,8 @@
+<div class="item_data user">
+  <% custom_fields_for user_data, { :header => :username } do |f| %>
+    <div class="column first">
+      <%= f.field :username %>
+      <%= f.field :last_login, { :value => (user_data.last_login.short_date + " " + user_data.last_login.short_time rescue "") } %>
+    </div>
+  <% end %>
+</div>

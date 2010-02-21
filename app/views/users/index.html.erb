@@ -1,22 +1,7 @@
-<h1>users</h1>
-
-<table>
-  <tr>
-    <th>Username</th>
-    <th>Last login</th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.username %></td>
-    <td><%=h user.last_login %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New user', new_user_path %>
+<div class="list users">
+  <div class="heading">users <%= link_to '+', new_user_path %></div>
+  <div class="content">
+    <%= render :partial => "list_header" %>
+    <%= render :partial => "user", :collection => @users %>
+  </div>
+</div>

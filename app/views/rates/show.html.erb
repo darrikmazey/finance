@@ -1,18 +1,4 @@
-<p>
-  <b>Name:</b>
-  <%=h @rate.name %>
-</p>
-
-<p>
-  <b>Project:</b>
-  <%=h @rate.project %>
-</p>
-
-<p>
-  <b>Modifier:</b>
-  <%=h @rate.modifier %>
-</p>
-
+<%= render :partial => "rate_data", :object => @rate %>
 
 <%= link_to 'Edit', edit_rate_path(@rate) %> |
 <%= link_to 'Back', rates_path %>

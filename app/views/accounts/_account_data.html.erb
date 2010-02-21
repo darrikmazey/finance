@@ -1,14 +1,16 @@
 <div class="item_data account">
   <% custom_fields_for account_data do |f| %>
-    <%= f.field :name %>      
-    <%= f.field :parent, { :value => (link_to(account_data.parent.name, account_data.parent) rescue 'none') } %>
-    <%= f.field :description %>
-    <%= f.field :initial_balance, { :value => number_to_currency(account_data.balance) } %>
-    <%= f.field :balance, { :value => number_to_currency(account_data.initial_balance) } %>
-    <%= f.field :unallocated_balance, { :value => number_to_currency(account_data.unallocated_balance) } %>
-    <%= f.field :due_date, { :value => (account_data.due_date.short_date rescue nil) } %>
-    <%= f.field :period, { :value => Period[account_data.period].name } %>
-    <%= f.field :account_number %>
-    <%= f.field :amount, { :value => number_to_currency(account_data.amount) } %>
+    <div class="column first">
+      <%= f.field :name %>      
+      <%= f.field :parent, { :value => (link_to(account_data.parent.name, account_data.parent) rescue 'none') } %>
+      <%= f.field :description %>
+      <%= f.field :initial_balance, { :value => number_to_currency(account_data.balance) } %>
+      <%= f.field :balance, { :value => number_to_currency(account_data.initial_balance) } %>
+      <%= f.field :unallocated_balance, { :value => number_to_currency(account_data.unallocated_balance) } %>
+      <%= f.field :due_date, { :value => (account_data.due_date.short_date rescue nil) } %>
+      <%= f.field :period, { :value => Period[account_data.period].name } %>
+      <%= f.field :account_number %>
+      <%= f.field :amount, { :value => number_to_currency(account_data.amount) } %>
+    </div>
   <% end %>
 </div>
