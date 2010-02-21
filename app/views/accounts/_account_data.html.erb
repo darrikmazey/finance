@@ -1,57 +1,14 @@
 <div class="item_data account">
-	<div class="heading"><%= account_data.class.name.titleize %> : <%= account_data.name %></div>
-
-	<div class="content">
-		<div class="column first">
-			<div class="field first name">
-				<div class="field_name">Name:</div>
-				<div class="field_value"><%=h account_data.name %></div>
-			</div>
-
-			<div class="field parent">
-				<div class="field_name">Parent:</div>
-				<div class="field_value"><%= link_to account_data.parent.name, account_data.parent rescue 'none' %></div>
-			</div>
-
-			<div class="field description">
-				<div class="field_name">Description:</div>
-				<div class="field_value"><%=h account_data.description %></div>
-			</div>
-
-			<div class="field initial_balance">
-				<div class="field_name">Initial balance:</div>
-				<div class="field_value"><%=h number_to_currency(account_data.initial_balance) %></div>
-			</div>
-			
-			<div class="field balance">
-				<div class="field_name">Balance:</div>
-				<div class="field_value"><%=h number_to_currency(account_data.real_balance) %></div>
-			</div>
-
-			<div class="field unallocated_balance">
-				<div class="field_name">Unallocated:</div>
-				<div class="field_value"><%=h number_to_currency(account_data.balance) %></div>
-			</div>
-
-			<div class="field due_date">
-				<div class="field_name">Due date:</div>
-				<div class="field_value"><%=h account_data.due_date.short_date rescue '&nbsp;' %></div>
-			</div>
-
-			<div class="field period">
-				<div class="field_name">Period:</div>
-				<div class="field_value"><%=h Period[account_data.period].name %></div>
-			</div>
-
-			<div class="field account_number">
-				<div class="field_name">Account number:</div>
-				<div class="field_value"><%=h account_data.account_number %></div>
-			</div>
-
-			<div class="field amount">
-				<div class="field_name">Amount:</div>
-				<div class="field_value"><%=h number_to_currency(account_data.amount) %></div>
-			</div>
-		</div>
-	</div>
+  <% custom_fields_for account_data do |f| %>
+    <%= f.field :name %>      
+    <%= f.field :parent, { :value => (link_to(account_data.parent.name, account_data.parent) rescue 'none') } %>
+    <%= f.field :description %>
+    <%= f.field :initial_balance, { :value => number_to_currency(account_data.balance) } %>
+    <%= f.field :balance, { :value => number_to_currency(account_data.initial_balance) } %>
+    <%= f.field :unallocated_balance, { :value => number_to_currency(account_data.unallocated_balance) } %>
+    <%= f.field :due_date, { :value => (account_data.due_date.short_date rescue nil) } %>
+    <%= f.field :period, { :value => Period[account_data.period].name } %>
+    <%= f.field :account_number %>
+    <%= f.field :amount, { :value => number_to_currency(account_data.amount) } %>
+  <% end %>
 </div>

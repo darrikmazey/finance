@@ -1,39 +1,14 @@
 <div class="item_data work_item">
-	<div class="heading"><%= work_item_data.class.name.titleize %> : <%= work_item_data.start_time.short_date + ' ' + work_item_data.start_time.short_time %></div>
-
-	<div class="content">
-		<div class="column first">
-			<div class="field project">
-				<div class="field_name">Project:</div>
-				<div class="field_value"><%=h work_item_data.project.name rescue 'none' %></div>
-			</div>
-
-			<div class="field rate">
-				<div class="field_name">Rate:</div>
-				<div class="field_value"><%=h work_item_data.rate.name %></div>
-			</div>
-
-			<div class="field invoice">
-				<div class="field_name">Invoice:</div>
-				<div class="field_value"><%= link_to(work_item_data.invoice.identifier, work_item_data.invoice) rescue 'none' %></div>
-			</div>
-
-			<div class="field start_date">
-				<div class="field_name">Start date:</div>
-				<div class="field_value"><%=h work_item_data.start_time.short_date %></div>
-			</div>
-
-			<div class="field start_time">
-				<div class="field_name">Start time:</div>
-				<div class="field_value"><%=h work_item_data.start_time.short_time %></div>
-			</div>
-
-			<div class="field end_time">
-				<div class="field_name">End time:</div>
-				<div class="field_value"><%=h work_item_data.end_time.short_time rescue 'open' %></div>
-			</div>
-		</div>
-	</div>
+  <% custom_fields_for work_item_data, { :header => "#{work_item_data.start_time.short_date} #{work_item_data.start_time.short_time}" } do |f| %>
+    <div class="column first">
+      <%= f.field :project, { :value => (work_item_data.project.name rescue 'none') } %>
+      <%= f.field :rate, { :function => :name } %>
+      <%= f.field :invoice, { :value => (link_to(work_item_data.invoice.identifier, work_item_data.invoice) rescue 'none') } %>
+      <%= f.field :start_date, { :value => work_item_data.start_time.short_date } %>
+      <%= f.field :start_time, { :value => work_item_data.start_time.short_time } %>
+      <%= f.field :end_time, { :value => (work_item_data.end_time.short_time rescue 'open') } %>
+    </div>
+  <% end %>
 </div>
 
 <%= link_to 'Edit', edit_work_item_path(work_item_data) %> |

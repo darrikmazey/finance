@@ -1,46 +1,14 @@
 <div class="item_data invoice">
-	<div class="heading"><%= invoice_data.class.name.titleize %> : <%= invoice_data.identifier %></div>
-
-	<div class="content">
-		<div class="column first">
-			<div class="field identifier">
-				<div class="field_name">Identifier:</div>
-				<div class="field_value"><%=h @invoice.identifier %></div>
-			</div>
-
-			<div class="field client">
-				<div class="field_name">Client:</div>
-				<div class="field_value"<%= link_to @invoice.client.name, client_url(@invoice.client) %></div>
-			</div>
-
-			<div class="field project">
-				<div class="field_name">Project:</div>
-				<div class="field_value"><%= link_to @invoice.project.name, project_url(@invoice.project) %></div>
-			</div>
-
-			<div class="field created_at">
-				<div class="field_name">Created at:</div>
-				<div class="field_value"><%=h @invoice.created_at.short_date rescue '&nbsp;' %></div>
-			</div>
-
-			<div class="field billed_at">
-				<div class="field_name">Billed at:</div>
-				<div class="field_value"><%=h @invoice.billed_at.short_date rescue '&nbsp;' %></div>
-			</div>
-
-			<div class="field paid_at">
-				<div class="field_name">Paid at:</div>
-				<div class="field_value"><%=h @invoice.paid_at.short_date rescue '&nbsp;' %></div>
-			</div>
-
-			<div class="field hours">
-				<div class="field_name">Hours:</div>
-				<div class="field_value"><%=h "%0.02f" % @invoice.hours %></div>
-			</div>
-
-			<div class="field total">
-				<div class="field_name">Total:</div>
-				<div class="field_value"><%=h number_to_currency(@invoice.total) %></div>
-			</div>
-		</div>
-	</div>
+  <% custom_fields_for invoice_data, { :header => :identifier } do |f| %>
+    <div class="column first">
+      <%= f.field :identifier %>
+      <%= f.field :client, { :value => link_to(invoice_data.client.name, client_url(invoice_data.client)) } %>
+      <%= f.field :project, { :value => link_to(invoice_data.project.name, project_url(invoice_data.project)) } %>
+      <%= f.field :created_at, { :value => (invoice_data.created_at.short_date rescue nil) } %>
+      <%= f.field :billed_at, { :value => (invoice_data.billed_at.short_date rescue nil) } %>
+      <%= f.field :paid_at, { :value => (invoice_data.paid_at.short_date rescue nil) } %>
+      <%= f.field :hours, { :value => ("%0.02f" % invoice_data.hours) } %>
+      <%= f.field :total, { :value => number_to_currency(invoice_data.total) } %>
+    </div>
+  <% end %>
+</div>

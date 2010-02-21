@@ -1,27 +1,10 @@
 <div class="item_data project">
-	<div class="heading"><%= project_data.class.name.titleize %> : <%= project_data.name %></div>
-
-	<div class="content">
+  <% custom_fields_for project_data do |f| %>
 		<div class="column first">
-			<div class="field name">
-				<div class="field_name">Name:</div>
-				<div class="field_value"><%=h project_data.name %></div>
-			</div>
-
-			<div class="field description">
-				<div class="field_name">Description:</div>
-				<div class="field_value"><%=h project_data.description %></div>
-			</div>
-
-			<div class="field base_rate">
-				<div class="field_name">Base rate:</div>
-				<div class="field_value"><%=h number_to_currency(project_data.base_rate) %></div>
-			</div>
-
-			<div class="field client">
-				<div class="field_name">Client:</div>
-				<div class="field_value"><%= link_to project_data.client.name, client_url(project_data.client) %></div>
-			</div>
-		</div>
-	</div>
+      <%= f.field :name %>
+      <%= f.field :description %>
+      <%= f.field :base_rate, { :value => number_to_currency(project_data.base_rate) } %>
+      <%= f.field :client, { :value => link_to(project_data.client.name, client_url(project_data.client)) } %>
+    </div>
+  <% end %>
 </div>
