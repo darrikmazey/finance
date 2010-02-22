@@ -2,10 +2,15 @@ class User < ActiveRecord::Base
 	has_many :accounts
 	has_many :clients
 	has_many :invoices
-	has_many :projects
 	has_many :work_items
 	has_many :rates, :through => :projects
 	has_many :transactions, :through => :invoices
+
+  has_many :account_group_users
+  has_many :account_groups, :through => :account_group_users
+
+  has_many :project_users
+	has_many :projects, :through => :project_users
 
 	validates_presence_of :hashed_password
 	validates_presence_of :salt
