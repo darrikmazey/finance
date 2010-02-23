@@ -18,6 +18,22 @@ class ApplicationController < ActionController::Base
 
 	def load_user
 		@current_user = User.find(session[:user_id]) rescue nil
+    if @current_user
+      # create a hash of options, start with the defaults, merge in session and then merg in params
+      h = @current_user.user_options
+      h.merge!(session[:user_option]) if session[:user_option]
+
+      # stringify the params user options
+      p = {}
+      params[:user_option].each { |k, v| p[k.to_s] = v } if params[:user_option]
+      h.merge!(p) if p
+      @user_options = UserOption.new(h)
+
+      # save this in the session
+      session[:user_option] = @user_options.attributes
+
+      render :partial => 'account_groups/no_account_groups', :layout => true  unless @user_options.account_group
+    end
 	end
 
 	def require_user

@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :account_group_users
   has_many :account_groups, :through => :account_group_users
 
+  belongs_to :account_group
+
   has_many :project_users
 	has_many :projects, :through => :project_users
 
@@ -19,6 +21,16 @@ class User < ActiveRecord::Base
 
 	attr_accessor :password_confirmation
 	validates_confirmation_of :password
+
+  def user_options
+    ag = self.account_group || self.account_groups.first || nil
+    ag = nil unless ag
+    ag = ag.id if ag
+    return { 
+        "account_group_id" => ag,
+        "user_id" => self.id 
+      }
+  end
 
 	def last_project
 		wi = self.last_work_item

@@ -2,8 +2,7 @@
 
 <% form_builder_for(@user) do |f| %>
     <%= f.text_field :username %>
-    <%= f.text_field :hashed_password %>
-    <%= f.text_field :salt %>
+    <%= f.collection_select :account_group_id, @user.account_groups, :id, :name %>
     <%= f.datetime_select :last_login %>
     <%= f.submit 'Update' %>
 <% end %>
