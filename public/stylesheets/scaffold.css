@@ -129,9 +129,7 @@ a:hover { color: #fff; text-decoration: underline; }
 }
 
 .list .list_item {
-	padding-top: 4px;
-	padding-bottom: 4px;
-	padding-left: 4px;
+	padding: 4px;
 	color: #bbb;
 }
 
@@ -262,9 +260,23 @@ a:hover { color: #fff; text-decoration: underline; }
 	width: 8%;
 }
 
+.list.work_items .field.comments {
+	width: 7%;
+}
+
 .list.work_items .field.start_time,
 .list.work_items .field.end_time {
 	width: 5%;
+}
+
+.list.work_items .field.hours,
+.list.work_items .field.subtotal {
+	width: 7%;
+}
+
+.list.work_items .links .edit,
+.list.work_items .links .show {
+	width: 17%;
 }
 
 .list.accounts .field.type {
@@ -303,8 +315,7 @@ a:hover { color: #fff; text-decoration: underline; }
 
 .list.work_items .field.hours,
 .list.work_items .field.subtotal {
-	text-align: right;
-	padding-right: 10px;
+	text-align: center;
 }
 
 .decr_transaction .field.credit_amount.non_zero,
