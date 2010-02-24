@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-	has_many :accounts
 	has_many :clients
 	has_many :invoices
 	has_many :work_items
@@ -26,10 +25,19 @@ class User < ActiveRecord::Base
     ag = self.account_group || self.account_groups.first || nil
     ag = nil unless ag
     ag = ag.id if ag
+    ag = self.account_groups.first unless self.account_groups.include?(ag)
     return { 
         "account_group_id" => ag,
         "user_id" => self.id 
       }
+  end
+
+  def accounts
+    if @user_option
+      return @user_option.account_group.accounts
+    else
+      return account_group.accounts
+    end
   end
 
 	def last_project

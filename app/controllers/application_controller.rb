@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :password
 	
 	before_filter :load_user
 	before_filter :preload
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
 	def load_user
 		@current_user = User.find(session[:user_id]) rescue nil
-    if @current_user
+    if @current_user && (controller_name != "user" && action_name != "logout")
       # create a hash of options, start with the defaults, merge in session and then merg in params
       h = @current_user.user_options
       h.merge!(session[:user_option]) if session[:user_option]

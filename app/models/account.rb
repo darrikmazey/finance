@@ -6,6 +6,8 @@ class Account < ActiveRecord::Base
 	named_scope :root, { :conditions => { :parent_id => nil } }
 	named_scope :of_type, lambda { |t| { :conditions => { :type => (t.to_s + '_account').camelize } } }
 
+  belongs_to :account_group
+
 	def self.model_name
 		name = 'account'
 		name.instance_eval do
@@ -101,12 +103,14 @@ class Account < ActiveRecord::Base
 	end
 
 	def child_amount
-		if credit_increasing?
-			return children.inject(0) { |s, v| s += Period.convert(v.credit_amount, v.period, self.period) }
-		end
-		if debit_increasing?
-			return children.inject(0) { |s, v| s += Period.convert(v.debit_amount, v.period, self.period) }
-		end
+    if self.period
+      if credit_increasing?
+        return children.inject(0) { |s, v| s += Period.convert(v.credit_amount, v.period, self.period) }
+      end
+      if debit_increasing?
+        return children.inject(0) { |s, v| s += Period.convert(v.debit_amount, v.period, self.period) }
+      end
+    end
 		0
 	end
 
