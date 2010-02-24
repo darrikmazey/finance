@@ -38,14 +38,8 @@ module ApplicationHelper
     form_for(record_or_name_or_array, *(args << options.merge(:builder => CustomFormBuilder)), &proc)
   end
 
-  def custom_fields_for(obj, options = {})
-    header = options.delete(:header) || :name
-    header = obj.send(header) if header.is_a?(Symbol)
-    options[:builder] = FinanceFieldBuilder unless options[:builder]
-    
-    concat("<div class=\"heading\">#{obj.class.name.titleize} : #{header}</div>
-      <div class=\"content\">")
-    yield CustomFields.new(obj, options)
-    concat("</div>")
+  def my_custom_fields_for(obj, options = {}, &block)
+    options[:builder] = FinanceFieldBuilder.new unless options[:builder]
+    custom_fields_for(obj, options, &proc)
   end
 end

@@ -1,5 +1,5 @@
 <div class="item_data work_item">
-  <% custom_fields_for work_item_data, { :header => "#{work_item_data.start_time.short_date} #{work_item_data.start_time.short_time}" } do |f| %>
+  <% my_custom_fields_for work_item_data, { :header => "#{work_item_data.start_time.short_date} #{work_item_data.start_time.short_time}" } do |f| %>
     <div class="column first">
       <%= f.field :project, { :value => (work_item_data.project.name rescue 'none') } %>
       <%= f.field :rate, { :function => :name } %>

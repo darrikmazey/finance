@@ -1,5 +1,5 @@
 <div class="item_data invoice">
-  <% custom_fields_for invoice_data, { :header => :identifier } do |f| %>
+  <% my_custom_fields_for invoice_data, { :header => :identifier } do |f| %>
     <div class="column first">
       <%= f.field :identifier %>
       <%= f.field :client, { :value => link_to(invoice_data.client.name, client_url(invoice_data.client)) } %>

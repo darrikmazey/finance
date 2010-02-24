@@ -1,5 +1,5 @@
 <div class="item_data transaction">
-  <% custom_fields_for transaction_data, { :header => :ref } do |f| %>
+  <% my_custom_fields_for transaction_data, { :header => :ref } do |f| %>
     <div class="column first">
       <%= f.field :ref %>
       <%= f.field :description %>

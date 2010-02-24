@@ -1,5 +1,5 @@
 <div class="item_data client">
-  <% custom_fields_for client_data do |f| %>
+  <% my_custom_fields_for client_data do |f| %>
 		<div class="column first">
       <%= f.field :name %>
       <%= f.field :account, { :value => (link_to(client_data.account.name, account_url(client_data.account)) rescue 'none') } %>
