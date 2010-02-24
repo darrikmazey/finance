@@ -1,5 +1,5 @@
 <% if @user_options.account_group %>
-  <%= "Account group - #{@user_options.account_group.name}" %>
+  <%= "#{@user_options.account_group.description || @user_options.account_group.name}" %>
   <% form_for(@user_options, :url => '/') do |f| %>
     <%= f.collection_select :account_group_id, @current_user.account_groups, :id, :name %>
     <%= f.submit "Change Account Group" %>
