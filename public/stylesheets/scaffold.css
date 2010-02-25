@@ -36,6 +36,8 @@ a:hover { color: #fff; text-decoration: underline; }
 
 .menu .link {
 	display: inline-block;
+  padding-right: 5px;
+  border-right: 1px solid gray;
 }
 
 .fieldWithErrors {
