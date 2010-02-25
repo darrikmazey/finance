@@ -33,11 +33,10 @@ class User < ActiveRecord::Base
   end
 
   def accounts
-    if @user_option
-      return @user_option.account_group.accounts
-    else
-      return account_group.accounts
-    end
+    ag = account_group
+    ag = @user_options.account_group if @user_options
+    ag = account_groups.first unless self.account_groups.include?(ag) 
+    return ag.accounts
   end
 
 	def last_project
