@@ -1,0 +1,9 @@
+<div class="list_item account_group">
+	<div class="field first name"><%=h account_group_item.name %></div>
+	<div class="field description"><%=h account_group_item.description %></div>
+	<div class="links">
+		<div class="link show"><%= link_to 'Show', account_group_item %></div>
+		<div class="link edit"><%= link_to 'Edit', edit_account_group_path(account_group_item) %></div>
+		<div class="link destroy"><%= link_to 'Destroy', account_group_item, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

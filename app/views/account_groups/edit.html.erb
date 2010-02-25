@@ -1,0 +1,10 @@
+<h1><%= @account_group.new_record? ? 'New' : 'Editing' -%> Account Group</h1>
+
+<% form_builder_for(@account_group) do |f| %>
+  <%= f.text_field :name %>
+  <%= f.text_field :description %>
+  <%= f.submit 'Update' %>
+<% end %>
+
+<%= link_to 'Show', @account_group %> |
+<%= link_to 'Back', account_groups_path %>
