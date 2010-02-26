@@ -5,8 +5,8 @@
       <%= f.field :description %>
       <%= f.field :credit_amount, { :value => number_to_currency(transaction_data.credit_amount) } %>
       <%= f.field :debit_amount, { :value => number_to_currency(transaction_data.debit_amount) } %>
-      <%= f.field :trans_date, { :label => "Transaction Date", :value => transaction_data.trans_date.short_date } %>
-      <%= f.field :trans_date, { :label => "Transaction Time", :value => transaction_data.trans_date.short_time } %>
+      <%= f.field :trans_date, { :label => "Transaction Date", :value => (transaction_data.trans_date.short_date rescue nil) } %>
+      <%= f.field :trans_date, { :label => "Transaction Time", :value => (transaction_data.trans_date.short_time rescue nil)} %>
     </div>
   <% end %>
 </div>
