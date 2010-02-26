@@ -2,7 +2,11 @@
 
 <% form_builder_for(@user) do |f| %>
     <%= f.text_field :username %>
-    <%= f.collection_select :account_group_id, @user.account_groups, :id, :name %>
+    <% if !@user.account_groups.empty? %>
+      <%= f.collection_select :account_group_id, @user.account_groups, :id, :name %>
+    <% end %>
+    <%= f.password_field :password %>
+    <%= f.password_field :password_confirmation %>
     <%= f.select :template, options_for_select(UserOption.templates, @user.template) %>
     <%= f.datetime_select :last_login %>
     <%= f.submit 'Update' %>

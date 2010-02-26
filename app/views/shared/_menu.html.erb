@@ -11,7 +11,7 @@
 	<div class="link"><%= link_to 'users', users_url %></div>
 	<div class="link logout">
 		<% if !@current_user.nil? -%>
-			<%= link_to 'logout', logout_users_url %>
+			<%= link_to "logout [#{@current_user.username}]", logout_users_url %>
 		<% else -%>
 			<%= link_to 'login', login_users_url %>
 		<% end -%>
