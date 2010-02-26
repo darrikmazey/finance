@@ -7,4 +7,13 @@
     <%= f.submit 'Update' %>
 <% end %>
 
+<% if @current_user == @user %>
+  <h2>User Options</h2>
+  <% form_builder_for(@user_options, :url => '/') do |f| %>
+    <%= f.collection_select :account_group_id, @current_user.account_groups, :id, :name %>
+    <%= f.select :template, options_for_select(UserOption.templates, @user_options.template) %>
+    <%= f.submit 'Change' %>
+  <% end %>
+<% end %>
+
 <%= link_to 'Back', users_path %>
