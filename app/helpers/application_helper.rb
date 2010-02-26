@@ -42,4 +42,8 @@ module ApplicationHelper
     options[:builder] = FinanceFieldBuilder.new unless options[:builder]
     custom_fields_for(obj, options, &proc)
   end
+
+  def admin?
+    logged_in? && @current_user.admin?
+  end
 end

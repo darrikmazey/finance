@@ -1,4 +1,4 @@
-<% if @user_options.account_group %>
+<% if logged_in? && @user_options.account_group %>
   <%= "#{@user_options.account_group.description || @user_options.account_group.name}" %>
   <% if @current_user.account_groups.length > 1 %>
     <% form_for(@user_options, :url => '/') do |f| %>
@@ -6,6 +6,4 @@
       <%= f.submit "Change Account Group" %>
     <% end %>
   <% end %>
-<% else %>
-  Not part of any account groups!
 <% end %>

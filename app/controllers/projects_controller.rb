@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 	
-	before_filter :require_user
+	before_filter :login_required
 
   # GET /projects
   # GET /projects.xml

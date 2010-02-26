@@ -1,14 +1,16 @@
 <h1><%= @user.new_record? ? 'New' : 'Editing' -%> User</h1>
 
 <% form_builder_for(@user) do |f| %>
-    <%= f.text_field :username %>
+    <%= f.text_field :name %>
     <% if !@user.account_groups.empty? %>
       <%= f.collection_select :account_group_id, @user.account_groups, :id, :name %>
+    <% end %>
+    <% if @current_user == @user %> 
+      <%= f.password_field :old_password %>
     <% end %>
     <%= f.password_field :password %>
     <%= f.password_field :password_confirmation %>
     <%= f.select :template, options_for_select(UserOption.templates, @user.template) %>
-    <%= f.datetime_select :last_login %>
     <%= f.submit 'Update' %>
 <% end %>
 

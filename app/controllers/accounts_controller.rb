@@ -1,6 +1,6 @@
 class AccountsController < ApplicationController
 	
-	before_filter :require_user
+  before_filter :login_required
 
   # GET /accounts
   # GET /accounts.xml

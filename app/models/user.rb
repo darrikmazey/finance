@@ -1,5 +1,31 @@
+require 'digest/sha1'
+
 class User < ActiveRecord::Base
-	has_many :clients
+
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
+  include Authorization::StatefulRoles
+
+  validates_presence_of     :login
+  validates_length_of       :login,    :within => 3..40
+  validates_uniqueness_of   :login
+  validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
+   
+  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  validates_length_of       :name,     :maximum => 100
+
+  validates_presence_of     :email
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_uniqueness_of   :email
+  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+
+  # HACK HACK HACK -- how to do attr_accessible from here?
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :login, :email, :name, :password, :password_confirmation, :old_password, :template, :account_group_id
+
+  has_many :clients
 	has_many :invoices
 	has_many :work_items
 	has_many :rates, :through => :projects
@@ -13,12 +39,10 @@ class User < ActiveRecord::Base
   has_many :project_users
 	has_many :projects, :through => :project_users
 
-	validates_presence_of :hashed_password
 	validates_presence_of :salt
-	validates_presence_of :username
-	validates_uniqueness_of :username
 
 	attr_accessor :password_confirmation
+  attr_accessor :old_password
 	validates_confirmation_of :password
 
   def user_options
@@ -66,10 +90,6 @@ class User < ActiveRecord::Base
 		WorkItem.find :first, :conditions => { :user_id => self.id }, :order => 'start_time DESC'
 	end
 
-#	def transactions
-#		accounts.map { |a| a.transactions }.flatten.uniq
-#	end
-
 	def asset_accounts
 		accounts_of_type(AssetAccount)
 	end
@@ -102,39 +122,25 @@ class User < ActiveRecord::Base
 		capital_accounts.inject(0) { |s,a| s += a.balance }
 	end
 
-	def password
-		@password
-	end
+  def self.authenticate(login, password)
+    return nil if login.blank? || password.blank?
+    u = find_in_state :first, :active, :conditions => {:login => login.downcase} # need to get the salt
+    u && u.authenticated?(password) ? u : nil
+  end
 
-	def password=(p)
-		@password=p
-		return if p.blank?
-		create_new_salt
-		self.hashed_password = User.encrypted_password(self.password, self.salt)
-	end
+  def login=(value)
+    write_attribute :login, (value ? value.downcase : nil)
+  end
 
-	def self.authenticate(name, pass)
-		return nil if name.blank?
-		return nil if pass.blank?
-		d = self.find_by_username(name)
-		if d
-			expected_password = encrypted_password(pass, d.salt)
-			if d.hashed_password != expected_password
-				d = nil
-			end
-		end
-		d
-	end
+  def email=(value)
+    write_attribute :email, (value ? value.downcase : nil)
+  end
 
-	private
+  protected
 
-	def self.encrypted_password(p, s)
-		plaintext = 'messerskandh' + p + 'wouldyoupleaseshutthehellup' + s
-		Digest::SHA256.hexdigest(plaintext)
-	end
-
-	def create_new_salt
-		self.salt = rand.to_s + self.object_id.to_s + rand.to_s
-	end
+    def make_activation_code
+      self.deleted_at = nil
+      self.activation_code = self.class.make_token
+    end
 
 end

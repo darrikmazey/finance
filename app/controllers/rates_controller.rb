@@ -1,6 +1,6 @@
 class RatesController < ApplicationController
 
-	before_filter :require_user
+	before_filter :login_required
 
   # GET /rates
   # GET /rates.xml

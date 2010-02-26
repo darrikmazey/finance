@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
 	
-	before_filter :require_user
+	before_filter :login_required
 
   # GET /clients
   # GET /clients.xml
