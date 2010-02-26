@@ -28,7 +28,8 @@ class User < ActiveRecord::Base
     ag = self.account_groups.first unless self.account_groups.include?(ag)
     return { 
         "account_group_id" => ag,
-        "user_id" => self.id 
+        "user_id" => self.id,
+        "template" => self.template
       }
   end
 
