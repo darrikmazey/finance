@@ -1,3 +1,5 @@
+require 'custom_fields'
+
 class FinanceFieldBuilder < Dmt::CustomFields::CustomFieldsView
   def field(name, value)
     "<div class=\"field #{name.downcase}\">
