@@ -1,0 +1,169 @@
+body { background-color: #000; color: #fff; }
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   16px;
+  line-height: 20px;
+}
+.debug { color: #ccf }
+pre {
+  background-color: #eee;
+  font-size: 11px;
+}
+a { color: #aaa }
+a:visited { color: #aaa }
+a:hover { color: #fff }
+.page_header .content { font-size: 1.2em }
+.menu .link { border-color: gray; }
+.fieldWithErrors { background-color: red }
+#errorExplanation {
+  border-color: red;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  font-size: 12px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p { color: #333 }
+#errorExplanation ul li { font-size: 12px }
+
+.embedded_form {
+	border-color: #ccc;
+}
+
+.list .heading {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.list .content { border-color: #ccc }
+
+.list .header {
+	background-color: #444;
+	font-weight: bold;
+}
+
+.list .list_item { color: #bbb }
+.list .list_item:hover { color: #fff }
+.list_item.root { background-color: #151515 }
+.list_item.root .field.name { font-weight: bold }
+.list_item.root .field.name a { color: #fff }
+.list_item .field.color_code { border-color: #ccc }
+.list_item.asset_account .field.color_code { background-color: #131 }
+.list_item.bank_account .field.color_code { background-color: #151 }
+.list_item.capital_account .field.color_code { background-color: #235 }
+.list_item.liability_account .field.color_code { background-color: #411 }
+.list_item.expense_account .field.color_code { background-color: #311 }
+.list_item.overdue_account .field.due_date { background-color: #311 }
+
+.list_item.liability_account.negative .field.balance,
+.list_item.equity_account.positive .field.balance,
+.list_item.asset_account.positive .field.balance {
+	background-color: #131;
+}
+
+.list_item.liability_account.positive .field.balance,
+.list_item.equity_account.negative .field.balance,
+.list_item.asset_account.negative .field.balance {
+	background-color: #311;
+}
+
+.transaction_links .link { font-size: 1.4em }
+
+.decr_transaction .field.credit_amount.non_zero,
+.incr_transaction .field.debit_amount.non_zero {
+	background-color: #131;
+}
+
+.decr_transaction .field.debit_amount.non_zero,
+.incr_transaction .field.credit_amount.non_zero {
+	background-color: #311;
+}
+
+.transaction .field.debit_amount.zero,
+.transaction .field.credit_amount.zero {
+	background-color: #431;
+}
+
+.account_transactions .incr_transaction .field.credit_amount,
+.account_transactions .incr_transaction .field.debit_amount,
+.client_transactions .incr_transaction .field.credit_amount,
+.client_transactions .incr_transaction .field.debit_amount,
+.invoice_transactions .incr_transaction .field.credit_amount,
+.invoice_transactions .incr_transaction .field.debit_amount,
+.cred_tran_transaction .field.credit_amount,
+.deb_tran_transaction .field.debit_amount {
+	background-color: #131;
+}
+
+.account_transactions .decr_transaction .field.debit_amount,
+.account_transactions .decr_transaction .field.credit_amount,
+.client_transactions .decr_transaction .field.debit_amount,
+.client_transactions .decr_transaction .field.credit_amount,
+.invoice_transactions .decr_transaction .field.debit_amount,
+.invoice_transactions .decr_transaction .field.credit_amount,
+.cred_tran_transaction .field.debit_amount,
+.deb_tran_transaction .field.credit_amount {
+	background-color: #311;
+}
+
+.edit_item .heading,
+.item_data .heading {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.edit_item .content,
+.item_data .content {
+	border-color: #ccc;
+}
+
+.edit_item .field .field_name,
+.item_data .field .field_name {
+	font-weight: bold;
+}
+
+.edit_item .field .field_value,
+.item_data .field .field_value {
+	color: #ccc;
+}
+
+.debit_transaction .field.amount {
+	background-color: #131;
+}
+
+.credit_transaction .field.amount {
+	background-color: #311;
+}
+
+.bank_summary .field.positive,
+.equity_summary .field.positive {
+	background-color: #131;
+}
+
+.bank_summary .field.negative,
+.equity_summary .field.negative {
+	background-color: #311;
+}
+
+.form_line input,
+.form_line textarea {
+  border-color: #888;
+  font-size: 90%;
+}
+
+.form_line input:focus,
+.form_line textarea:focus {
+  background-color: lightyellow;
+}
+
+.form_line .error {
+  color: red;
+}
+
+.form_line .fieldWithErrors textarea,
+.form_line .fieldWithErrors input {
+  border-color: red;
+}
