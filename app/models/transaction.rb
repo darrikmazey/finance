@@ -13,6 +13,10 @@ class Transaction < ActiveRecord::Base
 		u.accounts.collect { |a| a.transactions }.flatten.uniq.sort { |a,b| b.trans_date <=> a.trans_date }
 	end
 
+	def self.all_for_account_group(ag)
+		ag.accounts.collect { |a| a.transactions }.flatten.uniq.sort { |a,b| b.trans_date <=> a.trans_date }
+	end
+
 	def self.model_name
 		name = 'transaction'
 		name.instance_eval do

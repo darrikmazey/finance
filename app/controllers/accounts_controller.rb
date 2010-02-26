@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = @current_user.accounts.root
+    @accounts = @user_options.account_group.accounts.root
 		if params[:period]
 			@period = Period[params[:period].to_i]
 		else
