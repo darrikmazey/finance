@@ -1,6 +1,6 @@
 <%= render :partial => 'project_data', :object => @project %>
 
-<%= link_to edit_image_tag(:large), edit_project_path(@project) %> |
+<%= link_to edit_image_tag(:large), edit_project_path(@project) %>
 <%= link_to back_image_tag(:large), projects_path %>
 
 <% if @open_work_items.size > 0 -%>

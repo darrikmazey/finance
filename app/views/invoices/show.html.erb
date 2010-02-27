@@ -1,6 +1,6 @@
 <%= render :partial => 'invoice_data', :object => @invoice %>
 
-<%= link_to edit_image_tag(:large), edit_invoice_path(@invoice) %> |
+<%= link_to edit_image_tag(:large), edit_invoice_path(@invoice) %>
 <%= link_to back_image_tag(:large), invoices_path %>
 
 <% if @invoice.work_items.size > 0 -%>
