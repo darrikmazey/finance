@@ -4,8 +4,8 @@
 	<div class="field base_rate"><%=h number_to_currency(project.base_rate) %></div>
 	<div class="field client"><%= link_to project.client.name, client_url(project.client) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', project %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_project_path(project) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', project, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link show"><%= link_to show_image_tag, project %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_project_path(project) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, project, :confirm => 'Are you sure?', :method => :delete %></div>
 	</div>
 </div>

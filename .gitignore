@@ -2,3 +2,5 @@ log
 tmp
 schema.rb
 *.swp
+config/initializers/site_keys.rb
+.todo

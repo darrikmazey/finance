@@ -1,8 +1,8 @@
 <div class="list_item user">
   <div class="field first username"><%=h user.username %></div>
   <div class="links">
-    <div class="link show"><%= link_to 'Show', user %></div>
-    <div class="link edit"><%= link_to 'Edit', edit_user_path(user) %></div>
-    <div class="link destroy"><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></div>
+    <div class="link show"><%= link_to show_image_tag, user %></div>
+    <div class="link edit"><%= link_to edit_image_tag, edit_user_path(user) %></div>
+    <div class="link destroy"><%= link_to delete_image_tag, user, :confirm => 'Are you sure?', :method => :delete %></div>
   </div>
 </div>

@@ -120,8 +120,9 @@ a:hover { text-decoration: underline; }
 .list_item .links .link {
 	display: inline-block;
 	text-align: center;
-	width: 27%;
 }
+
+.list_item .links .link IMG { border: 0 }
 
 .list_item .transaction_links {
 	width: 10%;

@@ -8,9 +8,9 @@
 	<div class="field hours"><%= "%0.02f" % work_item.hours %></div>
 	<div class="field subtotal"><%= number_to_currency(work_item.subtotal) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', work_item %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_work_item_path(work_item) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', work_item, :confirm => 'Are you sure?', :method => :delete %></div>
-		<div class="link comment"><%= link_to 'Comment', new_work_item_comment_url(work_item) %></div>
+		<div class="link show"><%= link_to show_image_tag, work_item %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_work_item_path(work_item) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, work_item, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link comment"><%= link_to comment_image_tag, new_work_item_comment_url(work_item) %></div>
 	</div>
 </div>
