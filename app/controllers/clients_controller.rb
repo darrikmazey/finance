@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.xml
   def index
-    @clients = @current_user.clients
+    @clients = @user_options.account_group.clients
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.xml
   def show
-    @client = @current_user.clients.find(params[:id]) rescue nil
+    @client = @user_options.account_group.clients.find(params[:id]) rescue nil
 
 		if @client.nil?
 			redirect_to clients_url
@@ -47,7 +47,7 @@ class ClientsController < ApplicationController
   # GET /clients/1/edit
   def edit
     @client = Client.find(params[:id])
-		@client_accounts = @current_user.accounts
+		@client_accounts = @user_options.account_group.client_accounts
   end
 
   # POST /clients
