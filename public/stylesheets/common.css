@@ -230,6 +230,10 @@ a:hover { text-decoration: underline; }
   width: 30%;
 }
 
+.list.clients .field.account {
+  width: 25%;
+}
+
 .edit_item .content,
 .item_data .content {
 	border: 1px solid;
