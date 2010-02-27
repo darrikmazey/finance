@@ -174,11 +174,6 @@ a:hover { text-decoration: underline; }
 	width: 7%;
 }
 
-.list.work_items .links .edit,
-.list.work_items .links .show {
-	width: 17%;
-}
-
 .list.accounts .field.type {
 	width: 5%;
 }
