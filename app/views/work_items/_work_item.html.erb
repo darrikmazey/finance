@@ -1,7 +1,7 @@
 <div class="list_item work_item">
 	<div class="field first date"><%=h work_item.start_time.short_date rescue '&nbsp;' %></div>
 	<div class="field start_time"><%=h work_item.start_time.short_time rescue '&nbsp;' %></div>
-	<div class="field end_time"><%= link_to(work_item.end_time.short_time, open_work_item_url(work_item), :method => :post) rescue link_to('close', close_work_item_url(work_item), :method => :post) %></div>
+	<div class="field end_time"><%= link_to(work_item.end_time.short_time, open_work_item_url(work_item), :method => :post) rescue button_link_to('close', close_work_item_url(work_item), :method => :post) %></div>
 	<div class="field project"><%= link_to work_item.project.name, work_item.project rescue 'none' %></div>
 	<div class="field rate"><%= link_to work_item.rate.name, work_item.rate rescue 'none' %></div>
 	<div class="field comments"><%= work_item.comments.size %></div>

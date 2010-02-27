@@ -167,3 +167,17 @@ a:hover { color: #000 }
 .form_line .fieldWithErrors input {
   border-color: red;
 }
+.button_link {
+  border-color: #444;
+  background-color: #777;
+}
+.button_link a {
+  color: #111;
+}
+.button_link:hover a, {
+  color: #444;
+}
+.button_link a:hover {
+  color: #444;
+}
+}

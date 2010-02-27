@@ -46,4 +46,8 @@ module ApplicationHelper
   def admin?
     logged_in? && @current_user.admin?
   end
+
+  def button_link_to(text, url, options = {})
+    "<div class=\"button_link\">#{link_to text, url, options}</div>"
+  end
 end
