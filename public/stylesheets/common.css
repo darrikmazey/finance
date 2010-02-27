@@ -217,6 +217,19 @@ a:hover { text-decoration: underline; }
 .list.work_items .field.subtotal {
 	text-align: center;
 }
+
+.list.users .field.email {
+  width: 20%;
+}
+
+.list.account_groups .field.description {
+  width: 30%;
+}
+
+.list.projects .field.description {
+  width: 30%;
+}
+
 .edit_item .content,
 .item_data .content {
 	border: 1px solid;
