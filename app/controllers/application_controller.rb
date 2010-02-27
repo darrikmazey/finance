@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 	def load_user
     @current_user = current_user
     if @current_user && (controller_name != "user" && action_name != "logout")
-      # create a hash of options, start with the defaults, merge in session and then merg in params
+      # create a hash of options, start with the defaults, merge in session and then merge in params
       h = @current_user.user_options
       h.merge!(session[:user_option]) if session[:user_option]
 
@@ -42,7 +42,8 @@ class ApplicationController < ActionController::Base
       # save this in the session
       session[:user_option] = @user_options.attributes
 
-      render :partial => 'account_groups/no_account_groups', :layout => true  unless @user_options.account_group
+      render :partial => 'account_groups/no_account_groups', :layout => true unless @user_options.account_group
+      redirect_to :back if p["account_group_id"]
     end
 	end
 
