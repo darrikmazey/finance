@@ -1,5 +1,7 @@
 <div class="list_item user">
-  <div class="field first username"><%=h user.username %></div>
+  <div class="field first login"><%=h user.login %></div>
+  <div class="field name"><%=h user.name %></div>
+  <div class="field email"><%=h user.email %></div>
   <div class="links">
     <div class="link show"><%= link_to show_image_tag, user %></div>
     <div class="link edit"><%= link_to edit_image_tag, edit_user_path(user) %></div>
