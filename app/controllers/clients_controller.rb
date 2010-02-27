@@ -47,7 +47,8 @@ class ClientsController < ApplicationController
   # GET /clients/1/edit
   def edit
     @client = Client.find(params[:id])
-		@client_accounts = @user_options.account_group.client_accounts
+    redirect_to clients_path unless @user_options.account_group.clients.include?(@client)
+		@client_accounts = @user_options.account_group.accounts
   end
 
   # POST /clients

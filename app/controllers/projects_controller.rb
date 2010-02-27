@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = @current_user.projects
+    @projects = @user_options.account_group.projects
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = @current_user.projects.find(params[:id]) rescue nil
+    @project = Project.find(params[:id]) rescue nil
+    @project = nil unless @user_options.account_group.projects.include?(@project)
 		if @project.nil?
 			redirect_to projects_url
 			return
@@ -34,7 +35,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
-		@clients = @current_user.clients
+		@clients = @user_options.account_group.clients
 
     respond_to do |format|
       format.html { render :action => 'edit' }
@@ -45,7 +46,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
-    @clients = @current_user.clients
+    redirect_to projects_path unless @user_options.account_group.projects.include?(@project)
+    @clients = @user_options.account_group.clients
   end
 
   # POST /projects

@@ -3,14 +3,10 @@ class AccountGroup < ActiveRecord::Base
 
   has_many :account_group_users
   has_many :users, :through => :account_group_users
-
   has_many :accounts
+  has_many :clients, :through => :accounts
 
-  def clients
-    accounts.collect { |account| account.clients }.flatten.uniq
-  end
-
-  def client_accounts
-    clients.collect { |client| client.account }.flatten.uniq
+  def projects
+    clients.collect { |client| client.projects }.flatten.uniq
   end
 end
