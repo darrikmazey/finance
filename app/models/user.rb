@@ -83,6 +83,19 @@ class User < ActiveRecord::Base
     }.compact.uniq
   end
 
+  # all of the clients for an account_group
+  def clients_for_account_group(_account_group = nil)
+    return [] unless _account_group
+
+    # all clients if admin
+    return _account_group.clients if admin_account_groups.include?(_account_group)
+
+    # only clients for projects user is worker of
+    return _account_group.projects.collect { |project|
+      worker_projects.include?(project) ? project.client : nil
+    }.flatten.compact.uniq
+  end
+
   def user_options
     ag = self.account_group || self.account_groups.first || nil
     ag = nil unless ag
