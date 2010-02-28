@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id]) rescue nil
-    @project = nil unless @current_user.account_group_projects(@user_options.account_group).include?(@project)
+    @project = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@project)
 		if @project.nil?
 			redirect_to projects_url
 			return
@@ -47,7 +47,6 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
-    redirect_to projects_path unless @user_options.account_group.projects.include?(@project)
     @clients = @user_options.account_group.clients
   end
 
