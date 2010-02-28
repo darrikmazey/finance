@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
 	
 	before_filter :login_required
+  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy]
 
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = @user_options.account_group.projects
+    @projects = @current_user.projects_for_account_group(@user_options.account_group)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +18,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.xml
   def show
     @project = Project.find(params[:id]) rescue nil
-    @project = nil unless @user_options.account_group.projects.include?(@project)
+    @project = nil unless @current_user.account_group_projects(@user_options.account_group).include?(@project)
 		if @project.nil?
 			redirect_to projects_url
 			return

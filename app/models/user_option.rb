@@ -23,4 +23,8 @@ class UserOption < TablelessModel
     end
     return @user_option_templates
   end
+
+  def admin_account_group?
+    user.admin_account_groups.include?(account_group)
+  end
 end

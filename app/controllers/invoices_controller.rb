@@ -5,7 +5,7 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.xml
   def index
-    @invoices = @current_user.invoices
+    @invoices = @user_options.account_group.invoices
 
     respond_to do |format|
       format.html # index.html.erb

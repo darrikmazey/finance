@@ -12,4 +12,7 @@ class Project < ActiveRecord::Base
 		self.invoices.map(&:transactions).flatten
 	end
 
+  def account_group
+    client.account.account_group rescue nil
+  end
 end

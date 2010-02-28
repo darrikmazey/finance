@@ -50,4 +50,8 @@ module ApplicationHelper
   def button_link_to(text, url, options = {})
     "<div class=\"button_link\">#{link_to text, url, options}</div>"
   end
+
+  def admin_account_group_link_to(text, url, options = {})
+    link_to(text, url, options) if @user_options.admin_account_group?
+  end
 end

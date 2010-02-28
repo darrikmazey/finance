@@ -9,4 +9,8 @@ class AccountGroup < ActiveRecord::Base
   def projects
     clients.collect { |client| client.projects }.flatten.uniq
   end
+
+  def invoices
+    projects.collect { |project| project.invoices }.flatten.uniq
+  end
 end
