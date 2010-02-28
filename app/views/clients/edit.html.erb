@@ -63,11 +63,5 @@
   <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
-
-
-
-
-
-
+<%= link_to show_image_tag(:large), @client %>
+<%= link_to back_image_tag(:large), clients_path %>

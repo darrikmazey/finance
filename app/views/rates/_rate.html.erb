@@ -5,8 +5,8 @@
 	<div class="field taxeable"><%=h rate.taxeable? ? 'yes' : 'no' %></div>
 	<div class="field tax_rate"><%=h "%0.02f%" % (rate.tax * 100) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', rate %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_rate_path(rate) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', rate, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link show"><%= link_to show_image_tag, rate %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_rate_path(rate) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, rate, :confirm => 'Are you sure?', :method => :delete %></div>
 	</div>
 </div>

@@ -2,6 +2,8 @@ class Account < ActiveRecord::Base
   belongs_to :user
   belongs_to :parent, :class_name => 'Account', :foreign_key => 'parent_id'
 	has_many :children, :class_name => 'Account', :foreign_key => 'parent_id'
+  has_one :client
+  has_many :projects, :through => :client
 
 	named_scope :root, { :conditions => { :parent_id => nil } }
 	named_scope :of_type, lambda { |t| { :conditions => { :type => (t.to_s + '_account').camelize } } }

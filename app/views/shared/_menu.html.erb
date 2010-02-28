@@ -1,4 +1,3 @@
-
 <div class="menu">
 	<div class="link"><%= link_to 'account groups', account_groups_url %></div>
 	<div class="link"><%= link_to 'accounts', accounts_url %></div>
@@ -8,12 +7,13 @@
 	<div class="link"><%= link_to 'invoices', invoices_url %></div>
 	<div class="link"><%= link_to 'work items', work_items_url %></div>
 	<div class="link"><%= link_to 'rates', rates_url %></div>
-	<div class="link"><%= link_to 'users', users_url %></div>
+  <% if admin? %>
+    <div class="link"><%= link_to 'users', users_url %></div>
+  <% end %>
 	<div class="link logout">
-		<% if !@current_user.nil? -%>
-			<%= link_to 'logout', logout_users_url %>
-		<% else -%>
-			<%= link_to 'login', login_users_url %>
+		<% if logged_in? -%>
+			<%= link_to_current_user :content_method => :login %>
+      (<%= link_to "Log out", logout_path, { :title => "log out" } %>) 
 		<% end -%>
 	</div>
 </div>

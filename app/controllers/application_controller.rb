@@ -4,6 +4,9 @@
 require 'finance_classes'
 
 class ApplicationController < ActionController::Base
+
+  include AuthenticatedSystem
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
@@ -11,15 +14,22 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password
 	
 	before_filter :load_user
-	before_filter :preload
 	before_filter :get_version
 
 	private
 
+  def admin_required
+    @current_user.admin? || render(:partial => '/sessions/admin_required', :layout => true)
+  end
+    
+  def self_or_admin_required
+    @current_user == @user || admin_required
+  end
+
 	def load_user
-		@current_user = User.find(session[:user_id]) rescue nil
+    @current_user = current_user
     if @current_user && (controller_name != "user" && action_name != "logout")
-      # create a hash of options, start with the defaults, merge in session and then merg in params
+      # create a hash of options, start with the defaults, merge in session and then merge in params
       h = @current_user.user_options
       h.merge!(session[:user_option]) if session[:user_option]
 
@@ -32,42 +42,9 @@ class ApplicationController < ActionController::Base
       # save this in the session
       session[:user_option] = @user_options.attributes
 
-      render :partial => 'account_groups/no_account_groups', :layout => true  unless @user_options.account_group
+      render :partial => 'account_groups/no_account_groups', :layout => true unless @user_options.account_group
+      redirect_to :back if p["account_group_id"]
     end
-	end
-
-	def require_user
-		if @current_user.nil?
-			flash[:error] = 'authentication required'
-			session[:after_login] = request.url
-			redirect_to login_users_url
-			return
-		end
-	end
-
-	def preload
-		if @current_user
-			if params[:user_id]
-				if params[:user_id].to_i != @current_user.id.to_i
-					flash[:error] = "that doesn't belong to you.  eyes on your own paper!"
-					redirect_to user_accounts_url(@current_user)
-				end
-			end
-			@user = @current_user
-		else
-			if params[:user_id]
-				@user = User.find params[:user_id] rescue nil
-			end
-		end
-		if params[:account_id]
-			@account = Account.find params[:account_id] rescue nil
-		end
-		if params[:period]
-			@period = Period[params[:period].to_i]
-		end
-		if params[:work_item_id]
-			@work_item = WorkItem.find params[:work_item_id] rescue nil
-		end
 	end
 
 	def get_version

@@ -1,7 +1,7 @@
 <%= render :partial => 'client_data', :object => @client %>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to edit_image_tag(:large), edit_client_path(@client) %>
+<%= link_to back_image_tag(:large), clients_path %>
 
 <% if @client.projects.size > 0 -%>
 	<%= render :partial => 'projects/project_list', :object => @client.projects %>

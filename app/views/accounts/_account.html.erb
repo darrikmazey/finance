@@ -6,8 +6,8 @@
 	<div class="field amount"><%=h number_to_currency(account.total_amount) %></div>
 	<div class="field period_amount"><%=h number_to_currency(convert_period(account.total_amount, account.period, @period.value)) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', account %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_account_path(account) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link show"><%= link_to show_image_tag, account %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_account_path(account) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, account, :confirm => 'Are you sure?', :method => :delete %></div>
 	</div>
 </div>

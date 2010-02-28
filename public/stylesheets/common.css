@@ -1,0 +1,305 @@
+.debug { display: none }
+pre { padding: 10px }
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.page_header .content {
+	text-align: right;
+	padding: 5px;
+}
+
+.menu {
+	width: 100%;
+	margin-top: 5px;
+	padding: 3px;
+	margin-bottom: 5px;
+}
+
+.menu .link {
+	display: inline-block;
+  padding-right: 5px;
+  border-right: 1px solid;
+}
+
+.fieldWithErrors {
+  padding: 2px;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  margin: -7px;
+}
+
+#errorExplanation p {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  list-style: square;
+}
+
+.graph {
+	text-align: center;
+}
+
+.embedded_form {
+	width: 25%;
+	border-top: solid 1px;
+	border-bottom: solid 1px;
+}
+
+.list .heading {
+	display: inline-block;
+}
+
+.period_selector {
+	display: inline-block;
+	text-align: right;
+	margin-left: 70%;
+}
+
+.column {
+	display: inline-block;
+	width: 48%;
+}
+
+.column.first { vertical-align: top }
+
+.list {
+	margin-top: 15px;
+}
+
+.list .heading {
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.list .content { border: 1px solid }
+.list .header { padding: 4px }
+.list .list_item { padding: 4px }
+
+.list .field {
+	display: inline-block;
+	width: 10%;
+	text-align: center;
+}
+
+.list .field.first {
+	text-align: left;
+}
+
+.list .field.color_code {
+	width: 1%;
+}
+
+.list_item .field.color_code {
+	border: 1px solid;
+}
+
+.list_item .links {
+	display: none;
+	width: 20%;
+}
+
+.list_item:hover .links {
+	display: inline-block;
+}
+
+.list_item .links .link {
+	display: inline-block;
+	text-align: center;
+}
+
+.list_item .links .link IMG { border: 0 }
+
+.list_item .transaction_links {
+	width: 10%;
+}
+
+.list_item .transaction_links .link {
+	width: 12%;
+}
+
+.list_item .link:hover a {
+	text-decoration: none;
+}
+
+.transaction_links .link { display: inline-block }
+
+.list.rates .field.name,
+.list.rates .field.project,
+.list.work_items .field.rate,
+.list.work_items .field.project,
+.list.invoices .field.client,
+.list.projects .field.client,
+.list.projects .field.name,
+.list.clients .field.name,
+.list.accounts .field.name,
+.list.accounts .field.description {
+	width: 15%;
+}
+
+.list.accounts .field.user,
+.list.accounts .field.description {
+	display: none;
+}
+
+.list.work_items .field.date {
+	width: 8%;
+}
+
+.list.work_items .field.comments {
+	width: 7%;
+}
+
+.list.work_items .field.start_time,
+.list.work_items .field.end_time {
+	width: 5%;
+}
+
+.list.work_items .field.hours,
+.list.work_items .field.subtotal {
+	width: 7%;
+}
+
+.list.accounts .field.type {
+	width: 5%;
+}
+
+.list.accounts .field.period {
+	width: 10%;
+}
+
+.list.transactions .field.ref {
+	width: 5%;
+	display: none;
+}
+
+.list.transactions .field.description {
+	width: 15%;
+}
+
+.list.invoice_transactions .field.description,
+.list.client_transactions .field.description,
+.list.account_transactions .field.description {
+	width: 25%;
+}
+
+.list.invoice_transactions .field.account,
+.list.client_transactions .field.description,
+.list.account_transactions .field.account {
+	width: 15%;
+}
+
+.list.transactions .field.credit_account,
+.list.transactions .field.debit_account {
+	width: 15%;
+}
+
+.list.work_items .field.hours,
+.list.work_items .field.subtotal {
+	text-align: center;
+}
+
+.list.users .field.email {
+  width: 20%;
+}
+
+.list.account_groups .field.description {
+  width: 30%;
+}
+
+.list.projects .field.description {
+  width: 30%;
+}
+
+.list.clients .field.account {
+  width: 25%;
+}
+
+.edit_item .content,
+.item_data .content {
+	border: 1px solid;
+	padding: 5px;
+}
+
+.edit_item .field_name,
+.item_data .field_name {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+.edit_item .field .field_name,
+.item_data .field .field_name {
+	display: inline-block;
+	width: 35%;
+	text-align: right;
+	margin-right: 5px;
+}
+
+.edit_item .field .field_value,
+.item_data .field .field_value {
+	display: inline-block;
+	width: 30%;
+	text-align: left;
+}
+
+.form_line {
+  padding: 3px;
+}
+
+.form_line input,
+.form_line textarea {
+  border: 1px solid;
+  padding: 2px;
+  width: 680px;
+}
+
+.form_line .form_field_label {
+  float: left;
+  width: 140px;
+  text-align: right;
+}
+
+.form_line .form_field {
+  margin-left: 150px;
+}
+
+.form_button {
+  padding-top: 3px;
+  margin-left: 150px;
+  clear: both;
+}
+
+.form_line .fieldWithErrors textarea,
+.form_line .fieldWithErrors input {
+  border: 2px solid;
+}
+
+.list_item.comment .field.body {
+	width: 50%;
+	text-align: left;
+}
+
+.button_link {
+  padding: 2px;
+  border: 1px solid;
+  display: inline;
+}
+
+.button_link A {
+  line-height: 16px;
+  text-decoration: none;
+}

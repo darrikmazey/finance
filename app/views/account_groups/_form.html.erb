@@ -1,11 +1,12 @@
-<% if @user_options.account_group %>
+<% if logged_in? && @user_options.account_group %>
   <%= "#{@user_options.account_group.description || @user_options.account_group.name}" %>
   <% if @current_user.account_groups.length > 1 %>
     <% form_for(@user_options, :url => '/') do |f| %>
-      <%= f.collection_select :account_group_id, @current_user.account_groups, :id, :name %>
-      <%= f.submit "Change Account Group" %>
+      <%= f.select :account_group_id, options_for_select(@current_user.account_groups.collect { |a| [a.name, a.id] }, @user_options.account_group.id) %>
+      <%= observe_field 'user_option_account_group_id', 
+          :function => "$('new_user_option').submit();",
+          :frequency => 1
+       %>
     <% end %>
   <% end %>
-<% else %>
-  Not part of any account groups!
 <% end %>

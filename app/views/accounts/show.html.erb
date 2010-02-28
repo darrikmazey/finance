@@ -1,7 +1,7 @@
 <%= render :partial => 'account_data', :object => @account %>
 
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to edit_image_tag(:large), edit_account_path(@account) %>
+<%= link_to back_image_tag(:large), accounts_path %>
 
 <% if @account.transactions.size > 0 -%>
 <%= render :partial => 'transactions/transaction_list', :object => @account.transactions %>

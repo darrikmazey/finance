@@ -42,4 +42,12 @@ module ApplicationHelper
     options[:builder] = FinanceFieldBuilder.new unless options[:builder]
     custom_fields_for(obj, options, &proc)
   end
+
+  def admin?
+    logged_in? && @current_user.admin?
+  end
+
+  def button_link_to(text, url, options = {})
+    "<div class=\"button_link\">#{link_to text, url, options}</div>"
+  end
 end

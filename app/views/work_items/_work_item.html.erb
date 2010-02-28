@@ -1,16 +1,16 @@
 <div class="list_item work_item">
 	<div class="field first date"><%=h work_item.start_time.short_date rescue '&nbsp;' %></div>
 	<div class="field start_time"><%=h work_item.start_time.short_time rescue '&nbsp;' %></div>
-	<div class="field end_time"><%= link_to(work_item.end_time.short_time, open_work_item_url(work_item), :method => :post) rescue link_to('close', close_work_item_url(work_item), :method => :post) %></div>
+	<div class="field end_time"><%= link_to(work_item.end_time.short_time, open_work_item_url(work_item), :method => :post) rescue button_link_to('close', close_work_item_url(work_item), :method => :post) %></div>
 	<div class="field project"><%= link_to work_item.project.name, work_item.project rescue 'none' %></div>
 	<div class="field rate"><%= link_to work_item.rate.name, work_item.rate rescue 'none' %></div>
 	<div class="field comments"><%= work_item.comments.size %></div>
 	<div class="field hours"><%= "%0.02f" % work_item.hours %></div>
 	<div class="field subtotal"><%= number_to_currency(work_item.subtotal) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', work_item %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_work_item_path(work_item) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', work_item, :confirm => 'Are you sure?', :method => :delete %></div>
-		<div class="link comment"><%= link_to 'Comment', new_work_item_comment_url(work_item) %></div>
+		<div class="link show"><%= link_to show_image_tag, work_item %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_work_item_path(work_item) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, work_item, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link comment"><%= link_to comment_image_tag, new_work_item_comment_url(work_item) %></div>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
 	
-	before_filter :require_user
+	before_filter :login_required
 
   # GET /invoices
   # GET /invoices.xml

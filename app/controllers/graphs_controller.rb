@@ -3,6 +3,8 @@ require 'gruff'
 
 class GraphsController < ApplicationController
 
+  before_filter :login_required
+
 	def account
 		@account = Account.find params[:id] rescue nil
 		@size = params[:size] || 400

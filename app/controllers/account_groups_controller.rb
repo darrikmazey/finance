@@ -1,6 +1,6 @@
 class AccountGroupsController < ApplicationController
 
-  before_filter :require_user
+  before_filter :login_required
 
   def index
     @account_groups = @current_user.account_groups 

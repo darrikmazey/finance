@@ -1,6 +1,6 @@
 class WorkItemsController < ApplicationController
 
-	before_filter :require_user
+	before_filter :login_required
 
   # GET /work_items
   # GET /work_items.xml

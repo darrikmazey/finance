@@ -3,13 +3,13 @@
 	<div class="field client"><%= link_to invoice.client.name, client_url(invoice.client) %></div>
 	<div class="field project"><%= link_to invoice.project.name, project_url(invoice.project) %></div>
 	<div class="field created_at"><%=h invoice.created_at.short_date rescue '&nbsp;' %></div>
-	<div class="field billed_at"><%= link_to(invoice.billed_at.short_date, unbill_invoice_url(invoice), :method => :post) rescue link_to('bill', bill_invoice_url(invoice), :method => :post) %></div>
-	<div class="field paid_at"><%= link_to(invoice.paid_at.short_date, unpaid_invoice_url(invoice), :method => :post) rescue link_to('paid', paid_invoice_url(invoice), :method => :post) %></div>
+	<div class="field billed_at"><%= link_to(invoice.billed_at.short_date, unbill_invoice_url(invoice), :method => :post) rescue button_link_to('bill', bill_invoice_url(invoice), :method => :post) %></div>
+	<div class="field paid_at"><%= link_to(invoice.paid_at.short_date, unpaid_invoice_url(invoice), :method => :post) rescue button_link_to('paid', paid_invoice_url(invoice), :method => :post) %></div>
 	<div class="field total"><%=h number_to_currency(invoice.total) %></div>
 	<div class="links">
-		<div class="link show"><%= link_to 'Show', invoice %></div>
-		<div class="link edit"><%= link_to 'Edit', edit_invoice_path(invoice) %></div>
-		<div class="link destroy"><%= link_to 'Destroy', invoice, :confirm => 'Are you sure?', :method => :delete %></div>
-		<div class="link pdf"><%= link_to 'Pdf', invoice_url(invoice, :format => 'pdf') %></div>
+		<div class="link show"><%= link_to show_image_tag, invoice %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_invoice_path(invoice) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, invoice, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link pdf"><%= link_to pdf_image_tag, invoice_url(invoice, :format => 'pdf') %></div>
 	</div>
 </div>
