@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 	
 	before_filter :login_required
-  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy]
+  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy, :create]
 
   # GET /projects
   # GET /projects.xml

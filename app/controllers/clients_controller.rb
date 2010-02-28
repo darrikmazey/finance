@@ -1,11 +1,12 @@
 class ClientsController < ApplicationController
 	
 	before_filter :login_required
+  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy, :create]
 
   # GET /clients
   # GET /clients.xml
   def index
-    @clients = @user_options.account_group.clients
+    @clients = @current_user.clients_for_account_group(@user_options.account_group)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +17,8 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.xml
   def show
-    @client = @user_options.account_group.clients.find(params[:id]) rescue nil
+    @client = Client.find(params[:id]) rescue nil
+    @client = nil unless @current_user.clients_for_account_group(@user_options.account_group).include?(@client)
 
 		if @client.nil?
 			redirect_to clients_url

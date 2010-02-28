@@ -3,7 +3,7 @@
 	<div class="field account"><%= link_to client.account.name, account_url(client.account) rescue '&nbsp;' %></div>
 	<div class="links">
 		<div class="link show"><%= link_to show_image_tag, client %></div>
-		<div class="link edit"><%= link_to edit_image_tag, edit_client_path(client) %></div>
-		<div class="link destroy"><%= link_to delete_image_tag, client, :confirm => 'Are you sure?', :method => :delete %></div>
+		<div class="link edit"><%= admin_account_group_link_to edit_image_tag, edit_client_path(client) %></div>
+		<div class="link destroy"><%= admin_account_group_link_to delete_image_tag, client, :confirm => 'Are you sure?', :method => :delete %></div>
 	</div>
 </div>
