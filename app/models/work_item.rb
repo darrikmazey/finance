@@ -98,4 +98,9 @@ class WorkItem < ActiveRecord::Base
 	def closed?
 		!self.end_time.nil?
 	end
+
+  def total_rate
+    rate.modifier * project.base_rate
+  end
+  
 end

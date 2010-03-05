@@ -5,7 +5,11 @@ class InvoicesController < ApplicationController
   # GET /invoices
   # GET /invoices.xml
   def index
-    @invoices = @user_options.account_group.invoices
+    if @user_options.admin_account_group?
+      @invoices = @user_options.account_group.invoices
+    else
+      @invoices = @current_user.invoices_for_account_group(@user_options.account_group)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -89,7 +93,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.xml
   def show
-    @invoice = @current_user.invoices.find(params[:id]) rescue nil
+    @invoice = Invoice.find(params[:id])
+    if @user_options.admin_account_group?
+      @invoice = nil unless @user_options.account_group.invoices.include?(@invoice)
+    else
+      @invoice = nil unless @current_user.invoices.include?(@invoice)
+    end
 		if @invoice.nil?
 			redirect_to invoices_url
 			return

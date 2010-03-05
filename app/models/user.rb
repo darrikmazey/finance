@@ -101,6 +101,15 @@ class User < ActiveRecord::Base
     return wis
   end
 
+  # only show invoices for the current account_group
+  def invoices_for_account_group(_account_group = nil)
+    invs = []
+    invoices.each { |inv| 
+      invs << inv if @user_options.account_group == inv.client.account.account_group
+    }
+    invs 
+  end
+
   # all of the clients for an account_group
   def clients_for_account_group(_account_group = nil)
     return [] unless _account_group
@@ -152,7 +161,8 @@ class User < ActiveRecord::Base
 	end
 
 	def city_state_zip
-		company_city + ', ' + company_state + ' ' + company_zipcode
+    return nil unless company_city && company_state && company_zipcode
+		"#{company_city}, #{company_state} #{company_zipcode}"
 	end
 
 	def last_work_item

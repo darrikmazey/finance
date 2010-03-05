@@ -1,4 +1,6 @@
 module InvoicesHelper
+  @invoice_background_color
+
 	def pdf_footer(pdf, invoice)
 		(1 .. pdf.page_count).each do |page|
 			pdf.go_to_page(page)
@@ -8,7 +10,7 @@ module InvoicesHelper
 					pdf.text((invoice.billed_at.short_date.gsub(/-/, '.') rescue 'none'), :size => 8, :align => :left)
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3), 8], :width => (pdf.bounds.width / 3), :height => 8 do
-					pdf.text invoice.user.company_name, :size => 8, :align => :center
+					pdf.text invoice.user.company_name || '', :size => 8, :align => :center
 				end
 				pdf.bounding_box [(pdf.bounds.width / 3 * 2), 8], :width => (pdf.bounds.width / 3), :height => 8 do
 					pdf.text 'Invoice #' + invoice.identifier, :size => 8, :align => :right
@@ -21,10 +23,10 @@ module InvoicesHelper
 		pdf.bounding_box [ 0, pdf.bounds.top ], :width => pdf.bounds.width, :height => 100 do
 			pdf.stroke_bounds
 			pdf.bounding_box [ 10, 80 ], :width => (pdf.bounds.width), :height => 80 do
-				pdf.text invoice.user.company_name, :align => :center, :size => 20
-				pdf.text invoice.user.company_street1, :align => :center, :size => 12
-				pdf.text invoice.user.city_state_zip, :align => :center, :size => 12
-				pdf.text invoice.user.company_phone, :align => :center, :size => 12
+				pdf.text invoice.user.company_name || '', :align => :center, :size => 20
+				pdf.text invoice.user.company_street1 || '', :align => :center, :size => 12
+				pdf.text invoice.user.city_state_zip || '', :align => :center, :size => 12
+				pdf.text invoice.user.company_phone || '', :align => :center, :size => 12
 			end
 		end
 	end
@@ -50,64 +52,50 @@ module InvoicesHelper
 	end
 
 	def generate_table_data(pdf, invoice)
-		data = Array.new
-		i = 0
-		invoice.work_items.each do |work_item|
-			row_color = (i % 2 == 0) ? odd_color : even_color
-			if work_item.comments.size == 0
-				data << [
-					Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-					Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
-					Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
-				]
-			elsif work_item.comments.size == 1
-				data << [
-					Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => work_item.comments.first.body, :background_color => row_color),
-					Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
-					Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
-					Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
-				]
-			else
-				first_comment = true
-				work_item.comments.each do |c|
-					if first_comment
-						first_comment = false
-						data << [
-							Prawn::Table::Cell.new( :text => (work_item.start_time.short_date rescue 'none'), :background_color => row_color),
-							Prawn::Table::Cell.new( :text => (work_item.start_time.short_time rescue 'none'), :background_color => row_color),
-							Prawn::Table::Cell.new( :text => (work_item.end_time.short_time rescue 'none'), :background_color => row_color),
-							Prawn::Table::Cell.new( :text => c.body, :background_color => row_color),
-							Prawn::Table::Cell.new( :text => number_to_currency(work_item.rate.modifier * work_item.project.base_rate), :background_color => row_color),
-							Prawn::Table::Cell.new( :text => "%0.02f" % work_item.hours, :background_color => row_color),
-							Prawn::Table::Cell.new( :text => number_to_currency(work_item.subtotal), :background_color => row_color),
-						]
-					else
-						data << [
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-							Prawn::Table::Cell.new( :text => c.body, :background_color => row_color),
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-							Prawn::Table::Cell.new( :text => '', :background_color => row_color),
-						]
-					end
-				end
-			end
-			i += 1
-		end
-		data
-	end
+		data = []
+    invoice.invoice_items.each do |invoice_item|
+      data << generate_invoice_item_row(invoice_item)
+    end
+    data
+  end
 
+  def generate_invoice_item_row(invoice_item)
+    color = background_color
+    comments = invoice_item.comments
+    first_comment = comments.shift || nil
+    row_data = [
+      prawn_cell((invoice_item.start_time.short_date rescue 'none'), color),
+      prawn_cell((invoice_item.start_time.short_time rescue 'none'), color),
+      prawn_cell((invoice_item.end_time.short_time rescue 'none'), color),
+      prawn_cell((first_comment.body rescue ''), color),
+      prawn_cell(number_to_currency(invoice_item.total_rate), color),
+      prawn_cell("%0.02f" % invoice_item.hours, color),
+      prawn_cell(number_to_currency(invoice_item.subtotal), color)
+    ]
+  #  comments.each { |comment| 
+  #    row_data << generate_comment_row(comment)
+  #  }
+    row_data
+  end
+
+  def generate_comment_row(comment)
+    color = background_color
+    return [
+      prawn_cell('', color),
+      prawn_cell('', color),
+      prawn_cell('', color),
+      prawn_cell(comment.body, color),
+      prawn_cell('', color),
+      prawn_cell('', color)
+    ]
+  end
+
+  def prawn_cell(text, color)
+    Prawn::Table::Cell.new( :text => text, :background_color => color)
+  end
+  
 	def generate_table_headers(pdf, invoice)
-		[ 'Date', 'In', 'Out', 'Description', 'Rate', 'Hours', 'Amount'  ]
+		[ 'Date', 'In', 'Out', 'Description', 'Rate', 'Hours', 'Amount' ]
 	end
 
 	def generate_table_widths(pdf, invoice)
@@ -149,6 +137,11 @@ module InvoicesHelper
 			6 => :right,
 		}
 	end
+
+  def background_color
+    @invoice_background_color == even_color ? odd_color : even_color
+    return @invoice_background_color
+  end
 
 	def odd_color
 		'dddddd'
