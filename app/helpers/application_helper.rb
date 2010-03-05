@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  ActionView::Base.default_form_builder = CustomFormBuilder
 
 	def accounts_options_for_select(selected_id = nil)
 		option_tags = Array.new
@@ -32,11 +33,6 @@ module ApplicationHelper
 			''
 		end
 	end
-
-  def form_builder_for(record_or_name_or_array, *args, &proc)
-    options = args.extract_options!
-    form_for(record_or_name_or_array, *(args << options.merge(:builder => CustomFormBuilder)), &proc)
-  end
 
   def my_custom_fields_for(obj, options = {}, &block)
     options[:builder] = FinanceFieldBuilder.new unless options[:builder]

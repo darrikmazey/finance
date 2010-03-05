@@ -1,8 +1,8 @@
 <h1><%= @rate.new_record? ? 'New' : 'Editing' -%> Rate</h1>
 
-<% form_builder_for(@rate) do |f| %>
+<% form_for(@rate) do |f| %>
   <%= f.text_field :name %>
-  <%= f.collection_select :project_id, @current_user.projects, :id, :name %>
+  <%= f.collection_select :project_id, @projects, :id, :name %>
   <%= f.text_field :modifier %>
 	<%= f.check_box :taxeable, :label => 'Taxeable?' %>
 	<%= f.text_field :tax, :label => 'Tax Rate' %>

@@ -1,0 +1,7 @@
+<div class="list account_groups">
+  <div class="heading">account groups <%= admin_account_group_link_to '+', new_account_group_url %></div>
+  <div class="content">
+    <%= render :partial => 'account_groups/list_header' %>
+    <%= render :partial => 'account_groups/account_group_item', :collection => account_group_list %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <h1><%= @account.new_record? ? 'New' : 'Editing' -%> Account</h1>
 
-<% form_builder_for(@account) do |f| %>
+<% form_for(@account) do |f| %>
   <%= f.text_field :name %>
   <%= f.select :parent_id, accounts_options_for_select(@account.parent_id), { :include_blank => true } %>
   <%= f.text_field :description %>

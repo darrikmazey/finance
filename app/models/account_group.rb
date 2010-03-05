@@ -6,6 +6,8 @@ class AccountGroup < ActiveRecord::Base
   has_many :accounts
   has_many :clients, :through => :accounts
 
+  accepts_nested_attributes_for :account_group_users, :allow_destroy => true
+
   def projects
     clients.collect { |client| client.projects }.flatten.uniq
   end

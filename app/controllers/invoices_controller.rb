@@ -107,7 +107,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/new.xml
   def new
     @invoice = Invoice.new
-		@projects = @current_user.projects
+		@projects = @current_user.projects_for_account_group(@user_options.account_group)
 
     respond_to do |format|
       format.html { render :action => 'edit' }

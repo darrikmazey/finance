@@ -3,7 +3,9 @@
 	<div class="field description"><%=h account_group_item.description %></div>
 	<div class="links">
 		<div class="link show"><%= link_to show_image_tag, account_group_item %></div>
+    <% if @current_user.admin_account_groups.include?(account_group_item) %>
 		<div class="link edit"><%= link_to edit_image_tag, edit_account_group_path(account_group_item) %></div>
 		<div class="link destroy"><%= link_to delete_image_tag, account_group_item, :confirm => 'Are you sure?', :method => :delete %></div>
+    <% end %>
 	</div>
 </div>

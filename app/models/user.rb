@@ -83,6 +83,24 @@ class User < ActiveRecord::Base
     }.compact.uniq
   end
 
+  def loose_work_items_for_account_group(_account_group = nil)
+    projects = projects_for_account_group(_account_group)
+    wis = []
+    work_items.loose.ascending_creation.each { |wi|
+      wis << wi if projects.include?(wi.project)
+    }
+    return wis
+  end
+
+  def work_items_for_account_group(_account_group = nil)
+    projects = projects_for_account_group(_account_group)
+    wis = []
+    work_items.ascending_creation.each { |wi|
+      wis << wi if projects.include?(wi.project)
+    }
+    return wis
+  end
+
   # all of the clients for an account_group
   def clients_for_account_group(_account_group = nil)
     return [] unless _account_group

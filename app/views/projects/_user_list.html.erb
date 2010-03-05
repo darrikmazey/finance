@@ -1,0 +1,8 @@
+<% display_controls = defined?(show_controls) ? show_controls : false -%>
+<div class="list users">
+  <div class="heading"><%= defined?(title) ? title : 'users' %></div>
+  <div class="content">
+    <%= render :partial => "users/list_header" %>
+    <%= render :partial => "users/user", :collection => user_list %>
+  </div>
+</div>

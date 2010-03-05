@@ -1,0 +1,11 @@
+<div class="list_item user">
+  <div class="field first login">
+    <select id="account_group_account_group_users_attributes_user_id" name="account_group[account_group_users_attributes][<%= id.to_s %>][user_id]">
+      <option value="">&nbsp;</option>
+      <%= options_from_collection_for_select users, :id, :login %>
+    </select>
+  </div>
+  <div class="field name">&nbsp;</div>
+  <div class="field email">&nbsp;</div>
+  <div class="field remove"><%= link_to_function 'Remove', "$(this.parentNode.parentNode).remove()" %></div>
+</div>

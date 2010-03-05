@@ -5,7 +5,8 @@ class RatesController < ApplicationController
   # GET /rates
   # GET /rates.xml
   def index
-    @rates = @current_user.rates.find(:all, :order => 'project_id asc, id asc')
+    projects = @current_user.projects_for_account_group(@user_options.account_group)
+    @rates = projects.collect { |pro| pro.rates }.flatten
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +17,10 @@ class RatesController < ApplicationController
   # GET /rates/1
   # GET /rates/1.xml
   def show
-    @rate = @current_user.rates.find(params[:id]) rescue nil
+    @rate = Rate.find(params[:id])
+    if @rate
+      @rate = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@rate.project)
+    end
 		if @rate.nil?
 			redirect_to rates_url
 			return
@@ -33,6 +37,7 @@ class RatesController < ApplicationController
   def new
     @rate = Rate.new
     @rate.modifier = 1.00
+    @projects = @current_user.projects_for_account_group(@user_options.account_group)
 
     respond_to do |format|
       format.html { render :action => 'edit' } 
@@ -42,11 +47,15 @@ class RatesController < ApplicationController
 
   # GET /rates/1/edit
   def edit
-    @rate = @current_user.rates.find(params[:id]) rescue nil
+    @rate = Rate.find(params[:id])
+    if @rate
+      @rate = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@rate.project)
+    end
 		if @rate.nil?
 			redirect_to rates_url
 			return
 		end
+    @projects = @current_user.projects_for_account_group(@user_options.account_group)
   end
 
   # POST /rates
@@ -70,6 +79,13 @@ class RatesController < ApplicationController
   # PUT /rates/1.xml
   def update
     @rate = Rate.find(params[:id])
+    if @rate
+      @rate = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@rate.project)
+    end
+		if @rate.nil?
+			redirect_to rates_url
+			return
+		end
 
     respond_to do |format|
       if @rate.update_attributes(params[:rate])
@@ -87,6 +103,13 @@ class RatesController < ApplicationController
   # DELETE /rates/1.xml
   def destroy
     @rate = Rate.find(params[:id])
+    if @rate
+      @rate = nil unless @user_options.admin_account_group?
+    end
+		if @rate.nil?
+			redirect_to rates_url
+			return
+		end
     @rate.destroy
 
     respond_to do |format|

@@ -2,3 +2,8 @@
 
 <%= link_to edit_image_tag(:large), edit_user_path(@user) %>
 <%= link_to back_image_tag(:large), users_path %>
+
+<%= render :partial => 'account_groups/account_group_list', :object => @current_user.account_groups %>
+
+<%= render :partial => 'projects/project_list', :object => @user_options.account_group.projects, :locals => { :title => "projects for account group [#{@user_options.account_group.name}]" } %>
+

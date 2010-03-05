@@ -1,0 +1,9 @@
+<% form.fields_for :account_group_users, account_group_user do |puf| %>
+<div class="list_item user">
+  <%= puf.hidden_field :id, :value => account_group_user.id %>
+  <div class="field first login"><%=h account_group_user.user.login %></div>
+  <div class="field name"><%=h account_group_user.user.name %></div>
+  <div class="field email"><%=h account_group_user.user.email %></div>
+  <div class="field remove"><%= puf.check_box :_destroy, { :no_label => true } %></div>
+</div>
+<% end %>

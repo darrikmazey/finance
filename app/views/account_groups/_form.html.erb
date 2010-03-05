@@ -2,7 +2,7 @@
   <%= "#{@user_options.account_group.description || @user_options.account_group.name}" %>
   <% if @current_user.account_groups.length > 1 %>
     <% form_for(@user_options, :url => '/') do |f| %>
-      <%= f.select :account_group_id, options_for_select(@current_user.account_groups.collect { |a| [a.name, a.id] }, @user_options.account_group.id) %>
+      <%= f.select :account_group_id, options_for_select(@current_user.account_groups.collect { |a| [a.name, a.id] }, @user_options.account_group.id), { :no_label => true } %>
       <%= observe_field 'user_option_account_group_id', 
           :function => "$('new_user_option').submit();",
           :frequency => 1

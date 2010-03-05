@@ -6,7 +6,8 @@ class Project < ActiveRecord::Base
 	has_many :work_items
 
   has_many :project_users
-  has_many :users, :through => :project_users
+  has_many :workers, :source => :user, :through => :project_users
+  accepts_nested_attributes_for :project_users, :allow_destroy => true
 
 	def transactions
 		self.invoices.map(&:transactions).flatten

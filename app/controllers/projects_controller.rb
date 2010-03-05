@@ -23,6 +23,8 @@ class ProjectsController < ApplicationController
 			redirect_to projects_url
 			return
 		end
+    @admins = @project.account_group.users
+    @workers = @project.workers
 		@account = @project.client.account
 		@open_work_items = @project.work_items.open
 
@@ -36,6 +38,8 @@ class ProjectsController < ApplicationController
   # GET /projects/new.xml
   def new
     @project = Project.new
+    @admins = []
+    @workers = []
 		@clients = @user_options.account_group.clients
 
     respond_to do |format|
@@ -47,6 +51,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @admins = @project.account_group.users
+    @workers = @project.workers
     @clients = @user_options.account_group.clients
   end
 
@@ -93,6 +99,13 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(projects_url) }
       format.xml  { head :ok }
+    end
+  end
+
+  def add_project_user
+    @workers = User.all
+    if request.xhr?
+      render :partial => 'projects/project_users/form', :locals => { :workers => @workers, :id => params[:id] }
     end
   end
 end

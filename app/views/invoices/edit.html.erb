@@ -1,12 +1,14 @@
 <h1><%= @invoice.new_record? ? 'New' : 'Editing' -%> Invoice</h1>
 
-<% form_builder_for(@invoice) do |f| %>
+<% form_for(@invoice) do |f| %>
   <%= f.text_field :identifier %>
   <% if @invoice.new_record? -%>
     <%= f.collection_select :project_id, @projects, :id, :name %>
     <%= f.hidden_field :user_id, :value => @current_user.id %>
   <% else -%>
-    <%= f.collection_select :user_id, User.all, :id, :username %>
+    <% if @user_options.admin_account_group? %>
+      <%= f.collection_select :user_id, User.all, :id, :login %>
+    <% end %>
   <% end -%>
   <%= f.datetime_select :billed_at %>
   <%= f.submit 'Update' %>

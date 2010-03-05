@@ -1,6 +1,6 @@
 <h1><%= @client.new_record? ? 'New' : 'Editing' -%> Client</h1>
 
-<% form_builder_for(@client) do |f| %>
+<% form_for(@client) do |f| %>
   <%= f.text_field :name %>
 
 	<h3>Billing Contact</h3>

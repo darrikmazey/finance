@@ -6,7 +6,7 @@ class WorkItemsController < ApplicationController
   # GET /work_items.xml
   def index
 		@list_type = :loose
-    @work_items = @current_user.work_items.loose.ascending_creation
+    @work_items = @current_user.loose_work_items_for_account_group(@user_options.account_group)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class WorkItemsController < ApplicationController
 
 	def all
 		@list_type = :all
-		@work_items = @current_user.work_items.ascending_creation
+    @work_items = @current_user.work_items_for_account_group(@user_options.account_group)
 
 		respond_to do |format|
 			format.html { render :action => :index }
@@ -28,6 +28,7 @@ class WorkItemsController < ApplicationController
   # GET /work_items/1.xml
   def show
     @work_item = @current_user.work_items.find(params[:id]) rescue nil
+    @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
 			redirect_to work_items_url
 			return
@@ -42,6 +43,7 @@ class WorkItemsController < ApplicationController
 	# POST /work_items/1/close
 	def close
 		@work_item = @current_user.work_items.find(params[:id]) rescue nil
+    @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
 			redirect_to work_items_url
 			return
@@ -60,6 +62,7 @@ class WorkItemsController < ApplicationController
 	# POST /work_items/1/open
 	def open
 		@work_item = @current_user.work_items.find(params[:id]) rescue nil
+    @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
 			redirect_to work_items_url
 			return
@@ -82,6 +85,11 @@ class WorkItemsController < ApplicationController
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
 		@work_item.project = @current_user.last_project || @current_user.projects.first
+
+    # make sure they can access the project 
+    projects = @current_user.projects_for_account_group(@user_options.account_group)
+    @work_item.project = projects.first unless projects.include?(@work_item.project)
+
 		@work_item.rate = @current_user.last_rate || (@work_item.project.rates.first if @work_item.project)
 
     respond_to do |format|
@@ -93,6 +101,7 @@ class WorkItemsController < ApplicationController
   # GET /work_items/1/edit
   def edit
     @work_item = @current_user.work_items.find(params[:id]) rescue nil
+    @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
 			redirect_to work_items_url
 			return
@@ -137,6 +146,11 @@ class WorkItemsController < ApplicationController
   # DELETE /work_items/1.xml
   def destroy
     @work_item = WorkItem.find(params[:id])
+    @work_item = nil unless @current_user == @work_item.user || @user_options.admin_account_group?
+		if @work_item.nil?
+			redirect_to work_items_url
+			return
+		end
     @work_item.destroy
 
     respond_to do |format|

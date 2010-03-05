@@ -1,8 +1,9 @@
 <h1><%= @account_group.new_record? ? 'New' : 'Editing' -%> Account Group</h1>
 
-<% form_builder_for(@account_group) do |f| %>
+<% form_for(@account_group) do |f| %>
   <%= f.text_field :name %>
   <%= f.text_field :description %>
+  <%= render :partial => 'account_groups/admins/user_list', :object => @account_group.account_group_users, :locals => { :title => 'admins', :form => f } %>
   <%= f.submit 'Update' %>
 <% end %>
 

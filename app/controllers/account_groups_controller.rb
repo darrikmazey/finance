@@ -7,7 +7,8 @@ class AccountGroupsController < ApplicationController
   end
 
   def show
-    @account_group = @current_user.account_groups.find(params[:id]) rescue nil
+    @account_group = AccountGroup.find(params[:id])
+    @account_group = nil unless @current_user.account_groups.include?(@account_group)
     if @account_group.nil?
       redirect_to account_groups_url
       return
@@ -20,7 +21,8 @@ class AccountGroupsController < ApplicationController
   end
 
   def edit
-    @account_group = @current_user.account_groups.find(params[:id]) rescue nil
+    @account_group = AccountGroup.find(params[:id])
+    @account_group = nil unless @current_user.admin_account_groups.include?(@account_group)
     if @account_group.nil?
       redirect_to account_groups_url
       return
@@ -53,5 +55,12 @@ class AccountGroupsController < ApplicationController
     @account_group.destroy
 
     redirect_to account_groups_url
+  end
+
+  def add_account_group_admin
+    @users = User.all
+    if request.xhr?
+      render :partial => 'account_groups/admins/form', :locals => { :users => @users, :id => params[:id] }
+    end
   end
 end

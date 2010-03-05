@@ -1,9 +1,1 @@
-<div id="ajax_container">
-	<div class="list account_groups">
-		<div class="heading">account_group <%= link_to '+', new_account_group_url %></div>
-		<div class="content">
-			<%= render :partial => 'list_header' %>
-			<%= render :partial => 'account_group_item', :collection => @account_groups %>
-		</div>
-	</div>
-</div>
+<%= render :partial => 'account_group_list', :object => @account_groups %>

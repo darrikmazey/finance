@@ -1,0 +1,9 @@
+<% form.fields_for :project_users, project_user do |puf| %>
+<div class="list_item user">
+  <%= puf.hidden_field :id, :value => project_user.id %>
+  <div class="field first login"><%=h project_user.user.login %></div>
+  <div class="field name"><%=h project_user.user.name %></div>
+  <div class="field email"><%=h project_user.user.email %></div>
+  <div class="field remove"><%= puf.check_box :_destroy, { :no_label => true } %></div>
+</div>
+<% end %>

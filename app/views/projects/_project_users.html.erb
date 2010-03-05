@@ -1,0 +1,6 @@
+<h2>Admins</h2>
+<%= render :partial => 'users/list_header' %>
+<%= render :partial => 'users/user', :collection => @admins %>
+<h2>Workers</h2>
+<%= render :partial => 'users/list_header' %>
+<%= render :partial => 'users/user', :collection => @workers %>

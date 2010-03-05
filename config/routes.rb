@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :work_items, :member => { :open => [ :post ], :close => [ :post ] }, :collection => { :all => [ :get ] }, :has_many => :comments
   map.resources :accounts, :collection => { :ajax_index => [ :post ] }
   map.resources :rates
-  map.resources :projects
+  map.resources :projects, :has_many => :workers
   map.resources :invoices, :member => { :bill => [ :post ], :unbill => [ :post ], :paid => [ :post ], :unpaid => [ :post ] }
   map.resources :clients
   map.resources :transactions

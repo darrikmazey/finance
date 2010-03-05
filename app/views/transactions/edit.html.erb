@@ -1,6 +1,6 @@
 <h1><%= @transaction.new_record? ? 'New' : 'Editing' -%> Transaction</h1>
 
-<% form_builder_for(@transaction) do |f| %>
+<% form_for(@transaction) do |f| %>
 	<%= hidden_field :account, :id %>
   <%= f.datetime_select :trans_date %>
   <%= f.text_field :ref %>

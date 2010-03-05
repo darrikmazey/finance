@@ -46,6 +46,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
   # takes the params for a form field and the code for the actual field 
   # and creates the entire package
   def generate_form_field(method, super_code, options)
+    return super_code if options[:no_label]
     return "\ 
       <div class='form_line'> \
         #{generate_label(method, options)} \
@@ -69,7 +70,7 @@ class CustomFormBuilder < ActionView::Helpers::FormBuilder
 
   # generates the error code for a form field
   def generate_error(method, options)
-    object = @template.instance_variable_get("@#{@object_name}")
+    object = @template.instance_variable_get("@#{@object_name}") rescue nil
     error_text = ''
     unless object.nil? || options[:hide_errors]
       errors = object.errors.on(method.to_sym)

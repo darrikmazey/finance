@@ -1,11 +1,12 @@
 <h1><%= @project.new_record? ? 'New' : 'Editing' -%> Project</h1>
 
-<% form_builder_for(@project) do |f| %>
+<% form_for(@project) do |f| %>
   <%= f.text_field :name %>
   <%= f.text_field :description %>
   <%= f.text_field :base_rate %>
   <%= f.hidden_field :user_id, :value => @current_user.id %>
   <%= f.collection_select :client_id, @current_user.clients, :id, :name %>
+  <%= render :partial => 'projects/project_users/user_list', :object => @project.project_users, :locals => { :title => 'workers', :form => f } %>
   <%= f.submit 'Update' %>
 <% end %>
 
