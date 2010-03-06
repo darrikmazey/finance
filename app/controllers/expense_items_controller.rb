@@ -18,7 +18,7 @@ class ExpenseItemsController < ApplicationController
     @expense_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@expense_item.project)
 
     if @expense_item.nil?
-      redirect_to expense_items_url
+      redirect_to invoice_items_url
       return
     end
   end
@@ -39,7 +39,7 @@ class ExpenseItemsController < ApplicationController
     @expense_item = @current_user.expense_items.find(params[:id]) rescue nil
     @expense_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@expense_item.project)
     if @expense_item.nil?
-      redirect_to expense_items_url
+      redirect_to invoice_items_url
       return
     end
   end
@@ -48,7 +48,7 @@ class ExpenseItemsController < ApplicationController
     @expense_item = ExpenseItem.new(params[:expense_item])
     if @expense_item.save
       flash[:notice] = "Expense item was successfully created."
-      redirect_to expense_items_url
+      redirect_to invoice_items_url
     else
       render :action => 'edit'
     end
@@ -68,12 +68,12 @@ class ExpenseItemsController < ApplicationController
     @expense_item = ExpenseItem.find(params[:id])
     @expense_item = nil unless @current_user == @expense_item.user || @user_options.admin_account_group?
     if @expense_item.nil?
-      redirect_to expense_items_url
+      redirect_to invoice_items_url
       return
     end
 
     @expense_item.destroy
-    redirect_to expense_items_url
+    redirect_to invoice_items_url
   end
 end
 

@@ -30,7 +30,7 @@ class WorkItemsController < ApplicationController
     @work_item = @current_user.work_items.find(params[:id]) rescue nil
     @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
 
@@ -45,18 +45,18 @@ class WorkItemsController < ApplicationController
 		@work_item = @current_user.work_items.find(params[:id]) rescue nil
     @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
 		
 		@work_item.close
 		if (@work_item.save)
 			flash[:notice] = 'work item closed.'
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
 		flash[:error] = 'work item could not be closed'
-		redirect_to work_items_url
+		redirect_to invoice_items_url
 	end
 
 	# POST /work_items/1/open
@@ -64,17 +64,17 @@ class WorkItemsController < ApplicationController
 		@work_item = @current_user.work_items.find(params[:id]) rescue nil
     @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
 		@work_item.open
 		if (@work_item.save)
 			flash[:notice] = 'work item opened.'
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
 		flash[:error] = 'work item could not be opened.'
-		redirect_to work_items_url
+		redirect_to invoice_items_url
 	end
 
   # GET /work_items/new
@@ -103,7 +103,7 @@ class WorkItemsController < ApplicationController
     @work_item = @current_user.work_items.find(params[:id]) rescue nil
     @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
 		if @work_item.nil?
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
   end
@@ -116,7 +116,7 @@ class WorkItemsController < ApplicationController
     respond_to do |format|
       if @work_item.save
         flash[:notice] = 'WorkItem was successfully created.'
-        format.html { redirect_to work_items_url }
+        format.html { redirect_to invoice_items_url }
         format.xml  { render :xml => @work_item, :status => :created, :location => @work_item }
       else
         format.html { render :action => "edit" }
@@ -132,8 +132,8 @@ class WorkItemsController < ApplicationController
 
     respond_to do |format|
       if @work_item.update_attributes(params[:work_item])
-        flash[:notice] = 'WorkItem was successfully updated.'
-        format.html { redirect_to(work_items_url) }
+        flash[:notice] = 'Work item was successfully updated.'
+        format.html { redirect_to(invoice_items_url) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -148,13 +148,13 @@ class WorkItemsController < ApplicationController
     @work_item = WorkItem.find(params[:id])
     @work_item = nil unless @current_user == @work_item.user || @user_options.admin_account_group?
 		if @work_item.nil?
-			redirect_to work_items_url
+			redirect_to invoice_items_url
 			return
 		end
     @work_item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(work_items_url) }
+      format.html { redirect_to(invoice_items_url) }
       format.xml  { head :ok }
     end
   end
