@@ -1,0 +1,13 @@
+<div class="list expense_items">
+	<div class="heading"><%= @list_type.to_s %> expense items <%= link_to '+', new_expense_item_url %></div>
+	<div class="content">
+		<%= render :partial => 'expense_items/list_header' %>
+		<%= render :partial => 'expense_items/expense_item', :collection => expense_item_list %>
+	</div>
+</div>
+
+<% if @list_type != :all -%>
+<div class="link all"><%= link_to 'all', all_expense_items_url %></div>
+<% else -%>
+<div class="link loose"><%= link_to 'loose', expense_items_url %></div>
+<% end -%>

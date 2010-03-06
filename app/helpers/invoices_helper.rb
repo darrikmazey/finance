@@ -36,13 +36,13 @@ module InvoicesHelper
 			pdf.stroke_bounds
 			half_width = pdf.bounds.width / 2
 			pdf.bounding_box [10, 60], :width => (half_width - 15), :height => 60 do
-				pdf.text invoice.client.name, :size => 10
+				pdf.text invoice.client.name || '', :size => 10
 				pdf.text 'c/o ' + invoice.client.contact_name, :size => 9
-				pdf.text invoice.client.contact_street1, :size => 9
+				pdf.text invoice.client.contact_street1 || '', :size => 9
 				if !invoice.client.contact_street2.blank?
 					pdf.text invoice.client.contact_street2, :size => 9
 				end
-				pdf.text invoice.client.city_state_zip, :size => 9
+				pdf.text invoice.client.city_state_zip || '', :size => 9
 			end
 			pdf.bounding_box [((pdf.bounds.width)/2), 60], :width => (half_width - 15), :height => 60 do
 				pdf.text 'Invoice #' + invoice.identifier, :size => 10, :align => :right
@@ -64,17 +64,17 @@ module InvoicesHelper
     comments = invoice_item.comments
     first_comment = comments.shift || nil
     row_data = [
-      prawn_cell((invoice_item.start_time.short_date rescue 'none'), color),
-      prawn_cell((invoice_item.start_time.short_time rescue 'none'), color),
-      prawn_cell((invoice_item.end_time.short_time rescue 'none'), color),
+      prawn_cell((invoice_item.invoice_start_time.short_date rescue 'none'), color),
+      prawn_cell((invoice_item.start_time.short_time rescue ''), color),
+      prawn_cell((invoice_item.end_time.short_time rescue ''), color),
       prawn_cell((first_comment.body rescue ''), color),
       prawn_cell(number_to_currency(invoice_item.total_rate), color),
       prawn_cell("%0.02f" % invoice_item.hours, color),
       prawn_cell(number_to_currency(invoice_item.subtotal), color)
     ]
-  #  comments.each { |comment| 
-  #    row_data << generate_comment_row(comment)
-  #  }
+    comments.each { |comment| 
+      row_data << generate_comment_row(comment)
+    }
     row_data
   end
 
@@ -139,7 +139,7 @@ module InvoicesHelper
 	end
 
   def background_color
-    @invoice_background_color == even_color ? odd_color : even_color
+    @invoice_background_color = @invoice_background_color == odd_color ? even_color : odd_color
     return @invoice_background_color
   end
 

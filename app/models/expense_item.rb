@@ -2,12 +2,20 @@ class ExpenseItem < ActiveRecord::Base
 
   belongs_to :invoice
   belongs_to :user
+  belongs_to :project
 
-  validates_presence_of :invoice_id
+  validates_presence_of :project_id
   validates_presence_of :user_id
 
-  validates_associated :invoice
+  validates_associated :project
   validates_associated :user
+
+  named_scope :loose, { :conditions => { :invoice_id => nil } }
+  named_scope :ascending_creation, { :order => 'created_at asc' }
+
+  def invoice_start_time
+    updated_at
+  end
 
   def total_rate
     rate
@@ -15,6 +23,14 @@ class ExpenseItem < ActiveRecord::Base
 
   def subtotal
     hours * rate
+  end
+
+  def start_time
+    ''
+  end
+
+  def end_time
+    ''
   end
 
   # make this act like work_items

@@ -70,13 +70,18 @@ class Invoice < ActiveRecord::Base
 		end
 	end
 
-	def scoop_loose_work_items
+	def scoop_loose_invoice_items
 		if project
 			wis = project.work_items.loose
 			wis.each do |wi|
 				wi.invoice = self
 				wi.save
 			end
+      eis = project.expense_items.loose
+      eis.each do |ei|
+        ei.invoice = self
+        ei.save
+      end
 		end
 	end
 

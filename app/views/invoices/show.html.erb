@@ -8,6 +8,10 @@
 <%= render :partial => 'work_items/work_item_list', :object => @invoice.work_items %>
 <% end -%>
 
+<% if @invoice.expense_items.size > 0 -%>
+<%= render :partial => 'expense_items/expense_item_list', :object => @invoice.expense_items %>
+<% end -%>
+
 <% if @invoice.transactions.size > 0 -%>
 <%= render :partial => 'transactions/transaction_list', :object => @invoice.rev_sorted_transactions %>
 <% end -%>

@@ -213,6 +213,16 @@ a:hover { text-decoration: underline; }
 	text-align: center;
 }
 
+.list.expense_items .field.description {
+  width: 40%;
+  text-align: left;
+}
+
+.list.expense_items .field.rate,
+.list.expense_items .field.hours {
+  width: 8%;
+}
+
 .list.users .field.email {
   width: 20%;
 }

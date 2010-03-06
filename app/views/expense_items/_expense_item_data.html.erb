@@ -1,0 +1,13 @@
+<div class="item_data expense_item">
+  <% my_custom_fields_for expense_item_data, { :header => "#{expense_item.description}" } do |f| %>
+    <div class="column first">
+      <%= f.field :project, { :value => (expense_item_data.project.name rescue 'none') } %>
+      <%= f.field :rate, { :function => :name } %>
+      <%= f.field :invoice, { :value => (link_to(expense_item_data.invoice.identifier, expense_item_data.invoice) rescue 'none') } %>
+      <%= f.field :description %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to edit_image_tag(:large), edit_expense_item_path(expense_item_data) %>
+<%= link_to back_image_tag(:large), expense_items_path %>

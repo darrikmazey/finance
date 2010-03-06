@@ -1,0 +1,12 @@
+<div class="list_item expense_item">
+	<div class="field project"><%= link_to expense_item.project.name, expense_item.project rescue 'none' %></div>
+	<div class="field rate"><%= number_to_currency(expense_item.rate) %></div>
+	<div class="field description"><%= expense_item.description %></div>
+	<div class="field hours"><%= "%0.02f" % expense_item.hours %></div>
+	<div class="field subtotal"><%= number_to_currency(expense_item.subtotal) %></div>
+	<div class="links">
+		<div class="link show"><%= link_to show_image_tag, expense_item %></div>
+		<div class="link edit"><%= link_to edit_image_tag, edit_expense_item_path(expense_item) %></div>
+		<div class="link destroy"><%= link_to delete_image_tag, expense_item, :confirm => 'Are you sure?', :method => :delete %></div>
+	</div>
+</div>

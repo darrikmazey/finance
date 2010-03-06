@@ -5,10 +5,12 @@ class Client < ActiveRecord::Base
 	has_many :invoices, :through => :projects
 
 	def contact_name
-		contact_first_name + ' ' + contact_last_name
+    return '' unless contact_first_name && contact_last_name
+		"#{contact_first_name} #{contact_last_name}"
 	end
 
 	def city_state_zip
-		contact_city + ', ' + contact_state + ' ' + contact_zipcode
+    return '' unless contact_city && contact_state && contact_zipcode
+		"#{contact_city}, #{contact_state} #{contact_zipcode}"
 	end
 end

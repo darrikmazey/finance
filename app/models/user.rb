@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :clients
 	has_many :invoices
 	has_many :work_items
+  has_many :expense_items
 	has_many :rates, :through => :projects
 	has_many :transactions, :through => :invoices
 
@@ -101,11 +102,29 @@ class User < ActiveRecord::Base
     return wis
   end
 
+  def loose_expense_items_for_account_group(_account_group = nil)
+    projects = projects_for_account_group(_account_group)
+    eis = []
+    expense_items.loose.ascending_creation.each { |ei|
+      eis << ei if projects.include?(ei.project)
+    }
+    return eis
+  end
+
+  def expense_items_for_account_group(_account_group = nil)
+    projects = projects_for_account_group(_account_group)
+    eis = []
+    expense_items.ascending_creation.each { |ei|
+      eis << ei if projects.include?(ei.project)
+    }
+    return eis
+  end
+
   # only show invoices for the current account_group
   def invoices_for_account_group(_account_group = nil)
     invs = []
     invoices.each { |inv| 
-      invs << inv if @user_options.account_group == inv.client.account.account_group
+      invs << inv if _account_group == inv.client.account.account_group
     }
     invs 
   end

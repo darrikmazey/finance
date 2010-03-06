@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
 	has_many :invoices
 	has_many :rates
 	has_many :work_items
+  has_many :expense_items
 
   has_many :project_users
   has_many :workers, :source => :user, :through => :project_users

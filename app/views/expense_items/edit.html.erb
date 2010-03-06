@@ -1,0 +1,19 @@
+<h1><%= @expense_item.new_record? ? 'New' : 'Editing' -%> Expense Item</h1>
+
+<% form_for(@expense_item) do |f| %>
+	<%= f.hidden_field :user_id, :value => @current_user.id %>
+  <%= f.collection_select :project_id, @current_user.projects_for_account_group(@user_options.account_group), :id, :name %>
+  <%= f.text_field :rate %>
+  <%= f.text_field :hours %>
+  <p id="project_invoices">
+    <%= f.collection_select :invoice_id, (@expense_item.project.nil? ? [] : @expense_item.project.invoices), :id, :identifier, :include_blank => true %>
+  </p>
+	<%= observe_field :expense_item_project_id, 
+        :url => { :controller => 'invoices', :action => 'for_project' }, 
+        :update => 'expense_item_invoice_id', 
+        :with => '"c=expense_item&id="+value' %>
+  <%= f.text_field :description %>
+  <%= f.submit 'Update' %>
+<% end %>
+
+<%= link_to back_image_tag(:large), expense_items_path %>

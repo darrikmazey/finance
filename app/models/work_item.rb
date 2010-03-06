@@ -9,6 +9,10 @@ class WorkItem < ActiveRecord::Base
 	named_scope :loose, { :conditions => { :invoice_id => nil } }
 	named_scope :ascending_creation, { :order => 'start_time asc, id asc' }
 
+  def invoice_start_time
+    start_time
+  end
+
 	def align_start_time
 		if self.start_time.nil?
 			return nil
