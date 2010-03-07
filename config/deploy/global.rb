@@ -62,6 +62,11 @@ namespace :deploy do
 	task :symlink_database_yml, :roles => :app do
 		run "cd #{release_path}/config && ln -s _database.yml database.yml"
 	end
+
+	desc "symlink initializers"
+	task :symlink_initializers, :roles => :app do
+		run "cd #{release_path}/config/initializers && ln -s #{deploy_to}/shared/config/initializers/site_keys.rb"
+	end
 end
 
 after 'deploy:setup', 'deploy:setup_code'
@@ -69,6 +74,7 @@ after 'deploy:update_code', 'deploy:copy_code_to_release'
 before 'deploy:copy_code_to_release', 'deploy:make_release_dir'
 after 'deploy:copy_code_to_release', 'deploy:migrate_db'
 before 'deploy:migrate_db', 'deploy:symlink_database_yml'
+before 'deploy:symlink_database_yml', 'deploy:symlink_initializers'
 after 'deploy:symlink', 'deploy:update_version'
 
 after 'deploy:symlink', 'deploy:make_tmp_dir'
