@@ -86,7 +86,8 @@ module InvoicesHelper
       prawn_cell('', color),
       prawn_cell(comment.body, color),
       prawn_cell('', color),
-      prawn_cell('', color)
+      prawn_cell('', color),
+			prawn_cell('', color)
     ]
   end
 
