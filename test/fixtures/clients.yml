@@ -9,4 +9,16 @@ ag_1_client_1:
   contact_city: Torrington
   contact_state: CT
   contact_zipcode: 06790
-  account: ag_1_checking
+  account: ag_1_client_account
+
+ag_2_client_1:
+  name: ag_2_client_1
+  user: ag_2_admin
+  contact_first_name: First
+  contact_last_name: Last
+  contact_street1: 11 Main Street
+  contact_city: Torrington
+  contact_state: CT
+  contact_zipcode: 06790
+  account: ag_2_client_account
+  

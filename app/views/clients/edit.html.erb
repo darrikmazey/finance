@@ -53,7 +53,7 @@
 
     <p>
     <%= label :client_account, :period %><br />
-    <%= collection_select :client_account, :period, Account::Period.all, :value, :name %>
+    <%= collection_select :client_account, :period, Period.all, :value, :name %>
     </p>
 
     </div>

@@ -12,3 +12,29 @@ ag_1_checking:
   amount: 1.5
   parent: 
   account_group: account_group_1
+
+ag_1_client_account:
+  name: ag_1_client_account
+  description: Client Revenue account
+  initial_balance: 0.0
+  type: RevenueAccount
+  user: ag_1_admin
+  due_date: 1
+  period: 1
+  account_number: 1435
+  amount: 0.0
+  parent:
+  account_group: account_group_1
+
+ag_2_client_account:
+  name: ag_2_client_account
+  description: Client Revenue account
+  initial_balance: 0.0
+  type: RevenueAccount
+  user: ag_1_admin
+  due_date: 1
+  period: 1
+  account_number: 1435
+  amount: 0.0
+  parent:
+  account_group: account_group_1

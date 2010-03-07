@@ -67,5 +67,12 @@ class ApplicationController < ActionController::Base
       redirect_to path
     end
   end
+
+  def admin_account_group_required_redirect_root
+    if !@user_options.admin_account_group?
+      flash[:error] = "You are only a worker, you do not have permission to do that!"
+      redirect_to '/'
+    end
+  end
   
 end

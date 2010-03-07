@@ -1,7 +1,7 @@
 class ClientsController < ApplicationController
 	
 	before_filter :login_required
-  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy, :create]
+  before_filter :admin_account_group_required_redirect_root
 
   # GET /clients
   # GET /clients.xml
