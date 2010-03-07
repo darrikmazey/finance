@@ -19,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
 	map.account_graph '/graphs/account/:id', :controller => 'graphs', :action => 'account'
 	map.summary_graph '/graphs/summary', :controller => 'graphs', :action => 'summary'
 
-  map.root :controller => 'accounts'
+  map.root :controller => 'invoice_items'
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
