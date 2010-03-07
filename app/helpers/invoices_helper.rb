@@ -54,7 +54,7 @@ module InvoicesHelper
 	def generate_table_data(pdf, invoice)
 		data = []
     invoice.invoice_items.each do |invoice_item|
-      data << generate_invoice_item_row(invoice_item)
+      data += generate_invoice_item_row(invoice_item)
     end
     data
   end
@@ -63,7 +63,8 @@ module InvoicesHelper
     color = background_color
     comments = invoice_item.comments
     first_comment = comments.shift || nil
-    row_data = [
+    row_data = []
+    row_data << [
       prawn_cell((invoice_item.invoice_start_time.short_date rescue 'none'), color),
       prawn_cell((invoice_item.start_time.short_time rescue ''), color),
       prawn_cell((invoice_item.end_time.short_time rescue ''), color),
