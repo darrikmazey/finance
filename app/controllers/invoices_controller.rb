@@ -1,6 +1,7 @@
 class InvoicesController < ApplicationController
 	
 	before_filter :login_required
+  before_filter :admin_account_group_required_redirect_root
 
   # GET /invoices
   # GET /invoices.xml

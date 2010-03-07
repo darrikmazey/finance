@@ -1,7 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+ag_1_invoice_1:
   identifier: 123
-  user: one
+  user: ag_1_admin
   billed_at: 2010-01-30 21:22:13
-  project: one
+  project: ag_1_project_1
+
+ag_2_invoice_1:
+  identifier: 124
+  user: ag_2_admin
+  billed_at: 2010-01-30 21:22:13
+  project: ag_2_project_1
+  
