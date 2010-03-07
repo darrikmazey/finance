@@ -5,7 +5,7 @@
     <%= render :partial => "projects/project_users/list_header" %>
     <%= render :partial => "projects/project_users/project_user", :collection => user_list, :locals => { :form => form } %>
   </div>
-  <script type="text/javascript">var project_users_container_id=<%= user_list.collect { |u| u.id }.max %>;</script>
+  <script type="text/javascript">var project_users_container_id=<%= user_list.collect { |u| u.id }.max || 0 %>;</script>
   <% if @user_options.admin_account_group? -%>
     <%= link_to_remote '+', :update => 'project_users_container',
         :position => :bottom,
