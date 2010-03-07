@@ -57,12 +57,18 @@ namespace :deploy do
 	task :symlink_pids_dir, :roles => :app do
 		run "cd #{release_path}/tmp && ln -s #{deploy_to}/shared/pids"
 	end
+
+	desc "symlink database.yml"
+	task :symlink_database_yml, :roles => :app do
+		run "cd #{release_path}/config && ln -s _database.yml database.yml"
+	end
 end
 
 after 'deploy:setup', 'deploy:setup_code'
 after 'deploy:update_code', 'deploy:copy_code_to_release'
 before 'deploy:copy_code_to_release', 'deploy:make_release_dir'
 after 'deploy:copy_code_to_release', 'deploy:migrate_db'
+before 'deploy:migrate_db', 'deploy:symlink_database_yml'
 after 'deploy:symlink', 'deploy:update_version'
 
 after 'deploy:symlink', 'deploy:make_tmp_dir'
