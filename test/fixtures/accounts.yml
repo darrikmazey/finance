@@ -1,25 +1,14 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  description: MyString
+ag_1_checking:
+  name: ag_1_checking
+  description: Personal Checking Account
   initial_balance: 1.5
-  type: MyString
-  user: 
+  type: ExpenseAccount
+  user: ag_1_admin
   due_date: 1
   period: 1
-  account_number: MyString
+  account_number: 12352341
   amount: 1.5
   parent: 
-
-two:
-  name: MyString
-  description: MyString
-  initial_balance: 1.5
-  type: MyString
-  user: 
-  due_date: 1
-  period: 1
-  account_number: MyString
-  amount: 1.5
-  parent: 
+  account_group: account_group_1

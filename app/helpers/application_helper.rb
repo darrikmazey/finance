@@ -36,7 +36,7 @@ module ApplicationHelper
 
   def my_custom_fields_for(obj, options = {}, &block)
     options[:builder] = FinanceFieldBuilder.new unless options[:builder]
-    custom_fields_for(obj, options, &proc)
+    custom_fields_for(obj, options, &block)
   end
 
   def admin?

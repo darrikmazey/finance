@@ -1,17 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  ref: MyString
-  description: MyString
-  credit_amount: 1.5
-  debit_amount: 1.5
+  ref: 1123
+  description: Transaction1
+  amount: 1.5
   trans_date: 2010-01-28 11:10:18
-  account: 
-
-two:
-  ref: MyString
-  description: MyString
-  credit_amount: 1.5
-  debit_amount: 1.5
-  trans_date: 2010-01-28 11:10:18
-  account: 
+  invoice: one

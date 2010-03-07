@@ -1,7 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+account_group_1:
+  name: account_group_1
+  description: Personal Account Group
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+account_group_2:
+  name: account_group_2
+  description: Business Account Group

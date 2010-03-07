@@ -1,13 +1,37 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  username: MyString
-  hashed_password: MyString
-  salt: MyString
+ag_1_admin:
+  login: ag_1_admin
+  name: First User
+  crypted_password: 8ed7bec88ba214c560f41635633a574c389c80dd
+  state: active
+  salt: 337b016d91d67846ca4a32356756c44c0e274b88
   last_login: 2010-01-26 23:15:32
+  account_group: account_group_1
 
-two:
-  username: MyString
-  hashed_password: MyString
-  salt: MyString
+ag_1_worker:
+  login: ag_1_worker
+  name: worker 1
+  crypted_password: 8ed7bec88ba214c560f41635633a574c389c80dd
+  state: active
+  salt: 337b016d91d67846ca4a32356756c44c0e274b88
   last_login: 2010-01-26 23:15:32
+  account_group: account_group_1
+  
+ag_2_admin:
+  login: ag_2_admin
+  name: Second User
+  crypted_password: 8ed7bec88ba214c560f41635633a574c389c80dd
+  state: active
+  salt: 337b016d91d67846ca4a32356756c44c0e274b88
+  last_login: 2010-01-26 23:15:32
+  account_group: account_group_2
+
+ag_2_worker:
+  login: ag_2_worker
+  name: worker 2
+  crypted_password: 8ed7bec88ba214c560f41635633a574c389c80dd
+  state: active
+  salt: 337b016d91d67846ca4a32356756c44c0e274b88
+  last_login: 2010-01-26 23:15:32
+  account_group: account_group_2

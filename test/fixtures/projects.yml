@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  description: MyString
-  base_rate: 1.5
-  user: 
-  client: 
+ag_1_project_1:
+  name: ag_1_project_1
+  description: "Account Group 1 Project #1"
+  base_rate: 100
+  user: ag_1_admin
+  client: ag_1_client_1
 
-two:
-  name: MyString
-  description: MyString
-  base_rate: 1.5
-  user: 
-  client: 
+ag_1_project_2:
+  name: ag_1_project_2
+  description: "Account group 1 project #2"
+  base_rate: 65
+  user: ag_1_admin
+  client: ag_1_client_1

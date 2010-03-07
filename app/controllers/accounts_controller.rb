@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
 	
   before_filter :login_required
+  before_filter { |c| c.send :admin_account_group_required, '/' }
 
   # GET /accounts
   # GET /accounts.xml
@@ -28,6 +29,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = @current_user.accounts.find(params[:id]) rescue nil
+    @account = nil unless @account.account_group == @user_options.account_group
 		if @account.nil?
 			redirect_to accounts_url
 			return
@@ -54,6 +56,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1/edit
   def edit
     @account = @current_user.accounts.find(params[:id]) rescue nil
+    @account = nil unless @account.account_group == @user_options.account_group
 		if @account.nil?
 			redirect_to accounts_url
 			return
@@ -65,6 +68,7 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
+    @account.account_group = @user_options.account_group
 		@account.type = params[:account][:type]
 		@account.save
 
@@ -101,6 +105,11 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.xml
   def destroy
     @account = Account.find(params[:id])
+    @account = nil unless @account.account_group == @user_options.account_group
+    if @account.nil?
+      redirect_to accounts_path
+      return
+    end
     @account.destroy
 
     respond_to do |format|

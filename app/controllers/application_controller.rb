@@ -61,10 +61,10 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
-  def admin_account_group_required
+  def admin_account_group_required(path = "/#{controller_name}")
     if !@user_options.admin_account_group?
       flash[:error] = "You are only a worker, you do not have permission to do that!"
-      redirect_to "/#{controller_name}"
+      redirect_to path
     end
   end
   

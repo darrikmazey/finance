@@ -35,4 +35,16 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login_as(user)
+    @request.session['user_id'] = users(user).id
+    @request.session[:user_option] = { "user_id" => users(user).id }
+  end
+
+  def use_account_group(account_group)
+    @request.session[:user_option]["account_group_id"] = account_groups(account_group).id
+  end
+
+  def admin_account_group_error
+    "You are only a worker, you do not have permission to do that!"
+  end
 end
