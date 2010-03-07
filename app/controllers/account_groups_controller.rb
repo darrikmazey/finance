@@ -1,6 +1,7 @@
 class AccountGroupsController < ApplicationController
 
   before_filter :login_required
+  before_filter { |c| c.send :admin_account_group_required, '/' }
 
   def index
     @account_groups = @current_user.account_groups 
@@ -31,11 +32,14 @@ class AccountGroupsController < ApplicationController
 
   def create
     @account_group = AccountGroup.new(params[:account_group])
-    @account_group.users << @current_user
     if @account_group.save
+      @account_group.users << @current_user
       flash[:notice] = "Account Group was successfully created."
+      puts "saved, redirecting"
       redirect_to account_groups_url
     else
+      puts @current_user.inspect
+      puts @account_group.errors.full_messages.inspect
       render :action => 'edit'
     end
   end
