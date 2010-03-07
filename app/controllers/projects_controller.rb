@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 	
 	before_filter :login_required
-  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy, :create]
+  before_filter :admin_account_group_required, :only => [:new, :edit, :destroy, :create, :update]
 
   # GET /projects
   # GET /projects.xml
@@ -51,6 +51,12 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @project = nil unless @project.client.account.account_group == @user_options.account_group
+    if @project.nil?
+      redirect_to projects_path
+      return
+    end
+
     @admins = @project.account_group.users
     @workers = @project.workers
     @clients = @user_options.account_group.clients

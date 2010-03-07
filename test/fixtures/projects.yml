@@ -13,3 +13,10 @@ ag_1_project_2:
   base_rate: 65
   user: ag_1_admin
   client: ag_1_client_1
+
+ag_2_project_1:
+  name: ag_2_project_1
+  description: "Account group 2 project #1"
+  base_rate: 25
+  user: ag_2_admin
+  client: ag_2_client_1

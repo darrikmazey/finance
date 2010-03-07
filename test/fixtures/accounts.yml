@@ -37,4 +37,4 @@ ag_2_client_account:
   account_number: 1435
   amount: 0.0
   parent:
-  account_group: account_group_1
+  account_group: account_group_2
