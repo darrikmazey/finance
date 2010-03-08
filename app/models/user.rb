@@ -148,7 +148,7 @@ class User < ActiveRecord::Base
     ag = ag.id if ag
     ag = self.account_groups.first unless self.account_groups.include?(ag)
     return { 
-        "account_group_id" => ag.id,
+        "account_group_id" => (ag.nil? ? '' : ag.id),
         "user_id" => self.id,
         "template" => self.template
       }
