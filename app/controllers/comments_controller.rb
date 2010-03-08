@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 	
 	before_filter :login_required
+	before_filter :preload_work_item
 
   # GET /comments
   # GET /comments.xml
@@ -92,4 +93,12 @@ class CommentsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+	private
+
+	def preload_work_item
+		if params[:work_item_id]
+			@work_item = WorkItem.find(params[:work_item_id])
+		end
+	end
 end
