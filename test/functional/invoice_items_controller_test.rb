@@ -1,8 +1,7 @@
 require 'test_helper'
 
-class ExpenseItemsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
+class InvoiceItemsControllerTest < ActionController::TestCase
   test "the truth" do
-    assert true
+    assert !true
   end
 end
