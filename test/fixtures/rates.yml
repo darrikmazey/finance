@@ -1,11 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  project: 
-  modifier: 1.5
+ag_1_rate_1:
+  name: ag_1_rate_1
+  tax: 0.01
+  project: ag_1_project_1
+  modifier: 0.5
+  taxeable: true
 
-two:
-  name: MyString
-  project: 
-  modifier: 1.5
+ag_2_rate_2:
+  name: ag_2_rate_2
+  tax: 0.01
+  project: ag_2_project_1
+  modifier: 0.4
+  taxeable: true
