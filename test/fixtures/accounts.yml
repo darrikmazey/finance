@@ -38,3 +38,16 @@ ag_2_client_account:
   amount: 0.0
   parent:
   account_group: account_group_2
+
+ag_2_checking:
+  name: ag_2_checking
+  description: Business Checking Account
+  initial_balance: 1.5
+  type: ExpenseAccount
+  user: ag_2_admin
+  due_date: 1
+  period: 1
+  account_number: 12352341
+  amount: 1.5
+  parent: 
+  account_group: account_group_2

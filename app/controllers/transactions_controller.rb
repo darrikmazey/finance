@@ -58,7 +58,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         flash[:notice] = 'Transaction was successfully created.'
-        format.html { @account ? redirect_to(@account) : redirect_to(@transaction) }
+        format.html { @account ? redirect_to(@account) : redirect_to(transactions_path) }
         format.xml  { render :xml => @transaction, :status => :created, :location => @transaction }
       else
         format.html { render :action => "edit" }

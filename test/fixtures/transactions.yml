@@ -1,8 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+ag_1_transaction_1:
+  debit_account: ag_1_client_account
+  credit_account: ag_1_checking
   ref: 1123
-  description: Transaction1
-  amount: 1.5
-  trans_date: 2010-01-28 11:10:18
-  invoice: one
+  amount: 100.00
+  invoice: ag_1_invoice_1
+  trans_date: 2010-03-05
+  description: "Test transaction!!"
+
+ag_2_transaction_1:
+  debit_account: ag_2_client_account
+  credit_account: ag_2_checking
+  ref: 1124
+  amount: 400.00
+  invoice: ag_2_invoice_1
+  trans_date: 2010-03-05
+  description: "Test transaction #2!!"
