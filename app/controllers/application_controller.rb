@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
 	def load_user
     @current_user = current_user
-    if @current_user && (controller_name != "user" && action_name != "logout")
+    if @current_user && (controller_name != "sessions" && action_name != "destroy")
       # create a hash of options, start with the defaults, merge in session and then merge in params
       h = @current_user.user_options
       h.merge!(session[:user_option]) if session[:user_option]
