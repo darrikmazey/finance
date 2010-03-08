@@ -5,5 +5,5 @@
 
 <%= render :partial => 'account_groups/account_group_list', :object => @current_user.account_groups %>
 
-<%= render :partial => 'projects/project_list', :object => @user_options.account_group.projects, :locals => { :title => "projects for account group [#{@user_options.account_group.name}]" } %>
+<%= render :partial => 'projects/project_list', :object => @current_user.projects_for_account_group(@user_options.account_group), :locals => { :title => "projects for account group [#{@user_options.account_group.name}]" } %>
 
