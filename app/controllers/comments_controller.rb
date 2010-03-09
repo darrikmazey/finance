@@ -1,37 +1,7 @@
 class CommentsController < ApplicationController
 	
 	before_filter :login_required
-<<<<<<< HEAD:app/controllers/comments_controller.rb
-	before_filter :preload_work_item
-
-  # GET /comments
-  # GET /comments.xml
-  def index
-		if @work_item.nil?
-			@comments = Comment.all
-		else
-			@comments = @work_item.comments
-		end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @comments }
-    end
-  end
-
-  # GET /comments/1
-  # GET /comments/1.xml
-  def show
-    @comment = Comment.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
-    end
-  end
-=======
   before_filter :load_work_item
->>>>>>> 27eb2f9acc51ad5e15764ab6a7874a9b9aff2b76:app/controllers/comments_controller.rb
 
   # GET /comments/new
   # GET /comments/new.xml
