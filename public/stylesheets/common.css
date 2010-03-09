@@ -239,6 +239,16 @@ a:hover { text-decoration: underline; }
   width: 25%;
 }
 
+.list .summary {
+	background-color: #444;
+	padding-top: 2px;
+	padding-bottom: 3px;
+}
+
+.list.work_items .summary .field.empty_space {
+	width: 49%;
+}
+
 .edit_item .content,
 .item_data .content {
 	border: 1px solid;

@@ -1,0 +1,7 @@
+
+<div class="summary">
+	<div class="field date">Total</div>
+	<div class="field empty_space">&nbsp;</div>
+	<div class="field hours"><%=h list_summary.inject(0) { |s,v| s += v.hours } %></div>
+	<div class="field subtotal"><%=h number_to_currency(list_summary.inject(0) { |s,v| s += v.subtotal }) %></div>
+</div>
