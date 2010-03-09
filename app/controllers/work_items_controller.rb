@@ -84,7 +84,7 @@ class WorkItemsController < ApplicationController
 		@work_item.user = @current_user
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
-		@work_item.project = @current_user.last_project || @current_user.projects.first
+		@work_item.project = @current_user.last_project || @current_user.projects_for_account_group(@user_options.account_group).first
 
     # make sure they can access the project 
     projects = @current_user.projects_for_account_group(@user_options.account_group)
