@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
 	
 	before_filter :login_required
+<<<<<<< HEAD:app/controllers/comments_controller.rb
 	before_filter :preload_work_item
 
   # GET /comments
@@ -28,6 +29,9 @@ class CommentsController < ApplicationController
       format.xml  { render :xml => @comment }
     end
   end
+=======
+  before_filter :load_work_item
+>>>>>>> 27eb2f9acc51ad5e15764ab6a7874a9b9aff2b76:app/controllers/comments_controller.rb
 
   # GET /comments/new
   # GET /comments/new.xml
@@ -38,14 +42,9 @@ class CommentsController < ApplicationController
 		end
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :action => 'edit' }
       format.xml  { render :xml => @comment }
     end
-  end
-
-  # GET /comments/1/edit
-  def edit
-    @comment = Comment.find(params[:id])
   end
 
   # POST /comments
@@ -68,7 +67,6 @@ class CommentsController < ApplicationController
   # PUT /comments/1
   # PUT /comments/1.xml
   def update
-    @comment = Comment.find(params[:id])
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
@@ -85,7 +83,6 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    @comment = Comment.find(params[:id])
     @comment.destroy
 
     respond_to do |format|
@@ -94,11 +91,18 @@ class CommentsController < ApplicationController
     end
   end
 
-	private
+  private
 
-	def preload_work_item
-		if params[:work_item_id]
-			@work_item = WorkItem.find(params[:work_item_id])
-		end
-	end
+  # load the comment and work item
+  # fail gracefully if there is an issue and make sure the project for the work item is viewable
+  def load_work_item
+    @work_item = WorkItem.find(params[:work_item_id]) if params[:work_item_id]
+    @work_item = WorkItem.find(params[:comment][:work_item_id]) if params[:comment]
+    if params[:id] 
+      @comment = Comment.find(params[:id]) rescue nil
+      @work_item = @comment.work_item rescue nil
+    end
+    @work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project) rescue nil
+    redirect_to work_items_path if @work_item.nil?
+  end
 end

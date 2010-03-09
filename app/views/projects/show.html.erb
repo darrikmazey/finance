@@ -15,10 +15,12 @@
 <%= render :partial => 'work_items/work_item_list', :object => @open_work_items %>
 <% end -%>
 
-<% if @project.invoices.size > 0 -%>
-<%= render :partial => 'invoices/invoice_list', :object => @project.invoices %>
-<% end -%>
+<% if admin_account_group? %>
+  <% if @project.invoices.size > 0 -%>
+  <%= render :partial => 'invoices/invoice_list', :object => @project.invoices %>
+  <% end -%>
 
-<% if @project.transactions.size > 0 -%>
-<%= render :partial => 'accounts/transaction_list', :object => @project.transactions %>
-<% end -%>
+  <% if @project.transactions.size > 0 -%>
+  <%= render :partial => 'accounts/transaction_list', :object => @project.transactions %>
+  <% end -%>
+<% end %>

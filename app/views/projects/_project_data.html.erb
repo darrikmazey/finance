@@ -3,8 +3,10 @@
 		<div class="column first">
       <%= f.field :name %>
       <%= f.field :description %>
-      <%= f.field :base_rate, { :value => number_to_currency(project_data.base_rate) } %>
-      <%= f.field :client, { :value => link_to(project_data.client.name, client_url(project_data.client)) } %>
+      <% if admin_account_group? %>
+        <%= f.field :base_rate, { :value => number_to_currency(project_data.base_rate) } %>
+        <%= f.field :client, { :value => link_to(project_data.client.name, client_url(project_data.client)) } %>
+      <% end %>
     </div>
   <% end %>
 </div>

@@ -1,17 +1,9 @@
-<h1>Editing comment</h1>
+<h1><%= @comment.new_record? ? 'New' : 'Editing' -%> Comment</h1>
 
 <% form_for(@comment) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_field :body %>
-  </p>
+  <%= f.text_area :body %>
 	<%= f.hidden_field :work_item_id, :value => @comment.work_item.id %>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to show_image_tag(:large), @comment %>
-<%= link_to back_image_tag(:large), @comment.work_item %>
+<%= link_to back_image_tag(:large), work_item_path(@comment.work_item) %>

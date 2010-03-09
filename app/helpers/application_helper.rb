@@ -43,6 +43,10 @@ module ApplicationHelper
     logged_in? && @current_user.admin?
   end
 
+  def admin_account_group?
+    logged_in? && @user_options.admin_account_group?
+  end
+
   def button_link_to(text, url, options = {})
     "<div class=\"button_link\">#{link_to text, url, options}</div>"
   end
