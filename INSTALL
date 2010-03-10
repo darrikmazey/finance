@@ -1,0 +1,37 @@
+This file will guide you through the process of setting up the finance application.  
+
+1) Either download and extract a compressed version or get the latest code from the git repository directly.
+
+> git clone git@github.com:darrikmazey/finance.git
+
+2) Create the database using your database of choice.
+
+3) Edit the default database.yml file making changes as necessary.
+
+> cd finance/config
+> cp _database.yml database.yml
+
+Edit database.yml.
+
+4) Migrate the database
+
+> cd ..
+> RAILS_ENV=production rake db:migrate
+
+5) Generate the site key file.  This file contains a secret key that is used to further secure passwords.  
+
+NOTE: If you plan on using a previous database with user accounts then you will need to copy the site_keys.rb file from that application.
+
+> rake auth:gen:site_key
+
+6) Start the server.
+
+NOTE: The first person to load the site after it has been started is prompted to create an admin user and then the first account group for the application.  It's not advisable to start the application on a publically accessible domain until it has been successfully initialized.  
+
+> RAILS_ENV=production ./script/server
+
+7) Load up the site in a browser and create the first user.  After that has been completed, you will be prompted to create the first account group.  
+
+8) ?????
+
+9) Profit!
