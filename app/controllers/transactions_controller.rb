@@ -36,7 +36,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
 
 		ttype = params[:type]
-		@accounts = @current_user.accounts
+		@accounts = @user_options.account_group.accounts
 
     respond_to do |format|
       format.html { render :action => 'edit' }

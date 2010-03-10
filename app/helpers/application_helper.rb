@@ -4,7 +4,7 @@ module ApplicationHelper
 
 	def accounts_options_for_select(selected_id = nil)
 		option_tags = Array.new
-		@current_user.accounts.root.each do |a|
+		@user_options.account_group.accounts.root.each do |a|
 			option_tags << "<option value=\"#{a.id}\" #{account_selected(a.id, selected_id)}>#{a.name}</option>"
 			if a.children.size > 0
 				option_tags << "<optgroup>"
