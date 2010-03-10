@@ -13,10 +13,30 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 	
+  before_filter :check_users_exist
+  before_filter :check_account_groups_exist
 	before_filter :load_user
 	before_filter :get_version
 
 	private
+
+  def check_users_exist
+    if User.count == 0
+      if controller_name != 'users' && (action_name == 'new' || action_name == 'edit')
+        redirect_to new_user_path
+      end
+    end
+  end
+
+  def check_account_groups_exist
+    if User.count != 0
+      if AccountGroup.count == 0
+        if controller_name != 'account_groups' && (action_name != 'new' && action_name != 'edit')
+          redirect_to new_account_group_path
+        end
+      end
+    end
+  end
 
   def admin_required
     @current_user.admin? || render(:partial => '/sessions/admin_required', :layout => true)
@@ -40,9 +60,11 @@ class ApplicationController < ActionController::Base
       @user_options = UserOption.new(h)
 
       # save this in the session
-      session[:user_option] = @user_options.attributes
+      save_user_options
   
-      render :partial => 'account_groups/no_account_groups', :layout => true unless @user_options.account_group
+      if !@current_user.admin?
+        render :partial => 'account_groups/no_account_groups', :layout => true unless @user_options.account_group
+      end
       redirect_to :back if p["account_group_id"]
     end
 	end
@@ -62,17 +84,21 @@ class ApplicationController < ActionController::Base
 	end
 
   def admin_account_group_required(path = "/#{controller_name}")
-    if !@user_options.admin_account_group?
+    if !@current_user.admin? || !@user_options.admin_account_group?
       flash[:error] = "You are only a worker, you do not have permission to do that!"
       redirect_to path
     end
   end
 
   def admin_account_group_required_redirect_root
-    if !@user_options.admin_account_group?
+    if !@current_user.admin? || !@user_options.admin_account_group?
       flash[:error] = "You are only a worker, you do not have permission to do that!"
       redirect_to '/'
     end
+  end
+
+  def save_user_options
+      session[:user_option] = @user_options.attributes
   end
   
 end

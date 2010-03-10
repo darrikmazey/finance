@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def admin_account_group?
-    logged_in? && @user_options.admin_account_group?
+    logged_in? && (@current_user.admin? || @user_options.admin_account_group?)
   end
 
   def button_link_to(text, url, options = {})
@@ -52,6 +52,6 @@ module ApplicationHelper
   end
 
   def admin_account_group_link_to(text, url, options = {})
-    link_to(text, url, options) if @user_options.admin_account_group?
+    link_to(text, url, options) if @current_user.admin? || @user_options.admin_account_group?
   end
 end

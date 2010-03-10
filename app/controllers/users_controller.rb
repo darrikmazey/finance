@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   # render new.rhtml
   def new
     @user = User.new
+    render :action => 'edit'
   end
 
   def show
@@ -24,14 +25,32 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
+    @user.salt = User.make_token
+    first_user = false
+    if User.count == 0
+      @user.admin = true
+      @user.state == 'active'
+      first_user = true
+    end
     @user.register! if @user && @user.valid?
+    @user.activate! if first_user
     success = @user && @user.valid?
     if success && @user.errors.empty?
       redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      if first_user
+        self.current_user = User.authenticate(params[:user][:login], params[:user][:password])
+        handle_remember_cookie! 0
+        flash[:notice] = "User successfully created and logged in!"
+      else
+        flash[:notice] = "Thanks for signing up!  We're sending you an email with your activation code."
+      end
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
-      render :action => 'new'
+      if User.count == 0
+        flash[:error] = "We couldn't set up that account, sorry."
+      else
+        flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact an admin (link is above)."
+      end
+      render :action => 'edit'
     end
   end
 

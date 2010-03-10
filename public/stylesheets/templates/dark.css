@@ -14,7 +14,6 @@ a:visited { color: #aaa }
 a:hover { color: #fff }
 .page_header .content { font-size: 1.2em }
 .menu .link { border-color: gray; }
-.fieldWithErrors { background-color: red }
 #errorExplanation {
   border-color: red;
   background-color: #f0f0f0;

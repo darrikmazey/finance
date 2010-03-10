@@ -23,7 +23,6 @@ a:hover { text-decoration: underline; }
 
 .fieldWithErrors {
   padding: 2px;
-  display: table;
 }
 
 #errorExplanation {
@@ -322,4 +321,12 @@ a:hover { text-decoration: underline; }
 .button_link A {
   line-height: 16px;
   text-decoration: none;
+}
+
+form.new_user .form_field_label {
+  width: 250px;
+}
+
+form.new_user .form_field {
+  margin-left: 260px;
 }

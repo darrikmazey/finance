@@ -1,7 +1,7 @@
 class AccountGroupsController < ApplicationController
 
   before_filter :login_required
-  before_filter { |c| c.send :admin_account_group_required, '/' }
+  before_filter { |c| c.send(:admin_account_group_required, '/') if [:new, :create].include?(c.action_name) }
 
   def index
     @account_groups = @current_user.account_groups 
@@ -34,6 +34,13 @@ class AccountGroupsController < ApplicationController
     @account_group = AccountGroup.new(params[:account_group])
     if @account_group.save
       @account_group.users << @current_user
+      # make this the default account group if this the user's first
+      if @current_user.account_groups.count == 0
+        @current_user.account_group = @account_group
+        @current_user.save
+        @user_options.account_group_id = @account_group.id
+        save_user_options
+      end
       flash[:notice] = "Account Group was successfully created."
       puts "saved, redirecting"
       redirect_to account_groups_url
