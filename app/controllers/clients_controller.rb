@@ -62,6 +62,7 @@ class ClientsController < ApplicationController
 			@client_account = RevenueAccount.new(params[:client_account])
 			@client_account.name = @client.name
 			@client_account.user = @current_user
+      @client_account.account_group = @user_options.account_group
 			@client_account.save
 			@client.account = @client_account
 		end
