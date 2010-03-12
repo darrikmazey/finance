@@ -3,22 +3,14 @@ pre { padding: 10px }
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+.clear {
+  clear: both;
+  height: 1px;
+}
+
 .page_header .content {
 	text-align: right;
 	padding: 5px;
-}
-
-.menu {
-	width: 100%;
-	margin-top: 5px;
-	padding: 3px;
-	margin-bottom: 5px;
-}
-
-.menu .link {
-	display: inline-block;
-  padding-right: 5px;
-  border-right: 1px solid;
 }
 
 .fieldWithErrors {

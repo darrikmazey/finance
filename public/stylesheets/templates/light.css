@@ -13,7 +13,6 @@ a { color: #444 }
 a:visited { color: #444 }
 a:hover { color: #000 }
 .page_header .content { font-size: 1.2em }
-.menu .link { border-color: gray; }
 #errorExplanation {
   border-color: red;
   background-color: #f0f0f0;
@@ -179,4 +178,19 @@ a:hover { color: #000 }
 .button_link a:hover {
   color: #444;
 }
+/* dropdown */
+ul.dropdown { border-color: #ccc; }
+ul.dropdown li {
+  border-color: #fff #d9d9d9 #d9d9d9;
+  background-color: #f6f6f6;
+  color: #000;
 }
+ul.dropdown li.hover,
+ul.dropdown li:hover {
+  background-color: #eee;
+  color: #000;
+}
+ul.dropdown a:link,
+ul.dropdown a:visited { color: #000; }
+ul.dropdown a:hover { color: #000; }
+ul.dropdown a:active { color: #ffa500; }

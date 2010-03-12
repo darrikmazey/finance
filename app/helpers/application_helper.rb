@@ -54,4 +54,20 @@ module ApplicationHelper
   def admin_account_group_link_to(text, url, options = {})
     link_to(text, url, options) if @current_user.admin? || @user_options.admin_account_group?
   end
+
+  def display_menu_item(item)
+    ret = ""
+    ret += "<li #{item.children ? "class=\"dir\"" : ""}>"
+    ret += item.url ? link_to(item.name, item.url) : item.name
+    ret += " #{link_to('+', item.new_path, { :class => 'new_link' }) }" if item.new_path
+    if item.children
+      ret += "<ul>"
+      item.children.each { |child|
+        ret += display_menu_item(child)
+      }
+      ret += "</ul>"
+    end
+    ret += "</li>"
+    ret
+  end
 end

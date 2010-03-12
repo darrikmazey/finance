@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_account_groups_exist
 	before_filter :load_user
 	before_filter :get_version
+  before_filter :load_menu
 
 	private
 
@@ -99,6 +100,55 @@ class ApplicationController < ActionController::Base
 
   def save_user_options
       session[:user_option] = @user_options.attributes
+  end
+
+  class MenuLink
+    attr_accessor :name, :url, :children, :new_path
+
+    def initialize(name, url, children, new_path)
+      self.name = name
+      self.url = url
+      self.children = children
+      self.new_path = new_path
+    end
+  end
+
+  def link_to(name, url = nil, options = {})
+    MenuLink.new(name, url, options.delete(:children), options.delete(:new_path))
+  end
+
+  def load_menu
+    @menu = []
+
+    if @user_options.admin_account_group?
+      @menu << link_to('finance', root_path, { :children => [
+        link_to('account groups', account_groups_url, { :new_path => new_account_group_url }),
+        link_to('accounts', accounts_url, { :new_path => new_account_url }),
+        link_to('transaction', transactions_url, { :new_path => new_transaction_url })
+      ]})
+      @menu << link_to('projects', projects_url, { :children => [
+        link_to('clients', clients_url, { :new_path => new_client_url }),
+        link_to('invoices', invoices_url, { :new_path => new_invoice_url }),
+        link_to('projects', projects_url, { :new_path => new_project_url }),
+        link_to('rates', rates_url, { :new_path => new_rate_url })
+      ]})
+    end
+
+    @menu << link_to('invoice items', invoice_items_url, { :children => [
+      link_to('work items', work_items_path, { :new_path => new_work_item_url }),
+      link_to('expense items', expense_items_path, { :new_path => new_expense_item_url })
+    ]})
+
+    if @current_user.admin?
+      @menu << link_to("admin", nil, { :children => [ 
+        link_to('users', users_url, { :new_path => new_user_url })
+      ]})
+    end 
+    
+    if logged_in?
+      @menu << link_to(@current_user.login, user_path(@current_user))
+      @menu << link_to('logout', logout_url)
+    end
   end
   
 end
