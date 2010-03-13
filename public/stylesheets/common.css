@@ -20,6 +20,12 @@ a:hover { text-decoration: underline; }
   background-repeat: repeat-y;
 }
 
+.page_header .title {
+  float: left;
+  text-align: left;
+  padding-left: 15px;
+} 
+
 .fieldWithErrors {
   padding: 2px;
 }

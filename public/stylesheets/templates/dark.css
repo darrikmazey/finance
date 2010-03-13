@@ -12,7 +12,14 @@ pre {
 a { color: #aaa }
 a:visited { color: #aaa }
 a:hover { color: #fff }
-.page_header .content { font-size: 1.2em }
+.page_header .content { 
+  font-size: 1.2em 
+  color: #999;
+}
+.page_header .title {
+  font-size: 1.7em;
+  letter-spacing: 0.1em;
+}
 #errorExplanation {
   border-color: red;
   background-color: #f0f0f0;
