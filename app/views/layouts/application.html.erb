@@ -11,14 +11,10 @@
 	<%= javascript_include_tag 'prototype' %>
 </head>
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: red"><%= flash[:error] %></p>
-
-<%= render :partial => 'shared/page_header' %>
-<%= render :partial => 'shared/menu' %>
-
-<%= yield %>
-
+  <%= render :partial => 'shared/page_header' %>
+  <%= render :partial => 'shared/menu' %>
+  <div id="main_content">
+    <%= yield %>
+  </div>
 </body>
 </html>

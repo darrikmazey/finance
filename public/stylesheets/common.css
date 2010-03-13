@@ -1,3 +1,7 @@
+body {
+  padding: 0;
+  margin: 0;
+}
 .debug { display: none }
 pre { padding: 10px }
 a { text-decoration: none; }
@@ -5,12 +9,15 @@ a:hover { text-decoration: underline; }
 
 .clear {
   clear: both;
-  height: 1px;
+  height: 0px;
 }
 
 .page_header .content {
 	text-align: right;
 	padding: 5px;
+  background-image: url("/images/top_background.png");
+  background-position: 0 0;
+  background-repeat: repeat-y;
 }
 
 .fieldWithErrors {
@@ -321,4 +328,17 @@ form.new_user .form_field_label {
 
 form.new_user .form_field {
   margin-left: 260px;
+}
+
+#menu { 
+  padding-left: 10px; 
+  background-image: url("/images/menu_background.png");
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+#main_content {
+  padding: 10px;
 }

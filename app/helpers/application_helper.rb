@@ -55,11 +55,11 @@ module ApplicationHelper
     link_to(text, url, options) if @current_user.admin? || @user_options.admin_account_group?
   end
 
-  def display_menu_item(item)
+  def display_menu_item(item, first = false)
     ret = ""
-    ret += "<li #{item.children ? "class=\"dir\"" : ""}>"
-    ret += item.url ? link_to(item.name, item.url) : item.name
+    ret += "<li #{first ? "class=\"level1\"" : "class=\"level2\""}>"
     ret += " #{link_to('+', item.new_path, { :class => 'new_link' }) }" if item.new_path
+    ret += item.url ? link_to(item.name, item.url, :class => 'menu_contents') : "<span class=\"menu_contents\">#{item.name}</span>"
     if item.children
       ret += "<ul>"
       item.children.each { |child|

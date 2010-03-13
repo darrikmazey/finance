@@ -50,7 +50,6 @@ ul.dropdown ul {
   top: 100%;
   left: 0;
   z-index: 598;
-  width: 100%;
 }
 
 ul.dropdown ul li {
@@ -69,15 +68,31 @@ ul.dropdown li:hover > ul {
 ul.dropdown {
   font-weight: bold;
   display: block;
-  width: 100%;
-  border-bottom: 1px solid;
+  border-left: 1px solid;
 }
 
-ul.dropdown li {
-  padding: 3px 10px;
+ul.dropdown .level1 {
+  background-image: url("/images/menu_background.png");
+  background-position: 0 0;
+  background-repeat: repeat-x;
+  border-width: 0px 1px 0px 0px;
   border-style: solid;
-  border-width: 1px 1px 1px 0;
 }
+
+ul.dropdown .level1 .menu_contents {
+  line-height: 1.7em;
+  padding: 6px 10px;
+  height: 28px;
+}
+
+ul.dropdown .level2 {
+  border-style: solid;
+  border-width: 0px 1px 1px 5px;
+}
+
+ul.dropdown .level2 .menu_contents {
+  padding: 6px 4px;
+} 
 
 ul.dropdown a:link,
 ul.dropdown a:visited { text-decoration: none; }

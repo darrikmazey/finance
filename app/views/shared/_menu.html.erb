@@ -1,6 +1,8 @@
-<ul id="nav" class="dropdown dropdown-horizontal">
-  <% @menu.each do |menu_item| %>
-    <%= display_menu_item(menu_item) %>
-  <% end %>
-</ul>
-<div class="clear">&nbsp;</div>
+<div id="menu">
+  <ul id="nav" class="dropdown dropdown-horizontal">
+    <% @menu.each do |menu_item| %>
+      <%= display_menu_item(menu_item, true) %>
+    <% end %>
+  </ul>
+  <div class="clear">&nbsp;</div>
+</div>
