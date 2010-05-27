@@ -2,8 +2,8 @@
 	<div class="heading">transactions <%= link_to '+', new_transaction_url %></div>
 	<div class="content">
 
-		<%= render :partial => 'list_header' %>
-		<%= render :partial => 'transaction', :collection => transaction_list %>
+		<%= render :partial => 'accounts/list_header' %>
+		<%= render :partial => 'accounts/transaction', :collection => transaction_list %>
 
 	</div>
 </div>
