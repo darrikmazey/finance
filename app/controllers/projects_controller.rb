@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
     @admins = @project.account_group.users
     @workers = @project.workers
 		@account = @project.client.account
-		@open_work_items = @project.work_items.open
+		@loose_work_items = @project.work_items.loose
 		@period = params[:period] ? Period[params[:period].to_i] : Period[12]
 
     respond_to do |format|

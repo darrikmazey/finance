@@ -11,8 +11,8 @@
 <%= render :partial => 'projects/user_list', :object => @workers, :locals => { :title => 'workers', :project => @project, :show_controls => @user_options.admin_account_group? } %>
 <% end -%>
 
-<% if @open_work_items.size > 0 -%>
-<%= render :partial => 'work_items/work_item_list', :object => @open_work_items %>
+<% if @loose_work_items.size > 0 -%>
+<%= render :partial => 'work_items/work_item_list', :object => @loose_work_items %>
 <% end -%>
 
 <% if admin_account_group? %>
