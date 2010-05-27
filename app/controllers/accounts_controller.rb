@@ -2,16 +2,12 @@ class AccountsController < ApplicationController
 	
   before_filter :login_required
   before_filter { |c| c.send :admin_account_group_required, '/' }
+	before_filter :load_period, :only => [ :index, :show ]
 
   # GET /accounts
   # GET /accounts.xml
   def index
     @accounts = @user_options.account_group.accounts.root
-		if params[:period]
-			@period = Period[params[:period].to_i]
-		else
-			@period = Period[12]
-		end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -117,4 +113,14 @@ class AccountsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+	private
+
+	def load_period
+		if params[:period]
+			@period = Period[params[:period].to_i]
+		else
+			@period = Period[12]
+		end
+	end
 end
