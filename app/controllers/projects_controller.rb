@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
     @workers = @project.workers
 		@account = @project.client.account
 		@open_work_items = @project.work_items.open
+		@period = params[:period] ? Period[params[:period].to_i] : Period[12]
 
     respond_to do |format|
       format.html # show.html.erb
