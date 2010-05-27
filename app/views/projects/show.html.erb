@@ -20,7 +20,4 @@
   <%= render :partial => 'invoices/invoice_list', :object => @project.invoices %>
   <% end -%>
 
-  <% if @project.transactions.size > 0 -%>
-  <%= render :partial => 'accounts/transaction_list', :object => @project.transactions %>
-  <% end -%>
 <% end %>
