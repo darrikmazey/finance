@@ -4,7 +4,7 @@ class InvoiceItemsController < ApplicationController
 
   def index
 		@list_type = :loose
-    @work_items = @current_user.loose_work_items_for_account_group(@user_options.account_group)
+    @work_items = @current_user.loose_work_items_for_account_group(@user_options.account_group).reverse
     @expense_items = @current_user.loose_expense_items_for_account_group(@user_options.account_group)
   end
 end
