@@ -77,6 +77,18 @@ class WorkItemsController < ApplicationController
 		redirect_to invoice_items_url
 	end
 
+	def split
+		@work_item = @current_user.work_items.find(params[:id]) rescue nil
+		@work_item = nil unless @current_user.projects_for_account_group(@user_options.account_group).include?(@work_item.project)
+		if @work_item.nil?
+			redirect_to invoice_items_url
+			return
+		end
+		@work_item.split!
+		flash[:notice] = 'work item split.'
+		redirect_to invoice_items_url
+	end
+
   # GET /work_items/new
   # GET /work_items/new.xml
   def new

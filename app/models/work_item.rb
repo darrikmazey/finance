@@ -99,6 +99,21 @@ class WorkItem < ActiveRecord::Base
 		self.align_end_time
 	end
 
+	def split!
+		nwi = WorkItem.new
+		nwi.start_time = self.start_time + (self.end_time - self.start_time)/2
+		nwi.end_time = self.end_time
+		self.end_time = nwi.start_time
+		nwi.user = self.user
+		nwi.project = self.project
+		nwi.rate = self.rate
+		nwi.invoice = self.invoice
+		nwi.align_start_time
+		self.align_end_time
+		nwi.save
+		self.save
+	end
+
 	def closed?
 		!self.end_time.nil?
 	end
