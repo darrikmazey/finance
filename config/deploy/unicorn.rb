@@ -2,7 +2,7 @@
 namespace :unicorn do
 	desc "restart unicorn"
 	task :restart, :roles => :app do
-		run "sudo /usr/local/bin/unicorn_restart #{application} || sudo /etc/init.d/unicorn start"
+		run "cd #{deploy_to}/current; [ -f tmp/pids/unicorn.pid ] && sudo /bin/kill -USR2 `cat tmp/pids/unicorn.pid` || sudo /etc/init.d/unicorn start"
 	end
 
 	desc "autostart site"
