@@ -10,11 +10,14 @@ timeout 30
 
 socket_path = ''
 pid_path = ''
+app_root = ''
 eval(File.new('config/paths.rb').read)
 
 listen socket_path, :backlog => 2048
 pid pid_path
 
+stderr_path app_root + '/log/unicorn.stderr.log'
+stdout_path app_root + '/log/unicorn.stdout.log'
 
 before_fork do |server, worker|
 	old_pid = RAILS_ROOT + '/tmp/pids/unicorn.pid.oldbin'
