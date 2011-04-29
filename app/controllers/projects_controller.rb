@@ -42,6 +42,12 @@ class ProjectsController < ApplicationController
     @admins = []
     @workers = []
 		@clients = @user_options.account_group.clients
+    
+    if @clients.empty?
+      flash[:notice] = "There are currently no clients for this account group, please add one before adding a project."
+      redirect_to new_client_path
+      return
+    end
 
     respond_to do |format|
       format.html { render :action => 'edit' }

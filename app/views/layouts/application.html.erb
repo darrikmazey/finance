@@ -6,18 +6,15 @@
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title><%= controller.controller_name %>: <%= controller.action_name %></title>
   <%= stylesheet_link_tag 'common' %>
+  <%= stylesheet_link_tag 'dropdown' %>
   <%= stylesheet_link_tag "templates/#{@user_options.template rescue 'dark'}.css" %>
 	<%= javascript_include_tag 'prototype' %>
 </head>
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: red"><%= flash[:error] %></p>
-
-<%= render :partial => 'shared/page_header' %>
-<%= render :partial => 'shared/menu' %>
-
-<%= yield %>
-
+  <%= render :partial => 'shared/page_header' %>
+  <%= render :partial => 'shared/menu' %>
+  <div id="main_content">
+    <%= yield %>
+  </div>
 </body>
 </html>

@@ -12,8 +12,14 @@ pre {
 a { color: #444 }
 a:visited { color: #444 }
 a:hover { color: #000 }
-.page_header .content { font-size: 1.2em }
-.menu .link { border-color: gray; }
+.page_header .content { 
+  font-size: 1.2em;
+  color: #222;
+}
+.page_header .title {
+  font-size: 1.7em;
+  letter-spacing: 0.1em;
+}
 #errorExplanation {
   border-color: red;
   background-color: #f0f0f0;
@@ -179,4 +185,26 @@ a:hover { color: #000 }
 .button_link a:hover {
   color: #444;
 }
+/* dropdown */
+ul.dropdown { border-color: #ccc; }
+ul.dropdown li {
+  border-color: #fff #ddd #ddd #aaa;
+  background-color: #aaa;
+  color: #555;
+}
+ul.dropdown li.hover,
+ul.dropdown li:hover {
+  background-color: #ddd;
+  color: #000;
+  border-color: #fff #ccc #666 #666;
+}
+ul.dropdown a:link,
+ul.dropdown a:visited { color: #555; }
+ul.dropdown a:hover { color: #000; }
+ul.dropdown a:active { color: #ffa500; }
+#menu { 
+  border-color: #aaa; 
+  background-image: url("/images/menu_background-light.png");
+}
+ul.dropdown .level1 { background-image: url("/images/menu_background-light.png") }
 }

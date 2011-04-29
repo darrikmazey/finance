@@ -1,6 +1,7 @@
-
 <div class="page_header">
 	<div class="content">
+    <p style="color: green"><%= flash[:notice] %></p>
+    <p style="color: red"><%= flash[:error] %></p>
 		<div class="title">finance</div>
 		<div class="version"><%= @VERSION %></div>
     <div class="account_group"><%= render :partial => "account_groups/form" %></div>

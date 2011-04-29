@@ -1,23 +1,8 @@
-<div class="menu">
-  <% if admin_account_group? %>
-    <div class="link"><%= link_to 'account groups', account_groups_url %></div>
-    <div class="link"><%= link_to 'accounts', accounts_url %></div>
-    <div class="link"><%= link_to 'transactions', transactions_url %></div>
-    <div class="link"><%= link_to 'clients', clients_url %></div>
-    <div class="link"><%= link_to 'invoices', invoices_url %></div>
-    <div class="link"><%= link_to 'rates', rates_url %></div>
-  <% end %>
-  <% if logged_in? %>
-    <div class="link"><%= link_to 'projects', projects_url %></div>
-    <div class="link"><%= link_to 'invoice items', invoice_items_url %></div>
-  <% end %>
-  <% if admin? %>
-    <div class="link"><%= link_to 'users', users_url %></div>
-  <% end %>
-	<div class="link logout">
-		<% if logged_in? -%>
-			<%= link_to_current_user :content_method => :login %>
-      (<%= link_to "Log out", logout_path, { :title => "log out" } %>) 
-		<% end -%>
-	</div>
+<div id="menu">
+  <ul id="nav" class="dropdown dropdown-horizontal">
+    <% @menu.each do |menu_item| %>
+      <%= display_menu_item(menu_item, true) %>
+    <% end %>
+  </ul>
+  <div class="clear">&nbsp;</div>
 </div>

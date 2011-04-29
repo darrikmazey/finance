@@ -37,6 +37,11 @@ class TransactionsController < ApplicationController
 
 		ttype = params[:type]
 		@accounts = @user_options.account_group.accounts
+    if @accounts.empty?
+      flash[:notice] = "There are currently no accounts for this account group, please add one before adding a transaction."
+      redirect_to new_account_path
+      return
+    end
 
     respond_to do |format|
       format.html { render :action => 'edit' }

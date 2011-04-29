@@ -26,7 +26,20 @@ class ExpenseItemsController < ApplicationController
   def new
     @expense_item = ExpenseItem.new
     @expense_item.user = @current_user
-    @expense_item.project = @current_user.last_project || @current_user.projects.first
+
+    if @current_user.projects_for_account_group(@user_options.account_group).empty?
+      if @current_user.admin? || @user_options.admin_account_group?
+        flash[:notice] = "There are currently no projects for this account group, please add one before adding an expense item."
+        redirect_to new_project_path
+        return
+      else
+        flash[:notice] = "There are currently no projects for this account group.  An account group admin must add one before expense items can be created."
+        redirect_to invoice_items_path
+        return
+      end
+    end
+
+    @expense_item.project = @current_user.last_project || @current_user.projects_for_account_group(@user_options.account_group).first
 
     # make sure they can access the project
     projects = @current_user.projects_for_account_group(@user_options.account_group)

@@ -40,6 +40,12 @@ class RatesController < ApplicationController
     @rate.modifier = 1.00
     @projects = @current_user.projects_for_account_group(@user_options.account_group)
 
+    if @projects.empty?
+      flash[:notice] = "There are currently no projects for this account group, please add one before adding a rate."
+      redirect_to new_project_path
+      return
+    end
+
     respond_to do |format|
       format.html { render :action => 'edit' } 
       format.xml  { render :xml => @rate }

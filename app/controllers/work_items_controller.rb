@@ -96,6 +96,17 @@ class WorkItemsController < ApplicationController
 		@work_item.user = @current_user
 		@work_item.start_time = DateTime.now
 		@work_item.align_start_time
+    if @current_user.projects_for_account_group(@user_options.account_group).empty?
+      if @current_user.admin? || @user_options.admin_account_group?
+        flash[:notice] = "There are currently no projects for this account group, please add one before adding a work item."
+        redirect_to new_project_path
+        return
+      else
+        flash[:notice] = "There are currently no projects for this account group.  An account group admin must add one before work items can be created."
+        redirect_to invoice_items_path
+        return
+      end
+    end
 		@work_item.project = @current_user.last_project || @current_user.projects_for_account_group(@user_options.account_group).first
 
     # make sure they can access the project 
