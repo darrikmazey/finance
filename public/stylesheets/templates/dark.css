@@ -179,3 +179,11 @@ a:hover { color: #fff }
 .button_link a:hover {
   color: #444;
 }
+
+.work_item_week_0 {
+	background-color: #222;
+}
+
+.work_item_week_1 {
+	background-color: #111;
+}
