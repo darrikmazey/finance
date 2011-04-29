@@ -8,5 +8,11 @@
         <%= f.field :client, { :value => link_to(project_data.client.name, client_url(project_data.client)) } %>
       <% end %>
     </div>
+		<div class="column">
+			<%= f.field :year_to_date, { :value => number_to_currency(project_data.ytd) } %>
+			<%= f.field :this_time_last_year, { :value => number_to_currency(project_data.ytd_last_year) } %>
+			<%= f.field :last_12_months, { :value => number_to_currency(project_data.last_12_months) } %>
+			<%= f.field :last_calendar_year, { :value => number_to_currency(project_data.last_calendar_year) } %>
+		</div>
   <% end %>
 </div>
