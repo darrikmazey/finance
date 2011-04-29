@@ -120,30 +120,33 @@ class ApplicationController < ActionController::Base
   def load_menu
     @menu = []
 
-    if @user_options.admin_account_group?
-      @menu << link_to('finance', root_path, { :children => [
-        link_to('account groups', account_groups_url, { :new_path => new_account_group_url }),
-        link_to('accounts', accounts_url, { :new_path => new_account_url }),
-        link_to('transaction', transactions_url, { :new_path => new_transaction_url })
-      ]})
-      @menu << link_to('projects', projects_url, { :children => [
-        link_to('clients', clients_url, { :new_path => new_client_url }),
-        link_to('invoices', invoices_url, { :new_path => new_invoice_url }),
-        link_to('projects', projects_url, { :new_path => new_project_url }),
-        link_to('rates', rates_url, { :new_path => new_rate_url })
-      ]})
-    end
+		puts @current_user.inspect
+		if !@current_user.nil?
+			if @user_options.try(:admin_account_group?)
+				@menu << link_to('finance', root_path, { :children => [
+					link_to('account groups', account_groups_url, { :new_path => new_account_group_url }),
+					link_to('accounts', accounts_url, { :new_path => new_account_url }),
+					link_to('transaction', transactions_url, { :new_path => new_transaction_url })
+				]})
+				@menu << link_to('projects', projects_url, { :children => [
+					link_to('clients', clients_url, { :new_path => new_client_url }),
+					link_to('invoices', invoices_url, { :new_path => new_invoice_url }),
+					link_to('projects', projects_url, { :new_path => new_project_url }),
+					link_to('rates', rates_url, { :new_path => new_rate_url })
+				]})
+			end
 
-    @menu << link_to('invoice items', invoice_items_url, { :children => [
-      link_to('work items', work_items_path, { :new_path => new_work_item_url }),
-      link_to('expense items', expense_items_path, { :new_path => new_expense_item_url })
-    ]})
+			@menu << link_to('invoice items', invoice_items_url, { :children => [
+				link_to('work items', work_items_path, { :new_path => new_work_item_url }),
+				link_to('expense items', expense_items_path, { :new_path => new_expense_item_url })
+			]})
 
-    if @current_user.admin?
-      @menu << link_to("admin", nil, { :children => [ 
-        link_to('users', users_url, { :new_path => new_user_url })
-      ]})
-    end 
+			if @current_user.admin?
+				@menu << link_to("admin", nil, { :children => [ 
+					link_to('users', users_url, { :new_path => new_user_url })
+				]})
+			end 
+		end
     
     if logged_in?
       @menu << link_to(@current_user.login, user_path(@current_user))
